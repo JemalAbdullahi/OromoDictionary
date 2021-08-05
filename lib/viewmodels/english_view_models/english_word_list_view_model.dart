@@ -9,7 +9,6 @@ class EnglishWordListViewModel extends ChangeNotifier {
     final results = await SearchService().fetchEnglishWords(keyword);
     this.englishWords =
         results.map((item) => EnglishWordViewModel(item)).toList();
-    print(this.englishWords);
     notifyListeners();
   }
 }

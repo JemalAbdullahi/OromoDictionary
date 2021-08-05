@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oromo_dictionary/viewmodels/english_view_models/english_word_view_model.dart';
-import 'package:oromo_dictionary/viewmodels/grammatical_form_view_models/grammatical_form_list_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:oromo_dictionary/screens/translation_screen.dart';
 import 'package:oromo_dictionary/utils/constants.dart';
@@ -150,11 +149,11 @@ class _SearchScreenState extends State<SearchScreen> {
                               ],
                             ),
                             TextField(
-                              style: textTheme.bodyText1!
+                              style: textTheme.subtitle1!
                                   .apply(color: COLOR_WHITE),
                               decoration: InputDecoration(
                                 hintText: "Search for a Word to Translate...",
-                                hintStyle: textTheme.bodyText1!
+                                hintStyle: textTheme.subtitle1!
                                     .apply(color: COLOR_WHITE),
                                 filled: true,
                                 fillColor: Colors.white38,
@@ -200,7 +199,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             blurRadius: 25.0,
                           ),
                         ],
-                        color: Colors.grey[300],
+                        color: Colors.grey[200],
                         borderRadius: BorderRadius.only(
                           topRight: Radius.circular(40),
                           topLeft: Radius.circular(40),
@@ -216,21 +215,23 @@ class _SearchScreenState extends State<SearchScreen> {
                             onTap: () async {
                               EnglishWordViewModel word =
                                   englishVM.englishWords[index];
-                              GrammaticalFormListViewModel formListViewModel =
-                                  GrammaticalFormListViewModel();
-                              word.forms = await formListViewModel.fetchGrammaticalForms(word.id);
+                              await word.setForms();
                               Navigator.pushNamed(
                                 context,
                                 TranslationScreen.routeName,
-                                arguments: TranslationScreenArguments(
-                                    word),
+                                arguments: TranslationScreenArguments(word),
                               );
                             },
                             child: ListTile(
-                              title:
-                                  Text('${englishVM.englishWords[index].word}'),
+                              title: Text(
+                                '${englishVM.englishWords[index].word}',
+                                style: textTheme.subtitle1!,
+                              ),
                               subtitle: Text(
-                                  '/${englishVM.englishWords[index].phonetic}/'),
+                                '/${englishVM.englishWords[index].phonetic}/',
+                                style: textTheme.subtitle2!
+                                    .apply(color: Colors.black54),
+                              ),
                               trailing: Icon(Icons.navigate_next),
                             ),
                           );

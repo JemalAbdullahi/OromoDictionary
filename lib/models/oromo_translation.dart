@@ -9,7 +9,7 @@ class OromoTranslation {
     return OromoTranslation(
       parsedJson['id'],
       parsedJson['phrase_id'],
-      parsedJson['example'],
+      parsedJson['translation'],
     );
   }
 

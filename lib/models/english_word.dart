@@ -4,7 +4,7 @@ class EnglishWord {
   late final int id;
   late final String word;
   late final String phonetic;
-  late final List<GrammaticalFormViewModel> forms;
+  List<GrammaticalFormViewModel>? forms;
 
   EnglishWord(this.id, this.word, this.phonetic);
 

@@ -13,7 +13,7 @@ class OromoTranslationService {
 
   Future<List<OromoTranslationViewModel>> fetchOromoTranslations(
       int phraseID) async {
-        pathSegments.add(phraseID.toString());
+    pathSegments.add(phraseID.toString());
     final response =
         await client.get(API.searchURL.replace(pathSegments: pathSegments));
     final Map result = json.decode(response.body);

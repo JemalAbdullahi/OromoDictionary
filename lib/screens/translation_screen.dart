@@ -13,16 +13,22 @@ class TranslationScreen extends StatefulWidget {
 }
 
 class _TranslationScreenState extends State<TranslationScreen> {
-  late EnglishWordViewModel englishWord;
-  late TextTheme textTheme;
+  late final EnglishWordViewModel englishWord;
+  late final TextTheme textTheme;
+  bool initialized = false;
   int selectedSubEntryIndex = 0;
+  double phraseTranslationContainerWidth = 100;
 
   @override
   Widget build(BuildContext context) {
-    textTheme = Theme.of(context).textTheme;
-    final args = ModalRoute.of(context)!.settings.arguments
-        as TranslationScreenArguments;
-    englishWord = args.englishWord;
+    if (!initialized) {
+      textTheme = Theme.of(context).textTheme;
+      final args = ModalRoute.of(context)!.settings.arguments
+          as TranslationScreenArguments;
+      englishWord = args.englishWord;
+      phraseTranslationContainerWidth = MediaQuery.of(context).size.width * 0.8;
+      initialized = true;
+    }
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -52,7 +58,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
                                   .apply(color: COLOR_YELLOW),
                             ),
                             Text(
-                              englishWord.phonetic,
+                              "/ ${englishWord.phonetic} /",
                               style: textTheme.bodyText1!
                                   .apply(color: COLOR_YELLOW),
                             ),
@@ -72,7 +78,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
                       height: 50,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: englishWord.forms.length,
+                        itemCount: englishWord.forms!.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Material(
                             shape: index == selectedSubEntryIndex
@@ -87,8 +93,8 @@ class _TranslationScreenState extends State<TranslationScreen> {
                                 });
                               },
                               child: Text(
-                                '${englishWord.forms[index].partOfSpeech.toUpperCase()}',
-                                style: textTheme.bodyText1!
+                                '${englishWord.forms![index].partOfSpeech.toUpperCase()}',
+                                style: textTheme.bodyText2!
                                     .apply(color: COLOR_BLACK),
                               ),
                             ),
@@ -109,16 +115,16 @@ class _TranslationScreenState extends State<TranslationScreen> {
 
   Expanded selectedEntry() {
     GrammaticalFormViewModel selectedSubEntry =
-        englishWord.forms[selectedSubEntryIndex];
+        englishWord.forms![selectedSubEntryIndex];
     return Expanded(
       child: Column(
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: selectedSubEntry.phrases.length,
+              itemCount: selectedSubEntry.phrases!.length,
               itemBuilder: (BuildContext context, int index) {
                 return phraseTranslationContainer(
-                    selectedSubEntry.phrases[index], index);
+                    selectedSubEntry.phrases![index], index);
               },
             ),
           )
@@ -129,26 +135,33 @@ class _TranslationScreenState extends State<TranslationScreen> {
 
   Container phraseTranslationContainer(PhraseViewModel phrase, int index) {
     return Container(
-      height: 80,
-      padding: EdgeInsets.only(left: 12, top: 12),
+      height: 100,
       width: double.infinity,
+      padding: EdgeInsets.only(left: 12, top: 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Text("${index + 1}. ", style: textTheme.bodyText1!),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (phrase.phrase.isNotEmpty)
-                Text("${phrase.phrase} ${phrase.exampleToString()}",
-                    style: textTheme.bodyText1!
-                        .apply(fontStyle: FontStyle.italic)),
-              Text("${phrase.translationToString()}",
-                  style: textTheme.bodyText1!),
-            ],
+          Text("${index + 1}. ", style: textTheme.bodyText2!),
+          Container(
+            width: phraseTranslationContainerWidth,
+            height: double.infinity,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (phrase.phrase != null && phrase.phrase!.isNotEmpty)
+                  Text("${phrase.phrase} ${phrase.exampleToString()}",
+                      style: textTheme.bodyText2!
+                          .apply(fontStyle: FontStyle.italic)),
+                Text(
+                  "${phrase.translationToString()}",
+                  style: textTheme.bodyText2!,
+                  softWrap: true,
+                ),
+              ],
+            ),
           ),
         ],
       ),

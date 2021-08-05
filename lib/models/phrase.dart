@@ -3,9 +3,9 @@ import 'package:oromo_dictionary/viewmodels/oromo_translation_view_models/oromo_
 class Phrase {
   late final int id;
   late final int formID;
-  late final String phrase;
-  late final String example;
-  late final List<OromoTranslationViewModel> translations;
+  late final String? phrase;
+  late final String? example;
+  List<OromoTranslationViewModel>? translations;
 
   Phrase(this.id, this.formID, this.phrase, this.example);
 

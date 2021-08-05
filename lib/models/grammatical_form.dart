@@ -5,7 +5,7 @@ class GrammaticalForm {
   late final int id;
   late final int wordID;
   late final String partOfSpeech;
-  late List<PhraseViewModel> phrases;
+  List<PhraseViewModel>? phrases;
 
   GrammaticalForm(this.id, this.wordID, this.partOfSpeech);
 

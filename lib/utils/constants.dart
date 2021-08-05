@@ -15,9 +15,9 @@ TextTheme defaultText = TextTheme(
     headline4: GoogleFonts.heebo(fontWeight: FontWeight.bold, fontSize: 34),
     headline5: GoogleFonts.heebo(fontWeight: FontWeight.bold, fontSize: 24),
     headline6: GoogleFonts.heebo(fontWeight: FontWeight.bold, fontSize: 20),
-    bodyText1: GoogleFonts.heebo(fontSize: 16, fontWeight: FontWeight.normal),
+    bodyText1: GoogleFonts.heebo(fontSize: 20, fontWeight: FontWeight.normal),
     bodyText2: GoogleFonts.heebo(
-      fontSize: 14,
+      fontSize: 18,
       fontWeight: FontWeight.normal,
     ),
     subtitle1: GoogleFonts.heebo(fontSize: 16, fontWeight: FontWeight.normal),
