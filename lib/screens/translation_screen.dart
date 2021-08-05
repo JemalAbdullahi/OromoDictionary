@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/models/translation.dart';
 import 'package:oromo_dictionary/utils/constants.dart';
+import 'package:oromo_dictionary/viewmodels/english_view_models/english_word_view_model.dart';
+import 'package:oromo_dictionary/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
+import 'package:oromo_dictionary/viewmodels/phrase_view_models/phrase_view_model.dart';
 
 class TranslationScreen extends StatefulWidget {
   static const String routeName = "/translation";
@@ -11,7 +13,7 @@ class TranslationScreen extends StatefulWidget {
 }
 
 class _TranslationScreenState extends State<TranslationScreen> {
-  late MainEntry mainEntry;
+  late EnglishWordViewModel englishWord;
   late TextTheme textTheme;
   int selectedSubEntryIndex = 0;
 
@@ -20,7 +22,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
     textTheme = Theme.of(context).textTheme;
     final args = ModalRoute.of(context)!.settings.arguments
         as TranslationScreenArguments;
-    mainEntry = args.mainEntry;
+    englishWord = args.englishWord;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -45,12 +47,12 @@ class _TranslationScreenState extends State<TranslationScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              mainEntry.mainEntry,
+                              englishWord.word,
                               style: textTheme.headline4!
                                   .apply(color: COLOR_YELLOW),
                             ),
                             Text(
-                              mainEntry.phonetic,
+                              englishWord.phonetic,
                               style: textTheme.bodyText1!
                                   .apply(color: COLOR_YELLOW),
                             ),
@@ -70,7 +72,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
                       height: 50,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                        itemCount: mainEntry.subentries.length,
+                        itemCount: englishWord.forms.length,
                         itemBuilder: (BuildContext context, int index) {
                           return Material(
                             shape: index == selectedSubEntryIndex
@@ -85,7 +87,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
                                 });
                               },
                               child: Text(
-                                '${mainEntry.subentries[index].partOfSpeech.toUpperCase()}',
+                                '${englishWord.forms[index].partOfSpeech.toUpperCase()}',
                                 style: textTheme.bodyText1!
                                     .apply(color: COLOR_BLACK),
                               ),
@@ -106,7 +108,8 @@ class _TranslationScreenState extends State<TranslationScreen> {
   }
 
   Expanded selectedEntry() {
-    SubEntry selectedSubEntry = mainEntry.subentries[selectedSubEntryIndex];
+    GrammaticalFormViewModel selectedSubEntry =
+        englishWord.forms[selectedSubEntryIndex];
     return Expanded(
       child: Column(
         children: [
@@ -124,7 +127,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
     );
   }
 
-  Container phraseTranslationContainer(Phrase phrase, int index) {
+  Container phraseTranslationContainer(PhraseViewModel phrase, int index) {
     return Container(
       height: 80,
       padding: EdgeInsets.only(left: 12, top: 12),
@@ -154,6 +157,6 @@ class _TranslationScreenState extends State<TranslationScreen> {
 }
 
 class TranslationScreenArguments {
-  final MainEntry mainEntry;
-  TranslationScreenArguments(this.mainEntry);
+  final EnglishWordViewModel englishWord;
+  TranslationScreenArguments(this.englishWord);
 }

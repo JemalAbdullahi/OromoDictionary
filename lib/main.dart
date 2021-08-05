@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oromo_dictionary/screens/landing_screen.dart';
+import 'package:oromo_dictionary/screens/search_screen.dart';
 import 'package:oromo_dictionary/screens/translation_screen.dart';
 import 'package:oromo_dictionary/utils/constants.dart';
+import 'package:oromo_dictionary/viewmodels/english_view_models/english_word_list_view_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,9 +23,12 @@ class MyApp extends StatelessWidget {
           primaryColor: COLOR_GREEN,
           accentColor: COLOR_YELLOW,
         ),
-        initialRoute: LandingScreen.routeName,
+        home: ChangeNotifierProvider(
+          create: (context) => EnglishWordListViewModel(),
+          child: SearchScreen(),
+        ),
         routes: <String, WidgetBuilder>{
-          LandingScreen.routeName: (BuildContext context) => LandingScreen(),
+          SearchScreen.routeName: (BuildContext context) => SearchScreen(),
           TranslationScreen.routeName: (BuildContext context) =>
               TranslationScreen(),
         });

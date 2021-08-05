@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/models/translation.dart';
+import 'package:oromo_dictionary/viewmodels/english_view_models/english_word_view_model.dart';
+import 'package:oromo_dictionary/viewmodels/grammatical_form_view_models/grammatical_form_list_view_model.dart';
+import 'package:provider/provider.dart';
 import 'package:oromo_dictionary/screens/translation_screen.dart';
 import 'package:oromo_dictionary/utils/constants.dart';
 import 'package:oromo_dictionary/utils/widget_functions.dart';
+import 'package:oromo_dictionary/viewmodels/english_view_models/english_word_list_view_model.dart';
 
 const DICTIONARY_DATA = [
   {
@@ -77,19 +80,19 @@ const DICTIONARY_DATA = [
   },
 ];
 
-class LandingScreen extends StatefulWidget {
-  static const String routeName = "/";
-  const LandingScreen({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  static const String routeName = "/search";
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
-  _LandingScreenState createState() => _LandingScreenState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _LandingScreenState extends State<LandingScreen> {
+class _SearchScreenState extends State<SearchScreen> {
   bool hasSearched = false;
   List<Map<String, Object>> searchedWords = [];
 
-  MainEntry mainEntry = MainEntry("hand", "/ haand /");
+  /* MainEntry mainEntry = MainEntry("hand", "/ haand /");
   Phrase phrase1 = Phrase("", ["harka"]);
   Phrase phrase2 =
       Phrase("at hand", ["waan harka ifii jiruu", "dhihoo", "kaluu"]);
@@ -101,16 +104,11 @@ class _LandingScreenState extends State<LandingScreen> {
   Phrase phrase7 = Phrase(
       "hand in", ["galchuu", "naquu", "ol kennuu", "fidu", "deebisuu"],
       example: "~ homework");
-  SubEntry subVerb = SubEntry("verb");
-
-  _LandingScreenState() {
-    subNoun.phrases = [phrase1, phrase2, phrase3];
-    subVerb.phrases = [phrase4, phrase5, phrase6, phrase7];
-    mainEntry.subentries = [subNoun, subVerb];
-  }
+  SubEntry subVerb = SubEntry("verb"); */
 
   @override
   Widget build(BuildContext context) {
+    final englishVM = Provider.of<EnglishWordListViewModel>(context);
     TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -179,8 +177,9 @@ class _LandingScreenState extends State<LandingScreen> {
                                 ),
                               ),
                               onSubmitted: (value) {
+                                englishVM.fetchEnglishWords(value);
                                 setState(() {
-                                  search(value);
+                                  hasSearched = true;
                                 });
                               },
                             ),
@@ -211,20 +210,27 @@ class _LandingScreenState extends State<LandingScreen> {
                       width: constraints.maxWidth,
                       child: ListView.separated(
                         padding: const EdgeInsets.all(8),
-                        itemCount: searchedWords.length,
+                        itemCount: englishVM.englishWords.length,
                         itemBuilder: (BuildContext context, int index) {
                           return GestureDetector(
-                            onTap: () => Navigator.pushNamed(
-                              context,
-                              TranslationScreen.routeName,
-                              arguments: TranslationScreenArguments(
-                                  mainEntry),
-                            ),
+                            onTap: () async {
+                              EnglishWordViewModel word =
+                                  englishVM.englishWords[index];
+                              GrammaticalFormListViewModel formListViewModel =
+                                  GrammaticalFormListViewModel();
+                              word.forms = await formListViewModel.fetchGrammaticalForms(word.id);
+                              Navigator.pushNamed(
+                                context,
+                                TranslationScreen.routeName,
+                                arguments: TranslationScreenArguments(
+                                    word),
+                              );
+                            },
                             child: ListTile(
                               title:
-                                  Text('${searchedWords[index]["main_entry"]}'),
-                              subtitle:
-                                  Text('${searchedWords[index]["phonetic"]}'),
+                                  Text('${englishVM.englishWords[index].word}'),
+                              subtitle: Text(
+                                  '/${englishVM.englishWords[index].phonetic}/'),
                               trailing: Icon(Icons.navigate_next),
                             ),
                           );
@@ -242,15 +248,5 @@ class _LandingScreenState extends State<LandingScreen> {
         );
       }),
     );
-  }
-
-  void search(String word) {
-    hasSearched = true;
-    searchedWords = [];
-    for (var w in DICTIONARY_DATA) {
-      if (w["main_entry"]! == word) {
-        searchedWords.add(w);
-      }
-    }
   }
 }
