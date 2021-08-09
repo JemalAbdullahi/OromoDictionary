@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:oromo_dictionary/screens/search_screen.dart';
-import 'package:oromo_dictionary/screens/translation_screen.dart';
-import 'package:oromo_dictionary/utils/constants.dart';
-import 'package:oromo_dictionary/viewmodels/english_view_models/english_word_list_view_model.dart';
+import 'package:oromo_dictionary/src/screens/search_screen.dart';
+import 'package:oromo_dictionary/src/screens/translation_screen.dart';
+import 'package:oromo_dictionary/src/utils/constants.dart';
+import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_list_view_model.dart';
 import 'package:provider/provider.dart';
 
 void main() {

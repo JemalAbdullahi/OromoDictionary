@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/utils/constants.dart';
-import 'package:oromo_dictionary/viewmodels/english_view_models/english_word_view_model.dart';
-import 'package:oromo_dictionary/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
-import 'package:oromo_dictionary/viewmodels/phrase_view_models/phrase_view_model.dart';
+import 'package:oromo_dictionary/src/utils/constants.dart';
+import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
+import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
+import 'package:oromo_dictionary/src/viewmodels/phrase_view_models/phrase_view_model.dart';
 
 class TranslationScreen extends StatefulWidget {
   static const String routeName = "/translation";

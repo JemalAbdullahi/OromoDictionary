@@ -1,6 +1,6 @@
-import 'package:oromo_dictionary/models/grammatical_form.dart';
-import 'package:oromo_dictionary/viewmodels/phrase_view_models/phrase_list_view_model.dart';
-import 'package:oromo_dictionary/viewmodels/phrase_view_models/phrase_view_model.dart';
+import 'package:oromo_dictionary/src/models/grammatical_form.dart';
+import 'package:oromo_dictionary/src/viewmodels/phrase_view_models/phrase_list_view_model.dart';
+import 'package:oromo_dictionary/src/viewmodels/phrase_view_models/phrase_view_model.dart';
 
 class GrammaticalFormViewModel {
   late final GrammaticalForm _grammaticalForm;
@@ -29,8 +29,7 @@ class GrammaticalFormViewModel {
 
   setPhrases() async {
     if (phrases == null) {
-      final phrase =
-          await PhraseListViewModel.fetchPhrases(id);
+      final phrase = await PhraseListViewModel.fetchPhrases(id);
       phrases = phrase;
       for (PhraseViewModel phrase in phrases!) {
         await phrase.setTranslations();

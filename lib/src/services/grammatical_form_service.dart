@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' show Client;
-import 'package:oromo_dictionary/models/grammatical_form.dart';
-import 'package:oromo_dictionary/services/api.dart';
-import 'package:oromo_dictionary/services/phrase_service.dart';
+import 'package:oromo_dictionary/src/models/grammatical_form.dart';
+import 'package:oromo_dictionary/src/services/api.dart';
+import 'package:oromo_dictionary/src/services/phrase_service.dart';
 
 class GrammaticalFormService {
   Client client = Client();

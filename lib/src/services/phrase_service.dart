@@ -1,14 +1,13 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' show Client;
-import 'package:oromo_dictionary/models/phrase.dart';
-import 'package:oromo_dictionary/services/api.dart';
-import 'package:oromo_dictionary/services/oromo_translation_service.dart';
-import 'package:oromo_dictionary/viewmodels/phrase_view_models/phrase_view_model.dart';
+import 'package:oromo_dictionary/src/models/phrase.dart';
+import 'package:oromo_dictionary/src/services/api.dart';
+import 'package:oromo_dictionary/src/services/oromo_translation_service.dart';
+import 'package:oromo_dictionary/src/viewmodels/phrase_view_models/phrase_view_model.dart';
 
 class PhraseService {
   Client client = Client();
-  
 
   List<PhraseViewModel> phrases = [];
   List<String> pathSegments = ['phrase'];
@@ -24,7 +23,7 @@ class PhraseService {
           Phrase phrase = Phrase.fromJson(json_);
           phrase.translations =
               await OromoTranslationService().fetchOromoTranslations(phrase.id);
-          
+
           phrases.add(PhraseViewModel(phrase));
         } catch (Exception) {
           print(Exception);

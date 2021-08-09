@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:oromo_dictionary/services/search_service.dart';
-import 'package:oromo_dictionary/viewmodels/english_view_models/english_word_view_model.dart';
+import 'package:oromo_dictionary/src/services/search_service.dart';
+import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
 
 class EnglishWordListViewModel extends ChangeNotifier {
   List<EnglishWordViewModel> englishWords = [];

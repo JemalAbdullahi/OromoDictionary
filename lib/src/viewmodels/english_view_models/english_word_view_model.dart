@@ -1,6 +1,6 @@
-import 'package:oromo_dictionary/models/english_word.dart';
-import 'package:oromo_dictionary/viewmodels/grammatical_form_view_models/grammatical_form_list_view_model.dart';
-import 'package:oromo_dictionary/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
+import 'package:oromo_dictionary/src/models/english_word.dart';
+import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_list_view_model.dart';
+import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
 
 class EnglishWordViewModel {
   late final EnglishWord _englishWord;

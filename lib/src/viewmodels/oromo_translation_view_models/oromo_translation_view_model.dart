@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/models/oromo_translation.dart';
+import 'package:oromo_dictionary/src/models/oromo_translation.dart';
 
 class OromoTranslationViewModel {
   late final OromoTranslation _oromoTranslation;
