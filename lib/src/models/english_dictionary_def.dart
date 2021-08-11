@@ -3,7 +3,7 @@ class EnglishDictionaryDef {
   final String phonetic;
   final Map phonetics;
   final String? origin;
-  final Map meanings;
+  final List<dynamic> meanings;
 
   EnglishDictionaryDef(
       this.word, this.phonetic, this.phonetics, this.origin, this.meanings);
@@ -14,7 +14,7 @@ class EnglishDictionaryDef {
       parsedJson["phonetic"],
       parsedJson["phonetics"][0],
       parsedJson["origin"],
-      parsedJson["meanings"][0],
+      parsedJson["meanings"],
     );
   }
 }

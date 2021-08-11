@@ -3,9 +3,9 @@ import 'package:oromo_dictionary/src/viewmodels/oromo_translation_view_models/or
 import 'package:oromo_dictionary/src/viewmodels/oromo_translation_view_models/oromo_translation_view_model.dart';
 
 class PhraseViewModel {
-  late final Phrase _phrase;
+  final Phrase _phrase;
 
-  PhraseViewModel(this._phrase);
+  const PhraseViewModel(this._phrase);
 
   int get id {
     return this._phrase.id;

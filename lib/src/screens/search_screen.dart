@@ -176,10 +176,16 @@ class _SearchScreenState extends State<SearchScreen> {
                                 ),
                               ),
                               onSubmitted: (value) {
-                                englishVM.fetchEnglishWords(value);
-                                setState(() {
-                                  hasSearched = true;
-                                });
+                                if (value.isNotEmpty) {
+                                  englishVM.fetchEnglishWords(value);
+                                  setState(() {
+                                    hasSearched = true;
+                                  });
+                                } else if (value.isEmpty) {
+                                  setState(() {
+                                    hasSearched = false;
+                                  });
+                                }
                               },
                             ),
                             hasSearched

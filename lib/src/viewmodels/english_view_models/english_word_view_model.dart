@@ -24,7 +24,7 @@ class EnglishWordViewModel {
     return this._englishWord.audio;
   }
 
-  Map<String, List<String>> get definitions{
+  Map<String, List<String>> get definitions {
     return this._englishWord.definitions;
   }
 
@@ -37,11 +37,13 @@ class EnglishWordViewModel {
   }
 
   setForms() async {
+    //Fetch English Definitions
+    await EnglishDefinitionAPI.fetchEnglishDefinition(this._englishWord);
+    //Fetch Grammatical Forms of the word if not retrieved previously
     if (forms == null) {
       final grammaticalForms =
           await GrammaticalFormListViewModel.fetchGrammaticalForms(id);
       forms = grammaticalForms;
-      EnglishDefinitionAPI.fetchEnglishDefinition(this._englishWord);
       for (GrammaticalFormViewModel form in forms!) {
         await form.setPhrases();
       }

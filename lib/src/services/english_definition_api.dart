@@ -3,6 +3,7 @@ import 'package:oromo_dictionary/src/models/english_dictionary_def.dart';
 import 'dart:convert';
 
 import 'package:oromo_dictionary/src/models/english_word.dart';
+import 'package:oromo_dictionary/src/viewmodels/english_dictionary_def.dart/english_dictionary_def_view_model.dart';
 
 class EnglishDefinitionAPI {
   static Client client = Client();
@@ -22,16 +23,11 @@ class EnglishDefinitionAPI {
     if (response.statusCode == 200) {
       EnglishDictionaryDef englishDictionaryDef =
           EnglishDictionaryDef.fromJson(result[0]);
-      print(englishDictionaryDef.word);
-      /* englishWord.audio = result[0]["phonetics"][0]["audio"];
-      for (Map<String, dynamic> meaning in result[0]["meanings"][0]) {
-        for (Map<String, dynamic> definition in meaning['definitions']) {
-          definitions.add(definition['definition']);
-        }
-        print(definitions.toString());
-        englishWord.definitions[meaning['partOfSpeech']] = definitions;
-        definitions = []; */
-      // }
+      EnglishDictionaryDefViewModel englishDictionaryDefViewModel =
+          EnglishDictionaryDefViewModel(englishDictionaryDef);
+      englishWord.audio = englishDictionaryDefViewModel.audio;
+      englishWord.definitions = englishDictionaryDefViewModel.definitions;
+      print(englishWord.definitions.toString());
     } else {
       throw Exception(response.reasonPhrase);
     }
