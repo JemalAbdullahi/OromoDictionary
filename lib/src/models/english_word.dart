@@ -5,6 +5,8 @@ class EnglishWord {
   late final String word;
   late final String phonetic;
   List<GrammaticalFormViewModel>? forms;
+  Map<String, List<String>> definitions = new Map();
+  String? audio;
 
   EnglishWord(this.id, this.word, this.phonetic);
 

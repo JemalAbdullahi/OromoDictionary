@@ -57,10 +57,20 @@ class _TranslationScreenState extends State<TranslationScreen> {
                               style: textTheme.headline4!
                                   .apply(color: COLOR_YELLOW),
                             ),
-                            Text(
-                              "/ ${englishWord.phonetic} /",
-                              style: textTheme.bodyText1!
-                                  .apply(color: COLOR_YELLOW),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                elevation: 5.0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                primary: COLOR_YELLOW,
+                              ),
+                              onPressed: () => print(englishWord.phonetic),
+                              child: Text(
+                                "/ ${englishWord.phonetic} /",
+                                style: textTheme.bodyText1!
+                                    .apply(color: COLOR_GREEN),
+                              ),
                             ),
                           ],
                         ),
@@ -119,6 +129,11 @@ class _TranslationScreenState extends State<TranslationScreen> {
     return Expanded(
       child: Column(
         children: [
+          Container(
+            height: 250,
+            width: double.infinity,
+            child: Text(englishWord.definitions.values.toString()),
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: selectedSubEntry.phrases!.length,

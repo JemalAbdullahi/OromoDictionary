@@ -5,7 +5,6 @@ class GrammaticalForm {
   late final int wordID;
   late final String partOfSpeech;
   List<PhraseViewModel>? phrases;
-
   GrammaticalForm(this.id, this.wordID, this.partOfSpeech);
 
   factory GrammaticalForm.fromJson(Map<String, dynamic> parsedJson) {

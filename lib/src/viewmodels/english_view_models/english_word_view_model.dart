@@ -1,4 +1,5 @@
 import 'package:oromo_dictionary/src/models/english_word.dart';
+import 'package:oromo_dictionary/src/services/english_definition_api.dart';
 import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_list_view_model.dart';
 import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
 
@@ -19,6 +20,14 @@ class EnglishWordViewModel {
     return this._englishWord.phonetic;
   }
 
+  String? get audio {
+    return this._englishWord.audio;
+  }
+
+  Map<String, List<String>> get definitions{
+    return this._englishWord.definitions;
+  }
+
   List<GrammaticalFormViewModel>? get forms {
     return this._englishWord.forms;
   }
@@ -32,6 +41,7 @@ class EnglishWordViewModel {
       final grammaticalForms =
           await GrammaticalFormListViewModel.fetchGrammaticalForms(id);
       forms = grammaticalForms;
+      EnglishDefinitionAPI.fetchEnglishDefinition(this._englishWord);
       for (GrammaticalFormViewModel form in forms!) {
         await form.setPhrases();
       }
