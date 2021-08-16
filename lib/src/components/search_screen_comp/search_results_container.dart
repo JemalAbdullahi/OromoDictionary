@@ -22,17 +22,21 @@ class SearchResultsContainer extends StatelessWidget {
       decoration: _searchResultCardDecoration(),
       height: constraints.maxHeight / 1.8,
       width: constraints.maxWidth,
-      child: ListView.separated(
-        padding: const EdgeInsets.all(8),
-        itemCount: englishVM.englishWords.length,
-        itemBuilder: (BuildContext context, int index) {
-          return _buildListItemGestureDetector(index, context);
-        },
-        separatorBuilder: (BuildContext context, int index) => const Divider(
-          color: COLOR_BLACK,
-          thickness: 0.2,
-        ),
-      ),
+      child: englishVM.englishWords.length > 0
+          ? ListView.separated(
+              padding: const EdgeInsets.all(8),
+              itemCount: englishVM.englishWords.length,
+              itemBuilder: (BuildContext context, int index) {
+                return _buildListItemGestureDetector(index, context);
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(
+                color: COLOR_BLACK,
+                thickness: 0.2,
+              ),
+            )
+          : Center(
+              child: Text("No Words Found! Try searching a different word.")),
     );
   }
 

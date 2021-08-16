@@ -115,43 +115,52 @@ class _SearchScreenState extends State<SearchScreen> {
       textTheme = Theme.of(context).textTheme;
       initialized = true;
     }
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: LayoutBuilder(builder: (context, constraints) {
-        return Container(
-          color: COLOR_GREEN,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 4,
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            AppHeader(),
-                            _searchBar(),
-                            hasSearched
-                                ? addVerticalSpace(1)
-                                : addVerticalSpace(30),
-                          ]),
-                    )
-                  ],
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: LayoutBuilder(builder: (context, constraints) {
+          return Container(
+            color: COLOR_GREEN,
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 4,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              AppHeader(),
+                              _searchBar(),
+                              hasSearched
+                                  ? addVerticalSpace(1)
+                                  : addVerticalSpace(30),
+                            ]),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              hasSearched
-                  ? SearchResultsContainer(
-                      englishVM: englishVM,
-                      textTheme: textTheme,
-                      constraints: constraints)
-                  : Container(width: constraints.maxWidth),
-            ],
-          ),
-        );
-      }),
+                hasSearched
+                    ? SearchResultsContainer(
+                        englishVM: englishVM,
+                        textTheme: textTheme,
+                        constraints: constraints)
+                    : Container(width: constraints.maxWidth),
+              ],
+            ),
+          );
+        }),
+      ),
     );
   }
 
@@ -160,22 +169,25 @@ class _SearchScreenState extends State<SearchScreen> {
       style: textTheme.subtitle1!.apply(color: COLOR_WHITE),
       decoration: _searchBarDecoration(),
       onSubmitted: _search,
+      autocorrect: false,
     );
   }
 
   InputDecoration _searchBarDecoration() {
     return InputDecoration(
-      hintText: "Search for a Word to Translate...",
+      hintText: "Search a Word to Translate...",
       hintStyle: textTheme.subtitle1!.apply(color: COLOR_WHITE),
       filled: true,
       fillColor: Colors.white38,
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
       prefixIcon: Icon(Icons.search, color: COLOR_WHITE),
-      suffixIcon: _selectLanguageIcon(),
+      //suffixIcon: _selectLanguageIcon(),
     );
   }
 
+/* 
+  Switch Language search between English and Oromo words
   Container _selectLanguageIcon() {
     return Container(
       width: 70,
@@ -190,13 +202,13 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Icon(Icons.menu, color: Colors.white),
     );
   }
-
+ */
   void _search(value) {
     value.isNotEmpty ? _fetchEnglishWords(value) : _resetSearch();
   }
 
-  void _fetchEnglishWords(String value) {
-    englishVM.fetchEnglishWords(value);
+  void _fetchEnglishWords(String value) async {
+    await englishVM.fetchEnglishWords(value);
     setState(() {
       hasSearched = true;
     });

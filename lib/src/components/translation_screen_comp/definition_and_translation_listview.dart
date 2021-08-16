@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:oromo_dictionary/src/components/translation_screen_comp/phrase_translation_container.dart';
 import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
+import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
 
-class EnglishDefinitionContainer extends StatelessWidget {
-  const EnglishDefinitionContainer(
+class EnglishDefinitionListView extends StatelessWidget {
+  const EnglishDefinitionListView(
       {Key? key,
       required this.textTheme,
       required this.englishWord,
@@ -24,6 +25,30 @@ class EnglishDefinitionContainer extends StatelessWidget {
           englishDef: englishWord.definitions[partOfSpeech]![index],
           index: index,
           isPhraseSection: false,
+        );
+      },
+    );
+  }
+}
+
+class OromoTranslationListView extends StatelessWidget {
+  const OromoTranslationListView(
+      {Key? key, required this.textTheme, required this.selectedPartOfSpeech})
+      : super(key: key);
+
+  final TextTheme textTheme;
+  final GrammaticalFormViewModel selectedPartOfSpeech;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: selectedPartOfSpeech.phrases!.length,
+      itemBuilder: (BuildContext context, int index) {
+        return PhraseTranslationContainer(
+          textTheme: textTheme,
+          phrase: selectedPartOfSpeech.phrases![index],
+          index: index,
+          isPhraseSection: true,
         );
       },
     );

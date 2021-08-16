@@ -82,7 +82,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
 
   Container partOfSpeechSelector(BoxConstraints constraints) {
     return Container(
-      color: COLOR_GREY,
+      color: COLOR_RED,
       width: constraints.maxWidth,
       height: 50,
       child: ListView.builder(
@@ -90,8 +90,9 @@ class _TranslationScreenState extends State<TranslationScreen> {
         itemCount: englishWord.forms!.length,
         itemBuilder: (BuildContext context, int index) {
           return Material(
+            color: COLOR_RED,
             shape: index == selectedSubEntryIndex
-                ? Border(bottom: BorderSide(color: COLOR_GREEN, width: 5))
+                ? Border(bottom: BorderSide(color: COLOR_YELLOW, width: 5))
                 : null,
             child: TextButton(
               onPressed: () {
@@ -101,7 +102,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
               },
               child: Text(
                 '${englishWord.forms![index].partOfSpeech.toUpperCase()}',
-                style: textTheme.bodyText2!.apply(color: COLOR_BLACK),
+                style: textTheme.headline6!.apply(color: COLOR_YELLOW),
               ),
             ),
           );

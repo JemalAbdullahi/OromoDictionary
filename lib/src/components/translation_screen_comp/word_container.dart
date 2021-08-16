@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:oromo_dictionary/src/utils/constants.dart';
+import 'package:oromo_dictionary/src/utils/widget_functions.dart';
 import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
 
 class WordContainer extends StatelessWidget {
@@ -20,8 +21,14 @@ class WordContainer extends StatelessWidget {
     return Container(
       width: constraints.maxWidth,
       height: 100,
-      padding: const EdgeInsets.only(left: 28.0),
-      child: _buildColumn(),
+      padding: const EdgeInsets.only(left: 28.0, right: 28.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _buildColumn(),
+          oddaaImage(),
+        ],
+      ),
     );
   }
 
@@ -77,9 +84,10 @@ class _PhoneticButtonState extends State<_PhoneticButton> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           elevation: 5.0,
+          shadowColor: COLOR_RED,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          primary: COLOR_YELLOW),
+          primary: COLOR_RED),
       onPressed: phoneticAudio,
       child: _phoneticText(),
     );
@@ -93,7 +101,7 @@ class _PhoneticButtonState extends State<_PhoneticButton> {
   Text _phoneticText() {
     return Text(
       "/ ${widget.englishWord.phonetic} /",
-      style: widget.textTheme.bodyText1!.apply(color: COLOR_GREEN),
+      style: widget.textTheme.bodyText1!.apply(color: COLOR_YELLOW),
     );
   }
 }
