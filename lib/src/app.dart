@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:oromo_dictionary/src/screens/search_screen.dart';
-import 'package:oromo_dictionary/src/screens/translation_screen.dart';
+import 'package:oromo_dictionary/src/screens/translation_screens/english_oromo_translation_screen.dart';
+import 'package:oromo_dictionary/src/screens/translation_screens/oromo_english_translation_screen.dart';
 import 'package:oromo_dictionary/src/utils/constants.dart';
 import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_list_view_model.dart';
 import 'package:provider/provider.dart';
@@ -20,13 +21,17 @@ class MyApp extends StatelessWidget {
           accentColor: COLOR_YELLOW,
         ),
         home: ChangeNotifierProvider(
-          create: (context) => EnglishWordListViewModel(),
+          create: (context) => SearchListViewModel(),
           child: SearchScreen(),
         ),
         routes: <String, WidgetBuilder>{
           SearchScreen.routeName: (BuildContext context) => SearchScreen(),
-          TranslationScreen.routeName: (BuildContext context) =>
-              TranslationScreen(),
+          EnglishOromoTranslationScreen.routeName: (BuildContext context) =>
+              EnglishOromoTranslationScreen(),
+          OromoEnglishTranslationScreen.routeName: (BuildContext context) =>
+              ChangeNotifierProvider(
+                  create: (context) => SearchListViewModel(),
+                  child: OromoEnglishTranslationScreen()),
         });
   }
 }

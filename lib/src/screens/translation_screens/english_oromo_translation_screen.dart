@@ -4,15 +4,15 @@ import 'package:oromo_dictionary/src/components/translation_screen_comp/word_con
 import 'package:oromo_dictionary/src/utils/constants.dart';
 import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
 
-class TranslationScreen extends StatefulWidget {
-  static const String routeName = "/translation";
-  const TranslationScreen({Key? key}) : super(key: key);
+class EnglishOromoTranslationScreen extends StatefulWidget {
+  static const String routeName = "/englishtranslation";
+  const EnglishOromoTranslationScreen({Key? key}) : super(key: key);
 
   @override
-  _TranslationScreenState createState() => _TranslationScreenState();
+  _EnglishOromoTranslationScreenState createState() => _EnglishOromoTranslationScreenState();
 }
 
-class _TranslationScreenState extends State<TranslationScreen> {
+class _EnglishOromoTranslationScreenState extends State<EnglishOromoTranslationScreen> {
   late final EnglishWordViewModel englishWord;
   late final TextTheme textTheme;
   bool initialized = false;
@@ -24,7 +24,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
     if (!initialized) {
       textTheme = Theme.of(context).textTheme;
       final args = ModalRoute.of(context)!.settings.arguments
-          as TranslationScreenArguments;
+          as EnglishOromoTranslationScreenArguments;
       englishWord = args.englishWord;
       phraseTranslationContainerWidth = MediaQuery.of(context).size.width * 0.8;
       initialized = true;
@@ -112,7 +112,7 @@ class _TranslationScreenState extends State<TranslationScreen> {
   }
 }
 
-class TranslationScreenArguments {
+class EnglishOromoTranslationScreenArguments {
   final EnglishWordViewModel englishWord;
-  TranslationScreenArguments(this.englishWord);
+  EnglishOromoTranslationScreenArguments(this.englishWord);
 }

@@ -94,8 +94,10 @@ class _PhoneticButtonState extends State<_PhoneticButton> {
   }
 
   void phoneticAudio() async {
-    await player.setUrl("https://${widget.englishWord.audio!}");
-    player.play();
+    if (widget.englishWord.audio!.isNotEmpty) {
+      await player.setUrl("https://${widget.englishWord.audio!}");
+      player.play();
+    }
   }
 
   Text _phoneticText() {

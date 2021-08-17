@@ -9,12 +9,8 @@ class EnglishDictionaryDefViewModel {
     return _englishDictionaryDef.word;
   }
 
-  String get phonetic {
-    return _englishDictionaryDef.phonetic;
-  }
-
   String get audio {
-    return _englishDictionaryDef.phonetics["audio"];
+    return _englishDictionaryDef.phonetics!=null ? _englishDictionaryDef.phonetics!["audio"] : "";
   }
 
   String? get origin {

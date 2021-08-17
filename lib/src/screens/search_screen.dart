@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:oromo_dictionary/src/components/search_screen_comp/app_header.dart';
-import 'package:oromo_dictionary/src/components/search_screen_comp/search_results_container.dart';
+import 'package:oromo_dictionary/src/components/search_screen_comp/language_selector.dart';
+import 'package:oromo_dictionary/src/components/search_screen_comp/english_search_results_container.dart';
+import 'package:oromo_dictionary/src/components/search_screen_comp/oromo_search_result_container.dart';
+import 'package:oromo_dictionary/src/services/api.dart';
 import 'package:provider/provider.dart';
 import 'package:oromo_dictionary/src/utils/constants.dart';
 import 'package:oromo_dictionary/src/utils/widget_functions.dart';
@@ -91,7 +94,8 @@ class _SearchScreenState extends State<SearchScreen> {
   bool hasSearched = false;
   List<Map<String, Object>> searchedWords = [];
   late final TextTheme textTheme;
-  late final EnglishWordListViewModel englishVM;
+  late final SearchListViewModel englishVM;
+  final _searchBarFocusNode = FocusNode();
   bool initialized = false;
 
   /* MainEntry mainEntry = MainEntry("hand", "/ haand /");
@@ -111,7 +115,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     if (!initialized) {
-      englishVM = Provider.of<EnglishWordListViewModel>(context);
+      englishVM = Provider.of<SearchListViewModel>(context);
       textTheme = Theme.of(context).textTheme;
       initialized = true;
     }
@@ -151,10 +155,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
                 hasSearched
-                    ? SearchResultsContainer(
-                        englishVM: englishVM,
-                        textTheme: textTheme,
-                        constraints: constraints)
+                    ? _searchResults(constraints)
                     : Container(width: constraints.maxWidth),
               ],
             ),
@@ -164,8 +165,21 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  Widget _searchResults(BoxConstraints constraints) {
+    return API.isEnglish()
+        ? EnglishSearchResultsContainer(
+            englishVM: englishVM,
+            textTheme: textTheme,
+            constraints: constraints)
+        : OromoSearchResultsContainer(
+            englishVM: englishVM,
+            textTheme: textTheme,
+            constraints: constraints);
+  }
+
   TextField _searchBar() {
     return TextField(
+      focusNode: _searchBarFocusNode,
       style: textTheme.subtitle1!.apply(color: COLOR_WHITE),
       decoration: _searchBarDecoration(),
       onSubmitted: _search,
@@ -182,33 +196,39 @@ class _SearchScreenState extends State<SearchScreen> {
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
       prefixIcon: Icon(Icons.search, color: COLOR_WHITE),
-      //suffixIcon: _selectLanguageIcon(),
+      suffixIcon: _selectLanguageIcon(),
     );
   }
 
-/* 
-  Switch Language search between English and Oromo words
-  Container _selectLanguageIcon() {
-    return Container(
-      width: 70,
-      height: 70,
-      decoration: BoxDecoration(
-        color: Colors.white30,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),
-      ),
-      child: Icon(Icons.menu, color: Colors.white),
+  //Switch Language search between English and Oromo words
+  GestureDetector _selectLanguageIcon() {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _searchBarFocusNode.canRequestFocus = false;
+          _searchBarFocusNode.unfocus();
+        });
+      },
+      child: Container(
+          height: 60,
+          width: 60,
+          decoration: BoxDecoration(
+            color: Colors.white30,
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(20),
+              bottomRight: Radius.circular(20),
+            ),
+          ),
+          child: LanguageSelector()),
     );
   }
- */
+
   void _search(value) {
-    value.isNotEmpty ? _fetchEnglishWords(value) : _resetSearch();
+    value.isNotEmpty ? _fetchWords(value) : _resetSearch();
   }
 
-  void _fetchEnglishWords(String value) async {
-    await englishVM.fetchEnglishWords(value);
+  void _fetchWords(String value) async {
+    await englishVM.fetchWords(value);
     setState(() {
       hasSearched = true;
     });
