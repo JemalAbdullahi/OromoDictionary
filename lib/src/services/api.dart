@@ -3,8 +3,8 @@ class API {
   static String productionHost = 'oromo-dictionary.herokuapp.com';
   static String localhost = "10.0.2.2";
 
-  static Uri searchURL = Uri(scheme: 'http', host: localhost, port: 5000);
-  // static Uri searchURL = Uri(scheme: 'https', host: stageHost);
+  // static Uri searchURL = Uri(scheme: 'http', host: localhost, port: 5000);
+  static Uri searchURL = Uri(scheme: 'https', host: stageHost);
 
   static String language = "en";
 
