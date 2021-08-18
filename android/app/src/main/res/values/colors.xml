@@ -2,5 +2,4 @@
 
 <resources>
     <color name="background_color">#02943F</color>
-    <color name="backgroundColor" red="2" green="148" blue="63" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </resources>
