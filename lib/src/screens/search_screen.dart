@@ -91,11 +91,12 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  bool hasSearched = false;
-  List<Map<String, Object>> searchedWords = [];
   late final TextTheme textTheme;
   late final SearchListViewModel englishVM;
-  final _searchBarFocusNode = FocusNode();
+  final FocusNode _searchBarFocusNode = FocusNode();
+  final TextEditingController _searchBarController = TextEditingController();
+  bool hasSearched = false;
+  List<Map<String, Object>> searchedWords = [];
   bool initialized = false;
 
   /* MainEntry mainEntry = MainEntry("hand", "/ haand /");
@@ -118,6 +119,9 @@ class _SearchScreenState extends State<SearchScreen> {
       englishVM = Provider.of<SearchListViewModel>(context);
       textTheme = Theme.of(context).textTheme;
       initialized = true;
+    }
+    if (_searchBarController.text.isEmpty) {
+      _resetSearch();
     }
     return GestureDetector(
       onTap: () {
@@ -145,7 +149,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               AppHeader(),
-                              _searchBar(),
+                              searchBar(),
                               hasSearched
                                   ? addVerticalSpace(1)
                                   : addVerticalSpace(30),
@@ -177,9 +181,20 @@ class _SearchScreenState extends State<SearchScreen> {
             constraints: constraints);
   }
 
+  Stack searchBar() {
+    return Stack(
+      alignment: Alignment.centerRight,
+      children: [
+        _searchBar(),
+        _selectLanguageIcon(),
+      ],
+    );
+  }
+
   TextField _searchBar() {
     return TextField(
       focusNode: _searchBarFocusNode,
+      controller: _searchBarController,
       style: textTheme.subtitle1!.apply(color: COLOR_WHITE),
       decoration: _searchBarDecoration(),
       onSubmitted: _search,
@@ -196,31 +211,28 @@ class _SearchScreenState extends State<SearchScreen> {
       border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
       prefixIcon: Icon(Icons.search, color: COLOR_WHITE),
-      suffixIcon: _selectLanguageIcon(),
+      // suffixIcon: _selectLanguageIcon(),
     );
   }
 
   //Switch Language search between English and Oromo words
-  GestureDetector _selectLanguageIcon() {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _searchBarFocusNode.canRequestFocus = false;
-          _searchBarFocusNode.unfocus();
-        });
-      },
-      child: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            color: Colors.white30,
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
+  Container _selectLanguageIcon() {
+    return Container(
+        height: 60,
+        width: 60,
+        decoration: BoxDecoration(
+          // color: Colors.white30,
+          color: COLOR_YELLOW,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20),
+            bottomRight: Radius.circular(20),
           ),
-          child: LanguageSelector()),
-    );
+        ),
+        child: LanguageSelector(
+          controller: _searchBarController,
+          englishVM: englishVM,
+          textTheme: textTheme,
+        ));
   }
 
   void _search(value) {

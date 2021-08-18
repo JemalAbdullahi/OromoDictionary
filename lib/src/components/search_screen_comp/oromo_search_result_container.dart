@@ -32,7 +32,7 @@ class OromoSearchResultsContainer extends SearchResultsContainer {
     return ListTile(
       title: Text(
         '${englishVM.words[index].translation}',
-        style: textTheme.subtitle1!,
+        style: textTheme.bodyText2,
       ),
       trailing: Icon(Icons.navigate_next),
     );

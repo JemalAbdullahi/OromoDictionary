@@ -46,7 +46,7 @@ class PhraseViewModel {
     }
 
     StringBuffer stringBuffer = new StringBuffer();
-    stringBuffer.writeAll(oromoWords, ", ");
+    stringBuffer.writeAll(oromoWords, ",\n");
     return stringBuffer.toString();
   }
 

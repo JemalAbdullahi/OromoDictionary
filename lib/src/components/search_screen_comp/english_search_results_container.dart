@@ -33,11 +33,11 @@ class EnglishSearchResultsContainer extends SearchResultsContainer {
     return ListTile(
       title: Text(
         '${englishVM.words[index].word}',
-        style: textTheme.subtitle1!,
+        style: textTheme.bodyText2!,
       ),
       subtitle: Text(
         '/${englishVM.words[index].phonetic}/',
-        style: textTheme.subtitle2!.apply(color: Colors.black54),
+        style: textTheme.subtitle1!.apply(color: Colors.black54),
       ),
       trailing: Icon(Icons.navigate_next),
     );

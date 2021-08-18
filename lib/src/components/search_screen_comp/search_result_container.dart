@@ -18,20 +18,21 @@ abstract class SearchResultsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: _searchResultCardDecoration(),
+      clipBehavior: Clip.hardEdge,
       height: constraints.maxHeight / 1.8,
       width: constraints.maxWidth,
       child: englishVM.words.length > 0
-          ? ListView.separated(
-              padding: const EdgeInsets.only(top: 18),
+          ? ListView.builder(
+              padding: const EdgeInsets.only(top: 18, left: 12),
               itemCount: englishVM.words.length,
               itemBuilder: (BuildContext context, int index) {
                 return buildListItemGestureDetector(index, context);
               },
-              separatorBuilder: (BuildContext context, int index) =>
+              /* separatorBuilder: (BuildContext context, int index) =>
                   const Divider(
-                color: COLOR_RED,
-                thickness: 2,
-              ),
+                color: COLOR_BLACK,
+                thickness: 1,
+              ), */
             )
           : Center(
               child: Text("No Words Found! Try searching a different word.")),
