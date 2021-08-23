@@ -20,7 +20,7 @@ class SelectedPartOfSpeech extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: COLOR_GREEN,
+        color: Theme.of(context).primaryColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -3,84 +3,12 @@ import 'package:oromo_dictionary/src/components/search_screen_comp/app_header.da
 import 'package:oromo_dictionary/src/components/search_screen_comp/language_selector.dart';
 import 'package:oromo_dictionary/src/components/search_screen_comp/english_search_results_container.dart';
 import 'package:oromo_dictionary/src/components/search_screen_comp/oromo_search_result_container.dart';
+import 'package:oromo_dictionary/src/components/search_screen_comp/search_screen_app_bar.dart';
 import 'package:oromo_dictionary/src/services/api.dart';
 import 'package:provider/provider.dart';
 import 'package:oromo_dictionary/src/utils/constants.dart';
 import 'package:oromo_dictionary/src/utils/widget_functions.dart';
 import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_list_view_model.dart';
-
-const DICTIONARY_DATA = [
-  {
-    "main_entry": "hand",
-    "phonetic": "/ haand /",
-    "subentries": [
-      {
-        "partOfSpeech": "noun",
-        "phrases": [
-          {
-            "phrase": "",
-            "translations": [
-              {"translation": "harka"}
-            ]
-          },
-          {
-            "phrase": "at hand",
-            "translations": [
-              {"translation": "waan harka ifii jiruu"},
-              {"translation": "dhihoo"},
-              {"translation": "kaluu"}
-            ]
-          },
-          {
-            "phrase": "by hand",
-            "translations": [
-              {"translation": "harkaan"},
-              {"translation": "ka makiinaan hin tahin"}
-            ]
-          },
-        ]
-      },
-      {
-        "partOfSpeech": "verb",
-        "phrases": [
-          {
-            "phrase": "",
-            "translations": [
-              {"translation": "dabarsuu"},
-              {"translation": "keennuu"}
-            ]
-          },
-          {
-            "phrase": "hand back",
-            "translations": [
-              {
-                "translation": "deebisu",
-              },
-            ]
-          },
-          {
-            "phrase": "hand down",
-            "translations": [
-              {"translation": "gad kennuu"},
-              {"translation": "buusu"}
-            ]
-          },
-          {
-            "phrase": "hand in",
-            "example": "~ homework",
-            "translations": [
-              {"translation": "galchuu"},
-              {"translation": "naquu"},
-              {"translation": "ol kennuu"},
-              {"translation": "fidu"},
-              {"translation": "deebisuu"}
-            ]
-          },
-        ]
-      }
-    ]
-  },
-];
 
 class SearchScreen extends StatefulWidget {
   static const String routeName = "/search";
@@ -99,20 +27,6 @@ class _SearchScreenState extends State<SearchScreen> {
   List<Map<String, Object>> searchedWords = [];
   bool initialized = false;
 
-  /* MainEntry mainEntry = MainEntry("hand", "/ haand /");
-  Phrase phrase1 = Phrase("", ["harka"]);
-  Phrase phrase2 =
-      Phrase("at hand", ["waan harka ifii jiruu", "dhihoo", "kaluu"]);
-  Phrase phrase3 = Phrase("by hand", ["harkaan", "ka makiinaan hin tahin"]);
-  SubEntry subNoun = SubEntry("noun");
-  Phrase phrase4 = Phrase("", ["dabarsuu", "keennuu"]);
-  Phrase phrase5 = Phrase("hand back", ["deebisu"]);
-  Phrase phrase6 = Phrase("hand down", ["gad kennuu", "buusu"]);
-  Phrase phrase7 = Phrase(
-      "hand in", ["galchuu", "naquu", "ol kennuu", "fidu", "deebisuu"],
-      example: "~ homework");
-  SubEntry subVerb = SubEntry("verb"); */
-
   @override
   Widget build(BuildContext context) {
     if (!initialized) {
@@ -120,7 +34,7 @@ class _SearchScreenState extends State<SearchScreen> {
       textTheme = Theme.of(context).textTheme;
       initialized = true;
     }
-    if (_searchBarController.text.isEmpty) {
+    if (_searchBarController.text.isEmpty && hasSearched) {
       _resetSearch();
     }
     return GestureDetector(
@@ -135,23 +49,27 @@ class _SearchScreenState extends State<SearchScreen> {
         resizeToAvoidBottomInset: false,
         body: LayoutBuilder(builder: (context, constraints) {
           return Container(
-            color: COLOR_GREEN,
+            color: Theme.of(context).primaryColor,
             child: Column(
               children: [
                 Expanded(
-                  flex: 4,
+                  flex: 5,
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
+                      SearchScreenAppBar(textTheme: textTheme),
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: hasSearched
+                            ? const EdgeInsets.symmetric(
+                                vertical: 25, horizontal: 10)
+                            : const EdgeInsets.all(10),
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               AppHeader(),
                               searchBar(),
                               hasSearched
-                                  ? addVerticalSpace(1)
+                                  ? addVerticalSpace(0)
                                   : addVerticalSpace(30),
                             ]),
                       )

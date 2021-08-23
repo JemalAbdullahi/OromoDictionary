@@ -5,6 +5,7 @@ import 'package:oromo_dictionary/src/utils/widget_functions.dart';
 import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_list_view_model.dart';
 import 'package:oromo_dictionary/src/viewmodels/oromo_translation_view_models/oromo_translation_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:marquee/marquee.dart';
 
 class OromoEnglishTranslationScreen extends StatefulWidget {
   static const String routeName = "/oromotranslation";
@@ -45,7 +46,7 @@ class _OromoEnglishTranslationScreenState
         return Container(
           height: constraints.maxHeight,
           width: constraints.maxWidth,
-          color: COLOR_GREEN,
+          color: Theme.of(context).primaryColor,
           child: _buildColumn(constraints),
         );
       }),
@@ -113,6 +114,16 @@ class _OromoEnglishTranslationScreenState
       color: COLOR_RED,
       width: double.infinity,
       height: 50,
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Marquee(
+        text: oromoWord.translationBreakdown(),
+        style: textTheme.bodyText1!.apply(color: COLOR_YELLOW),
+        startAfter: Duration(seconds: 4),
+        velocity: 30,
+        pauseAfterRound: Duration(seconds: 3),
+        numberOfRounds: 2,
+        blankSpace: 300,
+      ),
     );
   }
 }

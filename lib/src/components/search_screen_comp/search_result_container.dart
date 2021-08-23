@@ -19,7 +19,7 @@ abstract class SearchResultsContainer extends StatelessWidget {
     return Container(
       decoration: _searchResultCardDecoration(),
       clipBehavior: Clip.hardEdge,
-      height: constraints.maxHeight / 1.8,
+      height: constraints.maxHeight / 2,
       width: constraints.maxWidth,
       child: englishVM.words.length > 0
           ? ListView.builder(

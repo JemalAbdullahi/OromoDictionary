@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:oromo_dictionary/src/screens/oromo_alphabet_screen.dart';
 import 'package:oromo_dictionary/src/screens/search_screen.dart';
 import 'package:oromo_dictionary/src/screens/translation_screens/english_oromo_translation_screen.dart';
 import 'package:oromo_dictionary/src/screens/translation_screens/oromo_english_translation_screen.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
           textTheme: defaultText,
           primaryColor: COLOR_GREEN,
           accentColor: COLOR_YELLOW,
+          iconTheme: IconThemeData(color: COLOR_YELLOW),
         ),
         home: ChangeNotifierProvider(
           create: (context) => SearchListViewModel(),
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider(
                   create: (context) => SearchListViewModel(),
                   child: OromoEnglishTranslationScreen()),
+          OromoAlphabetScreen.routeName: (BuildContext context) =>
+              OromoAlphabetScreen(),
         });
   }
 }
