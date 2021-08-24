@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.oromo_dictionary">
    <application
-        android:label="oromo_dictionary"
+        android:label="Oromo Dictionary"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
