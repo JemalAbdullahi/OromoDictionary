@@ -38,7 +38,11 @@ class EnglishWordViewModel {
 
   setForms() async {
     //Fetch English Definitions
-    await EnglishDefinitionAPI.fetchEnglishDefinition(this._englishWord);
+    try {
+      await EnglishDefinitionAPI.fetchEnglishDefinition(this._englishWord);
+    } catch (e) {
+      this._englishWord.audio = "";
+    }
     //Fetch Grammatical Forms of the word if not retrieved previously
     if (forms == null) {
       final grammaticalForms =

@@ -12,6 +12,10 @@ class GrammaticalFormViewModel {
   }
 
   String get partOfSpeech {
+    if (this._grammaticalForm.partOfSpeech == "transitive verb" ||
+        this._grammaticalForm.partOfSpeech == "intransitive verb")
+      return "verb";
+
     return this._grammaticalForm.partOfSpeech;
   }
 
