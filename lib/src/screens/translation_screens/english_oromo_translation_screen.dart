@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oromo_dictionary/src/components/translation_screen_comp/selected_part_of_speech.dart';
 import 'package:oromo_dictionary/src/components/translation_screen_comp/word_container.dart';
 import 'package:oromo_dictionary/src/utils/constants.dart';
+import 'package:oromo_dictionary/src/utils/widget_functions.dart';
 import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
 
 class EnglishOromoTranslationScreen extends StatefulWidget {
@@ -30,10 +31,7 @@ class _EnglishOromoTranslationScreenState extends State<EnglishOromoTranslationS
       initialized = true;
     }
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-        elevation: 0,
-      ),
+      appBar: customAppBar(),
       body: LayoutBuilder(builder: (context, constraints) {
         return Container(
           height: constraints.maxHeight,

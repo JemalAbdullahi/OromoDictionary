@@ -38,10 +38,7 @@ class _OromoEnglishTranslationScreenState
       initialized = true;
     }
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-        elevation: 0,
-      ),
+      appBar: customAppBar(),
       body: LayoutBuilder(builder: (context, constraints) {
         return Container(
           height: constraints.maxHeight,
@@ -118,9 +115,9 @@ class _OromoEnglishTranslationScreenState
       child: Marquee(
         text: oromoWord.translationBreakdown(),
         style: textTheme.bodyText1!.apply(color: COLOR_YELLOW),
-        startAfter: Duration(seconds: 4),
-        velocity: 30,
-        pauseAfterRound: Duration(seconds: 3),
+        startAfter: Duration(seconds: 2),
+        velocity: 50,
+        pauseAfterRound: Duration(seconds: 2),
         numberOfRounds: 2,
         blankSpace: 300,
       ),
