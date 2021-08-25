@@ -84,10 +84,10 @@ class _PhoneticButtonState extends State<_PhoneticButton> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           elevation: 5.0,
-          shadowColor: COLOR_RED,
+          shadowColor: COLOR_YELLOW,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          primary: COLOR_RED),
+          primary: COLOR_YELLOW),
       onPressed: phoneticAudio,
       child: _phoneticText(),
     );
@@ -103,7 +103,8 @@ class _PhoneticButtonState extends State<_PhoneticButton> {
   Text _phoneticText() {
     return Text(
       "/ ${widget.englishWord.phonetic} /",
-      style: widget.textTheme.bodyText1!.apply(color: COLOR_YELLOW),
+      style: widget.textTheme.bodyText1!
+          .apply(color: COLOR_GREEN, fontWeightDelta: 3),
     );
   }
 }
