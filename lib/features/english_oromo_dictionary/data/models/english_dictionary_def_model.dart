@@ -11,4 +11,13 @@ class EnglishDictionaryDefModel extends EnglishDictionaryDef {
             phonetics: phonetics,
             origin: origin,
             meanings: meanings);
+
+  factory EnglishDictionaryDefModel.fromJson(Map<String, dynamic> parsedJson) {
+    return EnglishDictionaryDefModel(
+      word: parsedJson["word"],
+      phonetics: parsedJson["phonetics"].isNotEmpty ? parsedJson["phonetics"][0] : null,
+      origin: parsedJson["origin"],
+      meanings: parsedJson["meanings"],
+    );
+  }
 }

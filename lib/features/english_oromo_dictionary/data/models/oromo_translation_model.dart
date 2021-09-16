@@ -7,4 +7,12 @@ class OromoTranslationModel extends OromoTranslation{
     required String translation,
   }) : super(id: id, phraseID: phraseID, translation: translation);
 
+  factory OromoTranslationModel.fromJson(Map<String, dynamic> parsedJson) {
+    return OromoTranslationModel(
+      id: parsedJson['id'],
+      phraseID: parsedJson['phrase_id'],
+      translation: parsedJson['translation'],
+    );
+  }
+
 }

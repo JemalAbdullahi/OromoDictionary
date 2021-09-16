@@ -7,4 +7,11 @@ class GrammaticalFormModel extends GrammaticalForm{
     required String partOfSpeech,
   }) : super(id: id, wordID: wordID, partOfSpeech: partOfSpeech);
 
+  factory GrammaticalFormModel.fromJson(Map<String, dynamic> parsedJson) {
+    return GrammaticalFormModel(
+      id:parsedJson['id'],
+      wordID:parsedJson['english_word_id'],
+      partOfSpeech:parsedJson['part_of_speech'],
+    );
+  }
 }

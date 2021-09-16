@@ -7,4 +7,13 @@ class PhraseModel extends Phrase {
     required String phrase,
     required String example,
   }) : super(id: id, formID: formID, phrase: phrase, example: example);
+
+  factory PhraseModel.fromJson(Map<String, dynamic> parsedJson) {
+    return PhraseModel(
+      id: parsedJson['id'],
+      formID: parsedJson['grammatical_form_id'],
+      phrase: parsedJson['phrase'],
+      example: parsedJson['example'],
+    );
+  }
 }
