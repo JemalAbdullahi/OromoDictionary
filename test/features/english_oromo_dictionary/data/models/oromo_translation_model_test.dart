@@ -33,4 +33,18 @@ void main() {
       },
     );
   });
+
+  group('toJson', () {
+    test(
+      'should return a JSON map containing the proper data',
+      () async {
+        //arranged already in tEnglishWordModel
+        //act
+        final result = tOromoTranslationModel.toJson();
+        //assert
+        final expectedMap = {"translation": "rifatu"};
+        expect(result, expectedMap);
+      },
+    );
+  });
 }

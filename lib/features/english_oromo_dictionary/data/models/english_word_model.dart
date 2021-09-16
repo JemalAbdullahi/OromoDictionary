@@ -5,7 +5,7 @@ class EnglishWordModel extends EnglishWord {
     required id,
     required word,
     required phonetic,
-  }) : super(id: id, word: word, phonetic: phonetic);
+  }) : super(word: word, phonetic: phonetic);
 
   factory EnglishWordModel.fromJson(Map<String, dynamic> parsedJson) {
     return EnglishWordModel(
@@ -13,5 +13,9 @@ class EnglishWordModel extends EnglishWord {
       word: parsedJson['word'],
       phonetic: parsedJson['phonetic'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {"word": word, "phonetic": phonetic};
   }
 }

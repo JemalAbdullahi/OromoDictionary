@@ -32,4 +32,18 @@ void main() {
       },
     );
   });
+
+  group('toJson', () {
+    test(
+      'should return a JSON map containing the proper data',
+      () async {
+        //arranged already in tEnglishWordModel
+        //act
+        final result = tGrammaticalFormModel.toJson();
+        //assert
+        final expectedMap = {"part_of_speech": "adverb"};
+        expect(result, expectedMap);
+      },
+    );
+  });
 }

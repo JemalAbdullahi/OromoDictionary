@@ -24,9 +24,9 @@ void main() {
 
   tEnglishTerm = "aba";
   tEnglishWordList = [
-    EnglishWord(id: 0, word: "aback", phonetic: "abaak"),
-    EnglishWord(id: 1, word: "abacus", phonetic: "abaakas"),
-    EnglishWord(id: 2, word: "abaft", phonetic: "abaaft"),
+    EnglishWord(word: "aback", phonetic: "abaak"),
+    EnglishWord(word: "abacus", phonetic: "abaakas"),
+    EnglishWord(word: "abaft", phonetic: "abaaft"),
   ];
   test(
     'should get a list of english words/translations for the oromo term from the repository',

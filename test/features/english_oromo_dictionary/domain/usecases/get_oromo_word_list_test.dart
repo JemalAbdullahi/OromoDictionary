@@ -24,9 +24,9 @@ void main() {
 
   tOromoTerm = "gab";
   tOromoTranslationList = [
-    OromoTranslation(id: 0, phraseID: 0, translation: "gabaabaa"),
-    OromoTranslation(id: 1, phraseID: 1, translation: "gabaabina"),
-    OromoTranslation(id: 2, phraseID: 2, translation: "gabaabsuu"),
+    OromoTranslation(translation: "gabaabaa"),
+    OromoTranslation(translation: "gabaabina"),
+    OromoTranslation(translation: "gabaabsuu"),
   ];
   test(
     'should get a list of oromo words/translations for the oromo term from the repository',

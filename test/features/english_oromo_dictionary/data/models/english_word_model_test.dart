@@ -32,4 +32,18 @@ void main() {
       },
     );
   });
+
+  group('toJson', () {
+    test(
+      'should return a JSON map containing the proper data',
+      () async {
+        //arranged already in tEnglishWordModel
+        //act
+        final result = tEnglishWordModel.toJson();
+        //assert
+        final expectedMap = {"word": "aback", "phonetic": "abaak"};
+        expect(result, expectedMap);
+      },
+    );
+  });
 }

@@ -7,17 +7,24 @@ class EnglishDictionaryDefModel extends EnglishDictionaryDef {
     required String? origin,
     required List<dynamic> meanings,
   }) : super(
-            word: word,
-            phonetics: phonetics,
-            origin: origin,
-            meanings: meanings);
+            word: word, phoneticAudio: phonetics!["audio"], meanings: meanings);
 
-  factory EnglishDictionaryDefModel.fromJson(Map<String, dynamic> parsedJson) {
+  factory EnglishDictionaryDefModel.fromJson(List<dynamic> parsedJson) {
     return EnglishDictionaryDefModel(
-      word: parsedJson["word"],
-      phonetics: parsedJson["phonetics"].isNotEmpty ? parsedJson["phonetics"][0] : null,
-      origin: parsedJson["origin"],
-      meanings: parsedJson["meanings"],
+      word: parsedJson[0]["word"],
+      phonetics: parsedJson[0]["phonetics"].isNotEmpty
+          ? parsedJson[0]["phonetics"][0]
+          : null,
+      origin: parsedJson[0]["origin"],
+      meanings: parsedJson[0]["meanings"],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "word": word,
+      "phonetic_audio": phoneticAudio,
+      "meanings": meanings,
+    };
   }
 }

@@ -10,10 +10,12 @@ void main() {
   final tEnglishDictionaryDefModel = EnglishDictionaryDefModel(
     word: 'aback',
     phonetics: {
-        "text": "əˈbak",
-        "audio": "//ssl.gstatic.com/dictionary/static/sounds/20200429/aback--_gb_1.mp3"
-      },
-    origin: "Old English on bæc  (see a-2, back). The term came to be treated as a single word in nautical use.",
+      "text": "əˈbak",
+      "audio":
+          "//ssl.gstatic.com/dictionary/static/sounds/20200429/aback--_gb_1.mp3"
+    },
+    origin:
+        "Old English on bæc  (see a-2, back). The term came to be treated as a single word in nautical use.",
     meanings: [
       {
         "partOfSpeech": "adverb",
@@ -25,8 +27,10 @@ void main() {
             "antonyms": []
           },
           {
-            "definition": "with the sail pressed backwards against the mast by a headwind.",
-            "example": "Peter holds the jib aback until our bow swings across the wind",
+            "definition":
+                "with the sail pressed backwards against the mast by a headwind.",
+            "example":
+                "Peter holds the jib aback until our bow swings across the wind",
             "synonyms": [],
             "antonyms": []
           }
@@ -51,9 +55,48 @@ void main() {
         final List<dynamic> jsonMap =
             json.decode(fixture('english_dictionary_def.json'));
         //act
-        final result = EnglishDictionaryDefModel.fromJson(jsonMap[0]);
+        final result = EnglishDictionaryDefModel.fromJson(jsonMap);
         //assert
         expect(result, tEnglishDictionaryDefModel);
+      },
+    );
+  });
+
+  group('toJson', () {
+    test(
+      'should return a JSON map containing the proper data',
+      () async {
+        //arranged already in tEnglishWordModel
+        //act
+        final result = tEnglishDictionaryDefModel.toJson();
+        //assert
+        final expectedMap = {
+          "word": "aback",
+          "phonetic_audio":
+              "//ssl.gstatic.com/dictionary/static/sounds/20200429/aback--_gb_1.mp3",
+          "meanings": [
+            {
+              "partOfSpeech": "adverb",
+              "definitions": [
+                {
+                  "definition": "towards or situated to the rear; back.",
+                  "example": "the little strip of pasture aback of the house",
+                  "synonyms": [],
+                  "antonyms": []
+                },
+                {
+                  "definition":
+                      "with the sail pressed backwards against the mast by a headwind.",
+                  "example":
+                      "Peter holds the jib aback until our bow swings across the wind",
+                  "synonyms": [],
+                  "antonyms": []
+                }
+              ]
+            }
+          ],
+        };
+        expect(result, expectedMap);
       },
     );
   });

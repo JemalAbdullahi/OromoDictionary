@@ -31,4 +31,18 @@ void main() {
       },
     );
   });
+
+  group('toJson', () {
+    test(
+      'should return a JSON map containing the proper data',
+      () async {
+        //arranged already in tEnglishWordModel
+        //act
+        final result = tPhraseModel.toJson();
+        //assert
+        final expectedMap = {"phrase": "to be taken aback", "example": ""};
+        expect(result, expectedMap);
+      },
+    );
+  });
 }
