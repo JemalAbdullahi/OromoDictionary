@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/src/utils/constants.dart';
+
+import 'constants.dart';
 
 Widget addVerticalSpace(double height) {
   return SizedBox(height: height);

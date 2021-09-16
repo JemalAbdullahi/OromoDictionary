@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/src/screens/oromo_alphabet_screen.dart';
-import 'package:oromo_dictionary/src/utils/constants.dart';
+import '../../screens/oromo_alphabet_screen.dart';
+import '../../utils/constants.dart';
 
 class SearchScreenAppBar extends StatelessWidget {
   const SearchScreenAppBar({

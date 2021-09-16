@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
+import '../viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
 
 class EnglishWord {
   late final int id;

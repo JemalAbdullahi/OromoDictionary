@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/src/components/search_screen_comp/search_result_container.dart';
-import 'package:oromo_dictionary/src/screens/translation_screens/english_oromo_translation_screen.dart';
-import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
+import 'search_result_container.dart';
+import '../../screens/translation_screens/english_oromo_translation_screen.dart';
+import '../../viewmodels/english_view_models/english_word_view_model.dart';
 
 class EnglishSearchResultsContainer extends SearchResultsContainer {
   EnglishSearchResultsContainer(

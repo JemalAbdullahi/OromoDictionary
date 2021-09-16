@@ -1,5 +1,5 @@
-import 'package:oromo_dictionary/src/models/oromo_translation.dart';
-import 'package:oromo_dictionary/src/utils/constants.dart';
+import '../../models/oromo_translation.dart';
+import '../../utils/constants.dart';
 
 class OromoTranslationViewModel {
   late final OromoTranslation _oromoTranslation;
@@ -27,7 +27,6 @@ class OromoTranslationViewModel {
         int j = i < translation.length - 1 ? i + 1 : -1;
         letter = j != -1 ? translation[i] + translation[j] : translation[i];
         letter.trim();
-        print(letter);
         if (uniqueConsonants.containsKey(letter)) {
           sb.write(letter + ": ");
           sb.write(uniqueConsonants[letter]!);

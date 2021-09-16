@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/src/components/translation_screen_comp/definition_and_translation_listview.dart';
-import 'package:oromo_dictionary/src/utils/constants.dart';
-import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
-import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
+import 'definition_and_translation_listview.dart';
+import '../../utils/constants.dart';
+import '../../viewmodels/english_view_models/english_word_view_model.dart';
+import '../../viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
 
 class SelectedPartOfSpeech extends StatelessWidget {
   const SelectedPartOfSpeech({
@@ -53,6 +53,7 @@ class SelectedPartOfSpeech extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Container(
+            clipBehavior: Clip.hardEdge,
             padding: const EdgeInsets.symmetric(horizontal: 8),
             decoration: BoxDecoration(
               color: COLOR_YELLOW,

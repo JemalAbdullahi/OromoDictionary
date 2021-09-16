@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' show Client;
-import 'package:oromo_dictionary/src/models/oromo_translation.dart';
-import 'package:oromo_dictionary/src/services/api.dart';
-import 'package:oromo_dictionary/src/models/english_word.dart';
+import '../models/oromo_translation.dart';
+import 'api.dart';
+import '../models/english_word.dart';
 
 class SearchService {
   Client client = Client();

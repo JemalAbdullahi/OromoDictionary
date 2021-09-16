@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/src/services/api.dart';
-import 'package:oromo_dictionary/src/utils/constants.dart';
-import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_list_view_model.dart';
+import '../../services/api.dart';
+import '../../utils/constants.dart';
+import '../../viewmodels/english_view_models/english_word_list_view_model.dart';
 
 class LanguageSelector extends StatefulWidget {
   const LanguageSelector(

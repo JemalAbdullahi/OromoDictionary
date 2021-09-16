@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' show Client;
-import 'package:oromo_dictionary/src/models/phrase.dart';
-import 'package:oromo_dictionary/src/services/api.dart';
-import 'package:oromo_dictionary/src/services/oromo_translation_service.dart';
-import 'package:oromo_dictionary/src/viewmodels/phrase_view_models/phrase_view_model.dart';
+import '../models/phrase.dart';
+import 'api.dart';
+import 'oromo_translation_service.dart';
+import '../viewmodels/phrase_view_models/phrase_view_model.dart';
 
 class PhraseService {
   Client client = Client();

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/src/components/translation_screen_comp/selected_part_of_speech.dart';
-import 'package:oromo_dictionary/src/components/translation_screen_comp/word_container.dart';
-import 'package:oromo_dictionary/src/utils/constants.dart';
-import 'package:oromo_dictionary/src/utils/widget_functions.dart';
-import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
+import '../../components/translation_screen_comp/selected_part_of_speech.dart';
+import '../../components/translation_screen_comp/word_container.dart';
+import '../../utils/constants.dart';
+import '../../utils/widget_functions.dart';
+import '../../viewmodels/english_view_models/english_word_view_model.dart';
 
 class EnglishOromoTranslationScreen extends StatefulWidget {
   static const String routeName = "/englishtranslation";
@@ -35,7 +35,7 @@ class _EnglishOromoTranslationScreenState extends State<EnglishOromoTranslationS
       body: LayoutBuilder(builder: (context, constraints) {
         return Container(
           height: constraints.maxHeight,
-          width: constraints.maxWidth,
+          width: constraints.maxWidth > 700 ? 700 : constraints.maxWidth,
           child: _buildColumn(constraints),
         );
       }),

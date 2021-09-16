@@ -1,6 +1,6 @@
-import 'package:oromo_dictionary/src/models/phrase.dart';
-import 'package:oromo_dictionary/src/viewmodels/oromo_translation_view_models/oromo_translation_list_view_model.dart';
-import 'package:oromo_dictionary/src/viewmodels/oromo_translation_view_models/oromo_translation_view_model.dart';
+import '../../models/phrase.dart';
+import '../oromo_translation_view_models/oromo_translation_list_view_model.dart';
+import '../oromo_translation_view_models/oromo_translation_view_model.dart';
 
 class PhraseViewModel {
   final Phrase _phrase;

@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/src/viewmodels/phrase_view_models/phrase_view_model.dart';
+import '../viewmodels/phrase_view_models/phrase_view_model.dart';
 
 class GrammaticalForm {
   late final int id;

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:oromo_dictionary/src/services/api.dart';
-import 'package:oromo_dictionary/src/services/search_service.dart';
-import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_view_model.dart';
-import 'package:oromo_dictionary/src/viewmodels/oromo_translation_view_models/oromo_translation_view_model.dart';
+import '../../services/api.dart';
+import '../../services/search_service.dart';
+import 'english_word_view_model.dart';
+import '../oromo_translation_view_models/oromo_translation_view_model.dart';
 
 class SearchListViewModel extends ChangeNotifier {
   List<dynamic> words = [];

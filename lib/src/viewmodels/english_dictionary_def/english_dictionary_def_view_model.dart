@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/src/models/english_dictionary_def.dart';
+import '../../models/english_dictionary_def.dart';
 
 class EnglishDictionaryDefViewModel {
   late final EnglishDictionaryDef _englishDictionaryDef;

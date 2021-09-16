@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/src/utils/constants.dart';
+import '../utils/constants.dart';
 
 class OromoAlphabetScreen extends StatefulWidget {
   static const String routeName = "/alphabet";
@@ -44,17 +44,19 @@ class _OromoAlphabetScreenState extends State<OromoAlphabetScreen> {
               : SizedBox.shrink()
         ],
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
-            color: theme.primaryColor,
-            height: constraints.maxHeight,
-            width: constraints.maxWidth,
-            child: selectedLetters.isEmpty
-                ? _buildlistViewSelector(theme)
-                : _listViewLetterBuilder(theme, letterSet[selectedLetters]!),
-          );
-        },
+      backgroundColor: theme.primaryColor,
+      body: Center(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Container(
+              height: constraints.maxHeight,
+              width: constraints.maxWidth > 700 ? 700 : constraints.maxWidth,
+              child: selectedLetters.isEmpty
+                  ? _buildlistViewSelector(theme)
+                  : _listViewLetterBuilder(theme, letterSet[selectedLetters]!),
+            );
+          },
+        ),
       ),
     );
   }

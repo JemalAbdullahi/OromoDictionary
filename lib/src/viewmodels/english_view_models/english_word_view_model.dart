@@ -1,7 +1,7 @@
-import 'package:oromo_dictionary/src/models/english_word.dart';
-import 'package:oromo_dictionary/src/services/english_definition_api.dart';
-import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_list_view_model.dart';
-import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
+import '../../models/english_word.dart';
+import '../../services/english_definition_api.dart';
+import '../grammatical_form_view_models/grammatical_form_list_view_model.dart';
+import '../grammatical_form_view_models/grammatical_form_view_model.dart';
 
 class EnglishWordViewModel {
   late final EnglishWord _englishWord;

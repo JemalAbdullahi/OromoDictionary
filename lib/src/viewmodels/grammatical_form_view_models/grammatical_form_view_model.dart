@@ -1,6 +1,6 @@
-import 'package:oromo_dictionary/src/models/grammatical_form.dart';
-import 'package:oromo_dictionary/src/viewmodels/phrase_view_models/phrase_list_view_model.dart';
-import 'package:oromo_dictionary/src/viewmodels/phrase_view_models/phrase_view_model.dart';
+import '../../models/grammatical_form.dart';
+import '../phrase_view_models/phrase_list_view_model.dart';
+import '../phrase_view_models/phrase_view_model.dart';
 
 class GrammaticalFormViewModel {
   late final GrammaticalForm _grammaticalForm;

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/src/components/search_screen_comp/app_header.dart';
-import 'package:oromo_dictionary/src/components/search_screen_comp/language_selector.dart';
-import 'package:oromo_dictionary/src/components/search_screen_comp/english_search_results_container.dart';
-import 'package:oromo_dictionary/src/components/search_screen_comp/oromo_search_result_container.dart';
-import 'package:oromo_dictionary/src/components/search_screen_comp/search_screen_app_bar.dart';
-import 'package:oromo_dictionary/src/services/api.dart';
+import '../components/search_screen_comp/app_header.dart';
+import '../components/search_screen_comp/language_selector.dart';
+import '../components/search_screen_comp/english_search_results_container.dart';
+import '../components/search_screen_comp/oromo_search_result_container.dart';
+import '../components/search_screen_comp/search_screen_app_bar.dart';
+import '../services/api.dart';
 import 'package:provider/provider.dart';
-import 'package:oromo_dictionary/src/utils/constants.dart';
-import 'package:oromo_dictionary/src/utils/widget_functions.dart';
-import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_list_view_model.dart';
+import '../utils/constants.dart';
+import '../utils/widget_functions.dart';
+import '../viewmodels/english_view_models/english_word_list_view_model.dart';
 
 class SearchScreen extends StatefulWidget {
   static const String routeName = "/search";
@@ -46,43 +46,51 @@ class _SearchScreenState extends State<SearchScreen> {
         }
       },
       child: Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         resizeToAvoidBottomInset: false,
-        body: LayoutBuilder(builder: (context, constraints) {
-          return Container(
-            color: Theme.of(context).primaryColor,
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      SearchScreenAppBar(textTheme: textTheme),
-                      Padding(
-                        padding: hasSearched
-                            ? const EdgeInsets.symmetric(
-                                vertical: 25, horizontal: 10)
-                            : const EdgeInsets.all(10),
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              AppHeader(),
-                              searchBar(),
-                              hasSearched
-                                  ? addVerticalSpace(0)
-                                  : addVerticalSpace(30),
-                            ]),
-                      )
-                    ],
+        body: Center(
+          child: LayoutBuilder(builder: (context, constraints) {
+            return Container(
+              alignment: Alignment.center,
+              // color: Theme.of(context).primaryColor,
+              width: constraints.maxWidth > 700 ? 700 : constraints.maxWidth,
+              height: constraints.maxHeight > 1000
+                  ? constraints.maxHeight * 0.8
+                  : constraints.maxHeight,
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 5,
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        SearchScreenAppBar(textTheme: textTheme),
+                        Padding(
+                          padding: hasSearched
+                              ? const EdgeInsets.symmetric(
+                                  vertical: 25, horizontal: 10)
+                              : const EdgeInsets.all(10),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                AppHeader(),
+                                searchBar(),
+                                hasSearched
+                                    ? addVerticalSpace(0)
+                                    : addVerticalSpace(30),
+                              ]),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                hasSearched
-                    ? _searchResults(constraints)
-                    : Container(width: constraints.maxWidth),
-              ],
-            ),
-          );
-        }),
+                  hasSearched
+                      ? _searchResults(constraints)
+                      : Container(width: constraints.maxWidth),
+                ],
+              ),
+            );
+          }),
+        ),
       ),
     );
   }

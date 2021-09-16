@@ -1,5 +1,5 @@
-import 'package:oromo_dictionary/src/services/grammatical_form_service.dart';
-import 'package:oromo_dictionary/src/viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
+import '../../services/grammatical_form_service.dart';
+import 'grammatical_form_view_model.dart';
 
 class GrammaticalFormListViewModel {
   // static List<GrammaticalFormViewModel> forms = [];

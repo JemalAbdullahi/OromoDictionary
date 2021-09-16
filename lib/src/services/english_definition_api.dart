@@ -1,9 +1,9 @@
 import 'package:http/http.dart' show Client, Response;
-import 'package:oromo_dictionary/src/models/english_dictionary_def.dart';
+import '../models/english_dictionary_def.dart';
 import 'dart:convert';
 
-import 'package:oromo_dictionary/src/models/english_word.dart';
-import 'package:oromo_dictionary/src/viewmodels/english_dictionary_def/english_dictionary_def_view_model.dart';
+import '../models/english_word.dart';
+import '../viewmodels/english_dictionary_def/english_dictionary_def_view_model.dart';
 
 class EnglishDefinitionAPI {
   static Client client = Client();

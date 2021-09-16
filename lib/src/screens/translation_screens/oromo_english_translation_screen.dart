@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/src/components/search_screen_comp/english_search_results_container.dart';
-import 'package:oromo_dictionary/src/utils/constants.dart';
-import 'package:oromo_dictionary/src/utils/widget_functions.dart';
-import 'package:oromo_dictionary/src/viewmodels/english_view_models/english_word_list_view_model.dart';
-import 'package:oromo_dictionary/src/viewmodels/oromo_translation_view_models/oromo_translation_view_model.dart';
+import '../../components/search_screen_comp/english_search_results_container.dart';
+import '../../utils/constants.dart';
+import '../../utils/widget_functions.dart';
+import '../../viewmodels/english_view_models/english_word_list_view_model.dart';
+import '../../viewmodels/oromo_translation_view_models/oromo_translation_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:marquee/marquee.dart';
 
@@ -42,7 +42,7 @@ class _OromoEnglishTranslationScreenState
       body: LayoutBuilder(builder: (context, constraints) {
         return Container(
           height: constraints.maxHeight,
-          width: constraints.maxWidth,
+          width: constraints.maxWidth > 700 ? 700 : constraints.maxWidth,
           color: Theme.of(context).primaryColor,
           child: _buildColumn(constraints),
         );
