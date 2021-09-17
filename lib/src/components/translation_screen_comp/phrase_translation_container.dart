@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../viewmodels/phrase_view_models/phrase_view_model.dart';
 
 class PhraseTranslationContainer extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/oromo_translation.dart';
+import '../../domain/entities/oromo_translation.dart';
 
 class OromoTranslationModel extends OromoTranslation {
   OromoTranslationModel({

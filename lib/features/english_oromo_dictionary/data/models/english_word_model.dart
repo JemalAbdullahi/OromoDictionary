@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
+import '../../domain/entities/english_word.dart';
 
 class EnglishWordModel extends EnglishWord {
   EnglishWordModel({

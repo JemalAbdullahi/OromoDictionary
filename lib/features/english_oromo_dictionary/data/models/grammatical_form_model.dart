@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/grammatical_form.dart';
+import '../../domain/entities/grammatical_form.dart';
 
 class GrammaticalFormModel extends GrammaticalForm {
   GrammaticalFormModel({

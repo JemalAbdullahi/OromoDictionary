@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/phrase.dart';
+import '../../domain/entities/phrase.dart';
 
 class PhraseModel extends Phrase {
   PhraseModel({

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'phrase_translation_container.dart';
+
 import '../../viewmodels/english_view_models/english_word_view_model.dart';
 import '../../viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
+import 'phrase_translation_container.dart';
 
 class EnglishDefinitionListView extends StatelessWidget {
   const EnglishDefinitionListView(

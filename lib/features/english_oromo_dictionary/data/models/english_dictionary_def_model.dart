@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_dictionary_def.dart';
+import '../../domain/entities/english_dictionary_def.dart';
 
 class EnglishDictionaryDefModel extends EnglishDictionaryDef {
   EnglishDictionaryDefModel({
