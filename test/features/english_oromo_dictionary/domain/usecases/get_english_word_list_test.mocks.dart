@@ -7,10 +7,6 @@ import 'dart:async' as _i4;
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:oromo_dictionary/core/error/failures.dart' as _i5;
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart'
-    as _i7;
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/oromo_translation.dart'
-    as _i6;
 
 import 'get_english_word_list_test.dart' as _i3;
 
@@ -36,19 +32,12 @@ class MockMockEnglishOromoDictionaryRepository extends _i1.Mock
   @override
   String toString() => super.toString();
   @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i6.OromoTranslation>>>
-      getOromoWordList(String? oromoTerm) => (super.noSuchMethod(
-          Invocation.method(#getOromoWordList, [oromoTerm]),
-          returnValue: Future<
-                  _i2.Either<_i5.Failure, List<_i6.OromoTranslation>>>.value(
-              _FakeEither_0<_i5.Failure, List<_i6.OromoTranslation>>())) as _i4
-          .Future<_i2.Either<_i5.Failure, List<_i6.OromoTranslation>>>);
-  @override
-  _i4.Future<_i2.Either<_i5.Failure, List<_i7.EnglishWord>>> getEnglishWordList(
-          String? englishTerm) =>
-      (super.noSuchMethod(Invocation.method(#getEnglishWordList, [englishTerm]),
-              returnValue:
-                  Future<_i2.Either<_i5.Failure, List<_i7.EnglishWord>>>.value(
-                      _FakeEither_0<_i5.Failure, List<_i7.EnglishWord>>()))
-          as _i4.Future<_i2.Either<_i5.Failure, List<_i7.EnglishWord>>>);
+  _i4.Future<_i2.Either<_i5.Failure, List<dynamic>>> getWordList(
+          {bool? isEnglish, String? searchTerm}) =>
+      (super.noSuchMethod(
+              Invocation.method(#getWordList, [],
+                  {#isEnglish: isEnglish, #searchTerm: searchTerm}),
+              returnValue: Future<_i2.Either<_i5.Failure, List<dynamic>>>.value(
+                  _FakeEither_0<_i5.Failure, List<dynamic>>()))
+          as _i4.Future<_i2.Either<_i5.Failure, List<dynamic>>>);
 }

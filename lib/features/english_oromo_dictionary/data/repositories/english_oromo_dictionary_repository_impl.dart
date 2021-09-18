@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:oromo_dictionary/core/error/exceptions.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/platform/network_info.dart';
@@ -18,18 +19,32 @@ class EnglishOromoDictionaryRepositoryImpl
       {required this.remoteDataSource,
       required this.localDataSource,
       required this.networkInfo});
-      
-  @override
-  Future<Either<Failure, List<EnglishWord>>> getEnglishWordList(
-      String englishTerm) {
-    // TODO: implement getEnglishWordList
-    throw UnimplementedError();
-  }
 
   @override
-  Future<Either<Failure, List<OromoTranslation>>> getOromoWordList(
-      String oromoTerm) {
-    // TODO: implement getOromoWordList
-    throw UnimplementedError();
+  Future<Either<Failure, List<dynamic>>> getWordList({required bool isEnglish, required String searchTerm}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final remoteWordList = isEnglish
+            ? await remoteDataSource.getEnglishWordList(searchTerm)
+            : await remoteDataSource.getOromoWordList(searchTerm);
+        isEnglish
+            ? localDataSource
+                .cacheEnglishWordList(remoteWordList as List<EnglishWord>)
+            : localDataSource
+                .cacheOromoWordList(remoteWordList as List<OromoTranslation>);
+        return Right(remoteWordList);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final localWordList = isEnglish
+            ? await localDataSource.getLastEnglishWordList()
+            : await localDataSource.getLastOromoWordList();
+        return Right(localWordList);
+      } on CacheException {
+        return Left(CacheFailure());
+      }
+    }
   }
 }

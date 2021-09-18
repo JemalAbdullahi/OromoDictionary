@@ -3,17 +3,18 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/usecases/usecase.dart';
-import '../entities/english_word.dart';
 import '../repositories/english_oromo_dictionary_repository.dart';
 
-class GetEnglishWordList implements UseCase<List<EnglishWord>, Params> {
+class GetEnglishWordList implements UseCase<List<dynamic>, Params> {
   final EnglishOromoDictionaryRepository repository;
 
   GetEnglishWordList(this.repository);
 
   @override
-  Future<Either<Failure, List<EnglishWord>>> call(Params params) async {
-    return await repository.getEnglishWordList(params.englishTerm);
+  Future<Either<Failure, List<dynamic>>> call(Params params) async {
+    return await repository.getWordList(
+        isEnglish: true,
+        searchTerm: params.englishTerm);
   }
 }
 

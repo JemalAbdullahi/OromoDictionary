@@ -29,16 +29,19 @@ void main() {
     OromoTranslation(translation: "gabaabsuu"),
   ];
   test(
-    'should get a list of oromo words/translations for the oromo term from the repository',
+    'should get a list of oromo words for the oromo term from the repository',
     () async {
       //arrange
-      when(mockEnglishOromoDictionaryRepository.getOromoWordList(any))
+      when(mockEnglishOromoDictionaryRepository.getWordList(
+              isEnglish: anyNamed("isEnglish"),
+              searchTerm: anyNamed("searchTerm")))
           .thenAnswer((_) async => Right(tOromoTranslationList));
       //act
       final result = await usecase(Params(oromoTerm: tOromoTerm));
       //assert
       expect(result, Right(tOromoTranslationList));
-      verify(mockEnglishOromoDictionaryRepository.getOromoWordList(tOromoTerm));
+      verify(mockEnglishOromoDictionaryRepository.getWordList(
+          isEnglish: false, searchTerm: tOromoTerm));
       verifyNoMoreInteractions(mockEnglishOromoDictionaryRepository);
     },
   );

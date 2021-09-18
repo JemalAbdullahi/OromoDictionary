@@ -29,17 +29,17 @@ void main() {
     EnglishWord(word: "abaft", phonetic: "abaaft"),
   ];
   test(
-    'should get a list of english words/translations for the oromo term from the repository',
+    'should get a list of english words for the english term from the repository',
     () async {
       //arrange
-      when(mockEnglishOromoDictionaryRepository.getEnglishWordList(any))
+      when(mockEnglishOromoDictionaryRepository.getWordList(isEnglish: anyNamed("isEnglish"), searchTerm: anyNamed("searchTerm")))
           .thenAnswer((_) async => Right(tEnglishWordList));
       //act
       final result = await usecase(Params(englishTerm: tEnglishTerm));
       //assert
       expect(result, Right(tEnglishWordList));
       verify(mockEnglishOromoDictionaryRepository
-          .getEnglishWordList(tEnglishTerm));
+          .getWordList(isEnglish: true, searchTerm: tEnglishTerm));
       verifyNoMoreInteractions(mockEnglishOromoDictionaryRepository);
     },
   );
