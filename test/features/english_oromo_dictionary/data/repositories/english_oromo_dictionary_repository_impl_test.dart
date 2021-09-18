@@ -5,7 +5,6 @@ import 'package:mockito/mockito.dart';
 import 'package:oromo_dictionary/core/error/exceptions.dart';
 import 'package:oromo_dictionary/core/error/failures.dart';
 import 'package:oromo_dictionary/core/network/network_info.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/english_oromo_dictionary_local_data_source.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/english_oromo_dictionary_remote_data_source.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/english_word_model.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/oromo_translation_model.dart';
@@ -17,25 +16,19 @@ import 'english_oromo_dictionary_repository_impl_test.mocks.dart';
 class MockRemoteDataSource extends Mock
     implements EnglishOromoDictionaryRemoteDataSource {}
 
-class MockLocalDataSource extends Mock
-    implements EnglishOromoDictionaryLocalDataSource {}
-
 class MockNetworkInfo extends Mock implements NetworkInfo {}
 
-@GenerateMocks([MockRemoteDataSource, MockLocalDataSource, MockNetworkInfo])
+@GenerateMocks([MockRemoteDataSource, MockNetworkInfo])
 void main() {
   late EnglishOromoDictionaryRepositoryImpl repository;
   late MockMockRemoteDataSource mockRemoteDataSource;
-  late MockMockLocalDataSource mockLocalDataSource;
   late MockMockNetworkInfo mockNetworkInfo;
 
   setUp(() {
     mockRemoteDataSource = MockMockRemoteDataSource();
-    mockLocalDataSource = MockMockLocalDataSource();
     mockNetworkInfo = MockMockNetworkInfo();
     repository = EnglishOromoDictionaryRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
-      localDataSource: mockLocalDataSource,
       networkInfo: mockNetworkInfo,
     );
   });
@@ -96,19 +89,6 @@ void main() {
           },
         );
         test(
-          'should cache data locally when the call to remote data source is successful',
-          () async {
-            //arrange
-            when(mockRemoteDataSource.getEnglishWordList(any))
-                .thenAnswer((_) async => tEnglishWordList);
-            //act
-            await repository.getWordList(isEnglish: true, searchTerm: tWord);
-            //assert
-            verify(mockRemoteDataSource.getEnglishWordList(tWord));
-            verify(mockLocalDataSource.cacheEnglishWordList(tEnglishWordList));
-          },
-        );
-        test(
           'should return server failure when the call to remote data source is unsuccessful',
           () async {
             //arrange
@@ -119,40 +99,21 @@ void main() {
                 isEnglish: true, searchTerm: tWord);
             //assert
             verify(mockRemoteDataSource.getEnglishWordList(tWord));
-            verifyZeroInteractions(mockLocalDataSource);
             expect(result, equals(Left(ServerFailure())));
           },
         );
       });
       runTestsOffline(() {
         test(
-          'should return last locally cached data when the cached data is present',
+          'should return ConnectionFailure when the device is offline',
           () async {
             //arrange
-            when(mockLocalDataSource.getLastEnglishWordList())
-                .thenAnswer((_) async => tEnglishWordList);
             //act
             final result = await repository.getWordList(
                 isEnglish: true, searchTerm: tWord);
             //assert
             verifyZeroInteractions(mockRemoteDataSource);
-            verify(mockLocalDataSource.getLastEnglishWordList());
-            expect(result, Right<Failure, List<EnglishWord>>(tEnglishWordList));
-          },
-        );
-        test(
-          'should return CacheFailure when the cached data is not present',
-          () async {
-            //arrange
-            when(mockLocalDataSource.getLastEnglishWordList())
-                .thenThrow(CacheException());
-            //act
-            final result = await repository.getWordList(
-                isEnglish: true, searchTerm: tWord);
-            //assert
-            verifyZeroInteractions(mockRemoteDataSource);
-            verify(mockLocalDataSource.getLastEnglishWordList());
-            expect(result, Left(CacheFailure()));
+            expect(result, equals(Left(ConnectionFailure())));
           },
         );
       });
@@ -206,7 +167,6 @@ void main() {
                 isEnglish: false, searchTerm: tTranslation);
             //assert
             verify(mockRemoteDataSource.getOromoWordList(tTranslation));
-            verify(mockLocalDataSource.cacheOromoWordList(tOromoWordList));
           },
         );
         test(
@@ -220,41 +180,21 @@ void main() {
                 isEnglish: false, searchTerm: tTranslation);
             //assert
             verify(mockRemoteDataSource.getOromoWordList(tTranslation));
-            verifyZeroInteractions(mockLocalDataSource);
             expect(result, equals(Left(ServerFailure())));
           },
         );
       });
       runTestsOffline(() {
         test(
-          'should return last locally cached data when the cached data is present',
+          'should return ConnectionFailure when the device is offline',
           () async {
             //arrange
-            when(mockLocalDataSource.getLastOromoWordList())
-                .thenAnswer((_) async => tOromoWordList);
             //act
             final result = await repository.getWordList(
                 isEnglish: false, searchTerm: tTranslation);
             //assert
             verifyZeroInteractions(mockRemoteDataSource);
-            verify(mockLocalDataSource.getLastOromoWordList());
-            expect(
-                result, Right<Failure, List<OromoTranslation>>(tOromoWordList));
-          },
-        );
-        test(
-          'should return CacheFailure when the cached data is not present',
-          () async {
-            //arrange
-            when(mockLocalDataSource.getLastOromoWordList())
-                .thenThrow(CacheException());
-            //act
-            final result = await repository.getWordList(
-                isEnglish: false, searchTerm: tTranslation);
-            //assert
-            verifyZeroInteractions(mockRemoteDataSource);
-            verify(mockLocalDataSource.getLastOromoWordList());
-            expect(result, Left(CacheFailure()));
+            expect(result, equals(Left(ConnectionFailure())));
           },
         );
       });

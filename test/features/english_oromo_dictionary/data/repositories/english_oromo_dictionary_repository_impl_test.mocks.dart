@@ -45,45 +45,6 @@ class MockMockRemoteDataSource extends _i1.Mock
           as _i3.Future<List<_i5.EnglishWord>>);
 }
 
-/// A class which mocks [MockLocalDataSource].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockMockLocalDataSource extends _i1.Mock
-    implements _i2.MockLocalDataSource {
-  MockMockLocalDataSource() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  String toString() => super.toString();
-  @override
-  _i3.Future<List<_i4.OromoTranslation>> getLastOromoWordList() =>
-      (super.noSuchMethod(Invocation.method(#getLastOromoWordList, []),
-              returnValue: Future<List<_i4.OromoTranslation>>.value(
-                  <_i4.OromoTranslation>[]))
-          as _i3.Future<List<_i4.OromoTranslation>>);
-  @override
-  _i3.Future<List<_i5.EnglishWord>> getLastEnglishWordList() =>
-      (super.noSuchMethod(Invocation.method(#getLastEnglishWordList, []),
-              returnValue:
-                  Future<List<_i5.EnglishWord>>.value(<_i5.EnglishWord>[]))
-          as _i3.Future<List<_i5.EnglishWord>>);
-  @override
-  _i3.Future<void> cacheOromoWordList(
-          List<_i4.OromoTranslation>? oromoWordListToCache) =>
-      (super.noSuchMethod(
-          Invocation.method(#cacheOromoWordList, [oromoWordListToCache]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
-  @override
-  _i3.Future<void> cacheEnglishWordList(
-          List<_i5.EnglishWord>? englishWordListToCache) =>
-      (super.noSuchMethod(
-          Invocation.method(#cacheEnglishWordList, [englishWordListToCache]),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
-}
-
 /// A class which mocks [MockNetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.

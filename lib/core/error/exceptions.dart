@@ -3,9 +3,12 @@ class ServerException implements Exception {
 
   ServerException(this.message); */
 }
+class ConnectionException implements Exception {}
 
+//Unnecessary Exception
 class CacheException implements Exception {
   /* final String message;
 
   CacheException(this.message); */
 }
+
