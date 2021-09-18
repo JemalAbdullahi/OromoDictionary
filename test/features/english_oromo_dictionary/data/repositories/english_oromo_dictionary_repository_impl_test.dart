@@ -4,7 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:oromo_dictionary/core/error/exceptions.dart';
 import 'package:oromo_dictionary/core/error/failures.dart';
-import 'package:oromo_dictionary/core/platform/network_info.dart';
+import 'package:oromo_dictionary/core/network/network_info.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/english_oromo_dictionary_local_data_source.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/english_oromo_dictionary_remote_data_source.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/english_word_model.dart';
@@ -71,7 +71,8 @@ void main() {
         () async {
           //arrange
           when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
-          when(mockRemoteDataSource.getEnglishWordList(any)).thenAnswer((_) async => tEnglishWordList);
+          when(mockRemoteDataSource.getEnglishWordList(any))
+              .thenAnswer((_) async => tEnglishWordList);
           //act
           await repository.getWordList(isEnglish: true, searchTerm: tWord);
           //assert

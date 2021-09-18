@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:oromo_dictionary/core/error/exceptions.dart';
 
 import '../../../../core/error/failures.dart';
-import '../../../../core/platform/network_info.dart';
+import '../../../../core/network/network_info.dart';
 import '../../domain/entities/english_word.dart';
 import '../../domain/entities/oromo_translation.dart';
 import '../../domain/repositories/english_oromo_dictionary_repository.dart';
