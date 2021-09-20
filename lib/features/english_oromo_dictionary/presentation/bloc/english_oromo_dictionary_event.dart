@@ -4,18 +4,18 @@ abstract class EnglishOromoDictionaryEvent extends Equatable {
   const EnglishOromoDictionaryEvent();
 }
 
-class GetEnglishWordList extends EnglishOromoDictionaryEvent {
+class GetListForEnglishWord extends EnglishOromoDictionaryEvent {
   final String englishTerm;
 
-  GetEnglishWordList(this.englishTerm);
+  GetListForEnglishWord(this.englishTerm);
 
   @override
   List<Object?> get props => [englishTerm];
 }
-class GetOromoWordList extends EnglishOromoDictionaryEvent {
+class GetListForOromoWord extends EnglishOromoDictionaryEvent {
   final String oromoTerm;
 
-  GetOromoWordList(this.oromoTerm);
+  GetListForOromoWord(this.oromoTerm);
 
   @override
   List<Object?> get props => [oromoTerm];
