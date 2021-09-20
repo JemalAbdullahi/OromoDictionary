@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../components/translation_screen_comp/selected_part_of_speech.dart';
 import '../../components/translation_screen_comp/word_container.dart';
 import '../../utils/constants.dart';

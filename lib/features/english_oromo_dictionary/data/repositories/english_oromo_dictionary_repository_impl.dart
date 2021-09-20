@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:oromo_dictionary/core/error/exceptions.dart';
+import '../../../../core/error/exceptions.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../../../core/network/network_info.dart';

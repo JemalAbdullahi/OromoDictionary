@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:oromo_dictionary/core/error/exceptions.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/english_word_model.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/oromo_translation_model.dart';
+import '../../../../core/error/exceptions.dart';
+import '../models/english_word_model.dart';
+import '../models/oromo_translation_model.dart';
 
 import '../../domain/entities/english_word.dart';
 import '../../domain/entities/oromo_translation.dart';

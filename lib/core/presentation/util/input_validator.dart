@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:oromo_dictionary/core/error/failures.dart';
+import '../../error/failures.dart';
 
 class InputValidator {
   Either<Failure, bool> isValid(String str) {

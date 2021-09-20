@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
+import 'package:provider/provider.dart';
+
 import '../../components/search_screen_comp/english_search_results_container.dart';
 import '../../utils/constants.dart';
 import '../../utils/widget_functions.dart';
 import '../../viewmodels/english_view_models/english_word_list_view_model.dart';
 import '../../viewmodels/oromo_translation_view_models/oromo_translation_view_model.dart';
-import 'package:provider/provider.dart';
-import 'package:marquee/marquee.dart';
 
 class OromoEnglishTranslationScreen extends StatefulWidget {
   static const String routeName = "/oromotranslation";

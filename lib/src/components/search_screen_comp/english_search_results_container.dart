@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'search_result_container.dart';
+
 import '../../screens/translation_screens/english_oromo_translation_screen.dart';
 import '../../viewmodels/english_view_models/english_word_view_model.dart';
+import 'search_result_container.dart';
 
 class EnglishSearchResultsContainer extends SearchResultsContainer {
   EnglishSearchResultsContainer(

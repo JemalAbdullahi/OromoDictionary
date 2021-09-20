@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/constants.dart';
+import 'package:oromo_dictionary/core/presentation/util/constants.dart';
 
 class AppHeader extends StatelessWidget {
   const AppHeader({Key? key}) : super(key: key);

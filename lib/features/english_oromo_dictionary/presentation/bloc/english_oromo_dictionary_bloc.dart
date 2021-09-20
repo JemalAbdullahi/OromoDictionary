@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:oromo_dictionary/core/error/failures.dart';
-import 'package:oromo_dictionary/core/presentation/util/input_validator.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/presentation/util/input_validator.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/get_english_word_list.dart'
     as english;
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/get_oromo_word_list.dart'

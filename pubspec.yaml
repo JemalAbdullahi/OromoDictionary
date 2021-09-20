@@ -24,6 +24,7 @@ dependencies:
   data_connection_checker_tv: ^0.3.5-nullsafety
   http: ^0.13.3
   shared_preferences: ^2.0.7
+  flutter_bloc: ^7.2.0
 
 dev_dependencies:
   flutter_test:
