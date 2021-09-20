@@ -120,9 +120,9 @@ void main() {
     });
 
     group('isEnglish: false', () {
-      final tID = 2;
-      final tTranslation = 'rifatu';
-      final tPhraseID = 3;
+      final tID = 62;
+      final tTranslation = 'gabaabaa';
+      final tPhraseID = 17;
       final tOromoTranslationModel = OromoTranslationModel(
           id: tID, phraseID: tPhraseID, translation: tTranslation);
       final OromoTranslation tOromoTranslation = tOromoTranslationModel;

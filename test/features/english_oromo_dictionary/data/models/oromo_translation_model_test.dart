@@ -6,10 +6,9 @@ import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entiti
 
 import '../../../../fixtures/fixture_reader.dart';
 
-
 void main() {
   final tOromoTranslationModel =
-      OromoTranslationModel(id: 3, phraseID: 2, translation: "rifatu");
+      OromoTranslationModel(id: 62, phraseID: 17, translation: "gabaabaa");
 
   test(
     'should be a subclass of OromoTranslation entity',
@@ -42,7 +41,7 @@ void main() {
         //act
         final result = tOromoTranslationModel.toJson();
         //assert
-        final expectedMap = {"translation": "rifatu"};
+        final expectedMap = {"translation": "gabaabaa"};
         expect(result, expectedMap);
       },
     );
