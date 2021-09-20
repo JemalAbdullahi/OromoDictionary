@@ -7,18 +7,16 @@ import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/reposi
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/get_oromo_word_list.dart';
 import 'get_oromo_word_list_test.mocks.dart';
 
-class MockEnglishOromoDictionaryRepository extends Mock
-    implements EnglishOromoDictionaryRepository {}
 
-@GenerateMocks([MockEnglishOromoDictionaryRepository])
+@GenerateMocks([EnglishOromoDictionaryRepository])
 void main() {
   late GetOromoWordList usecase;
-  late MockMockEnglishOromoDictionaryRepository
+  late MockEnglishOromoDictionaryRepository
       mockEnglishOromoDictionaryRepository;
   late final tOromoTranslationList, tOromoTerm;
   setUp(() {
     mockEnglishOromoDictionaryRepository =
-        MockMockEnglishOromoDictionaryRepository();
+        MockEnglishOromoDictionaryRepository();
     usecase = GetOromoWordList(mockEnglishOromoDictionaryRepository);
   });
 

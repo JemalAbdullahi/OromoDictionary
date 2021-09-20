@@ -5,12 +5,13 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:oromo_dictionary/core/network/network_info.dart' as _i6;
+import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/english_oromo_dictionary_remote_data_source.dart'
+    as _i2;
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart'
     as _i5;
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/oromo_translation.dart'
     as _i4;
-
-import 'english_oromo_dictionary_repository_impl_test.dart' as _i2;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -20,17 +21,15 @@ import 'english_oromo_dictionary_repository_impl_test.dart' as _i2;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-/// A class which mocks [MockRemoteDataSource].
+/// A class which mocks [EnglishOromoDictionaryRemoteDataSource].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMockRemoteDataSource extends _i1.Mock
-    implements _i2.MockRemoteDataSource {
-  MockMockRemoteDataSource() {
+class MockEnglishOromoDictionaryRemoteDataSource extends _i1.Mock
+    implements _i2.EnglishOromoDictionaryRemoteDataSource {
+  MockEnglishOromoDictionaryRemoteDataSource() {
     _i1.throwOnMissingStub(this);
   }
 
-  @override
-  String toString() => super.toString();
   @override
   _i3.Future<List<_i4.OromoTranslation>> getOromoWordList(String? oromoTerm) =>
       (super.noSuchMethod(Invocation.method(#getOromoWordList, [oromoTerm]),
@@ -43,13 +42,15 @@ class MockMockRemoteDataSource extends _i1.Mock
               returnValue:
                   Future<List<_i5.EnglishWord>>.value(<_i5.EnglishWord>[]))
           as _i3.Future<List<_i5.EnglishWord>>);
+  @override
+  String toString() => super.toString();
 }
 
-/// A class which mocks [MockNetworkInfo].
+/// A class which mocks [NetworkInfo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMockNetworkInfo extends _i1.Mock implements _i2.MockNetworkInfo {
-  MockMockNetworkInfo() {
+class MockNetworkInfo extends _i1.Mock implements _i6.NetworkInfo {
+  MockNetworkInfo() {
     _i1.throwOnMissingStub(this);
   }
 

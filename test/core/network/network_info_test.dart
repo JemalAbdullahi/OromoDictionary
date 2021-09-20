@@ -5,15 +5,14 @@ import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:oromo_dictionary/core/network/network_info.dart';
 import 'network_info_test.mocks.dart';
 
-class MockDataConnectionChecker extends Mock implements DataConnectionChecker {}
 
-@GenerateMocks([MockDataConnectionChecker])
+@GenerateMocks([DataConnectionChecker])
 void main() {
   late NetworkInfoImpl networkInfo;
-  late MockMockDataConnectionChecker mockDataConnectionChecker;
+  late MockDataConnectionChecker mockDataConnectionChecker;
 
   setUp(() {
-    mockDataConnectionChecker = MockMockDataConnectionChecker();
+    mockDataConnectionChecker = MockDataConnectionChecker();
     networkInfo = NetworkInfoImpl(mockDataConnectionChecker);
   });
 

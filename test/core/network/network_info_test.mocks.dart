@@ -2,12 +2,10 @@
 // in oromo_dictionary/test/core/network/network_info_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i3;
 
 import 'package:data_connection_checker_tv/data_connection_checker.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
-
-import 'network_info_test.dart' as _i3;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -17,19 +15,17 @@ import 'network_info_test.dart' as _i3;
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
-// ignore: camel_case_types
 class _FakeDuration_0 extends _i1.Fake implements Duration {}
 
-// ignore: camel_case_types
 class _FakeAddressCheckResult_1 extends _i1.Fake
     implements _i2.AddressCheckResult {}
 
-/// A class which mocks [MockDataConnectionChecker].
+/// A class which mocks [DataConnectionChecker].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMockDataConnectionChecker extends _i1.Mock
-    implements _i3.MockDataConnectionChecker {
-  MockMockDataConnectionChecker() {
+class MockDataConnectionChecker extends _i1.Mock
+    implements _i2.DataConnectionChecker {
+  MockDataConnectionChecker() {
     _i1.throwOnMissingStub(this);
   }
 
@@ -55,20 +51,20 @@ class MockMockDataConnectionChecker extends _i1.Mock
       Invocation.getter(#lastTryResults),
       returnValue: <_i2.AddressCheckResult>[]) as List<_i2.AddressCheckResult>);
   @override
-  _i4.Future<bool> get hasConnection =>
+  _i3.Future<bool> get hasConnection =>
       (super.noSuchMethod(Invocation.getter(#hasConnection),
-          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
   @override
-  _i4.Future<_i2.DataConnectionStatus> get connectionStatus =>
+  _i3.Future<_i2.DataConnectionStatus> get connectionStatus =>
       (super.noSuchMethod(Invocation.getter(#connectionStatus),
               returnValue: Future<_i2.DataConnectionStatus>.value(
                   _i2.DataConnectionStatus.disconnected))
-          as _i4.Future<_i2.DataConnectionStatus>);
+          as _i3.Future<_i2.DataConnectionStatus>);
   @override
-  _i4.Stream<_i2.DataConnectionStatus> get onStatusChange =>
+  _i3.Stream<_i2.DataConnectionStatus> get onStatusChange =>
       (super.noSuchMethod(Invocation.getter(#onStatusChange),
               returnValue: Stream<_i2.DataConnectionStatus>.empty())
-          as _i4.Stream<_i2.DataConnectionStatus>);
+          as _i3.Stream<_i2.DataConnectionStatus>);
   @override
   bool get hasListeners =>
       (super.noSuchMethod(Invocation.getter(#hasListeners), returnValue: false)
@@ -78,12 +74,12 @@ class MockMockDataConnectionChecker extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#isActivelyChecking),
           returnValue: false) as bool);
   @override
-  String toString() => super.toString();
-  @override
-  _i4.Future<_i2.AddressCheckResult> isHostReachable(
+  _i3.Future<_i2.AddressCheckResult> isHostReachable(
           _i2.AddressCheckOptions? options) =>
       (super.noSuchMethod(Invocation.method(#isHostReachable, [options]),
               returnValue: Future<_i2.AddressCheckResult>.value(
                   _FakeAddressCheckResult_1()))
-          as _i4.Future<_i2.AddressCheckResult>);
+          as _i3.Future<_i2.AddressCheckResult>);
+  @override
+  String toString() => super.toString();
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -12,15 +11,13 @@ import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/o
 import '../../../../fixtures/fixture_reader.dart';
 import 'english_oromo_dictionary_remote_data_source_test.mocks.dart';
 
-class MockHttpClient extends Mock implements http.Client {}
-
-@GenerateMocks([MockHttpClient])
+@GenerateMocks([http.Client])
 void main() {
   late EnglishOromoDictionaryRemoteDataSourceImpl dataSource;
-  late MockMockHttpClient mockHttpClient;
+  late MockClient mockHttpClient;
 
   setUp(() {
-    mockHttpClient = MockMockHttpClient();
+    mockHttpClient = MockClient();
     dataSource =
         EnglishOromoDictionaryRemoteDataSourceImpl(client: mockHttpClient);
   });

@@ -13,20 +13,16 @@ import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entiti
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/oromo_translation.dart';
 import 'english_oromo_dictionary_repository_impl_test.mocks.dart';
 
-class MockRemoteDataSource extends Mock
-    implements EnglishOromoDictionaryRemoteDataSource {}
 
-class MockNetworkInfo extends Mock implements NetworkInfo {}
-
-@GenerateMocks([MockRemoteDataSource, MockNetworkInfo])
+@GenerateMocks([EnglishOromoDictionaryRemoteDataSource, NetworkInfo])
 void main() {
   late EnglishOromoDictionaryRepositoryImpl repository;
-  late MockMockRemoteDataSource mockRemoteDataSource;
-  late MockMockNetworkInfo mockNetworkInfo;
+  late MockEnglishOromoDictionaryRemoteDataSource mockRemoteDataSource;
+  late MockNetworkInfo mockNetworkInfo;
 
   setUp(() {
-    mockRemoteDataSource = MockMockRemoteDataSource();
-    mockNetworkInfo = MockMockNetworkInfo();
+    mockRemoteDataSource = MockEnglishOromoDictionaryRemoteDataSource();
+    mockNetworkInfo = MockNetworkInfo();
     repository = EnglishOromoDictionaryRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
       networkInfo: mockNetworkInfo,
