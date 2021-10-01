@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'definition_and_translation_listview.dart';
+
 import '../../utils/constants.dart';
 import '../../viewmodels/english_view_models/english_word_view_model.dart';
 import '../../viewmodels/grammatical_form_view_models/grammatical_form_view_model.dart';
+import 'definition_and_translation_listview.dart';
 
 class SelectedPartOfSpeech extends StatelessWidget {
   const SelectedPartOfSpeech({

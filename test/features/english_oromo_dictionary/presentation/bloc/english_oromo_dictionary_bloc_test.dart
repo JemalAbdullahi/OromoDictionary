@@ -57,6 +57,7 @@ void main() {
         when(mockGetEnglishWordList(any))
             .thenAnswer((_) async => Right(tEnglishWordList));
         //act
+        bloc.isEnglish = true;
         bloc.add(GetListForEnglishWord(tWord));
         await untilCalled(mockInputValidator.isValid(any));
         //assert
@@ -90,6 +91,7 @@ void main() {
         when(mockGetEnglishWordList(any))
             .thenAnswer((_) async => Right(tEnglishWordList));
         //act
+        bloc.isEnglish = true;
         bloc.add(GetListForEnglishWord(tWord));
         await untilCalled(mockGetEnglishWordList(any));
         //assert
@@ -104,14 +106,15 @@ void main() {
         setUpMockInputValidatorSuccess();
         when(mockGetEnglishWordList(any))
             .thenAnswer((_) async => Right(tEnglishWordList));
-        //act
+        //assert later
         final expected = [
           Empty(),
           Loading(),
           Loaded(wordList: tEnglishWordList),
         ];
         expectLater(bloc, emitsInOrder(expected));
-        //assert
+        //act
+        bloc.isEnglish = true;
         bloc.add(GetListForEnglishWord(tWord));
       },
     );
@@ -122,14 +125,15 @@ void main() {
         setUpMockInputValidatorSuccess();
         when(mockGetEnglishWordList(any))
             .thenAnswer((_) async => Left(ServerFailure()));
-        //act
+        //assert later
         final expected = [
           Empty(),
           Loading(),
           Error(message: SERVER_FAILURE_MESSAGE),
         ];
         expectLater(bloc, emitsInOrder(expected));
-        //assert
+        //act
+        bloc.isEnglish = true;
         bloc.add(GetListForEnglishWord(tWord));
       },
     );
@@ -140,26 +144,27 @@ void main() {
         setUpMockInputValidatorSuccess();
         when(mockGetEnglishWordList(any))
             .thenAnswer((_) async => Left(ServerFailure()));
-        //act
+        //assert later
         final expected = [
           Empty(),
           Loading(),
           Error(message: SERVER_FAILURE_MESSAGE),
         ];
         expectLater(bloc, emitsInOrder(expected));
-        //assert
+        //act
+        bloc.isEnglish = true;
         bloc.add(GetListForEnglishWord(tWord));
       },
     );
   });
   group('GetListForOromoWord', () {
     final tID = 62;
-      final tTranslation = 'gabaabaa';
-      final tPhraseID = 17;
-      final tOromoTranslationModel = OromoTranslationModel(
-          id: tID, phraseID: tPhraseID, translation: tTranslation);
-      final OromoTranslation tOromoTranslation = tOromoTranslationModel;
-      final List<OromoTranslation> tOromoWordList = [tOromoTranslation];
+    final tTranslation = 'gabaabaa';
+    final tPhraseID = 17;
+    final tOromoTranslationModel = OromoTranslationModel(
+        id: tID, phraseID: tPhraseID, translation: tTranslation);
+    final OromoTranslation tOromoTranslation = tOromoTranslationModel;
+    final List<OromoTranslation> tOromoWordList = [tOromoTranslation];
 
     void setUpMockInputValidatorSuccess() =>
         when(mockInputValidator.isValid(any)).thenReturn(Right(true));
@@ -172,6 +177,7 @@ void main() {
         when(mockGetOromoWordList(any))
             .thenAnswer((_) async => Right(tOromoWordList));
         //act
+        bloc.isEnglish = false;
         bloc.add(GetListForOromoWord(tTranslation));
         await untilCalled(mockInputValidator.isValid(any));
         //assert
@@ -193,6 +199,7 @@ void main() {
         ];
         expectLater(bloc, emitsInOrder(expected));
         //act
+        bloc.isEnglish = false;
         bloc.add(GetListForOromoWord(tTranslation));
       },
     );
@@ -205,6 +212,7 @@ void main() {
         when(mockGetOromoWordList(any))
             .thenAnswer((_) async => Right(tOromoWordList));
         //act
+        bloc.isEnglish = false;
         bloc.add(GetListForOromoWord(tTranslation));
         await untilCalled(mockGetOromoWordList(any));
         //assert
@@ -227,6 +235,7 @@ void main() {
         ];
         expectLater(bloc, emitsInOrder(expected));
         //assert
+        bloc.isEnglish = false;
         bloc.add(GetListForOromoWord(tTranslation));
       },
     );
@@ -245,6 +254,7 @@ void main() {
         ];
         expectLater(bloc, emitsInOrder(expected));
         //assert
+        bloc.isEnglish = false;
         bloc.add(GetListForOromoWord(tTranslation));
       },
     );
@@ -263,6 +273,7 @@ void main() {
         ];
         expectLater(bloc, emitsInOrder(expected));
         //assert
+        bloc.isEnglish = false;
         bloc.add(GetListForOromoWord(tTranslation));
       },
     );

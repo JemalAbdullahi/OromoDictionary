@@ -22,6 +22,7 @@ class EnglishOromoDictionaryBloc
   english.GetEnglishWordList getEnglishWordList;
   oromo.GetOromoWordList getOromoWordList;
   InputValidator inputValidator;
+  bool isEnglish = true;
 
   EnglishOromoDictionaryBloc({
     required this.getEnglishWordList,
@@ -36,20 +37,23 @@ class EnglishOromoDictionaryBloc
     // Immediately branching the logic with type checking,
     // for the event to be smart casted
     if (event is GetListForEnglishWord) {
-      yield* _eitherInputValidatedOrErrorState(event.englishTerm, true);
+      yield* _eitherInputValidatedOrErrorState(event.englishTerm);
     } else if (event is GetListForOromoWord) {
-      yield* _eitherInputValidatedOrErrorState(event.oromoTerm, false);
+      yield* _eitherInputValidatedOrErrorState(event.oromoTerm);
+    } else if (event is ChangeLanguageSelected) {
+      isEnglish = event.isEnglish;
+      yield Empty();
     }
   }
 
   Stream<EnglishOromoDictionaryState> _eitherInputValidatedOrErrorState(
-      String searchTerm, bool isEnglish) async* {
+      String searchTerm) async* {
     final inputEither = inputValidator.isValid(searchTerm);
     yield* inputEither.fold((failure) async* {
       yield Error(message: INVALID_INPUT_FAILURE_MESSAGE);
     }, (bool) async* {
       yield Loading();
-      final failureOrWordList = isEnglish
+      final failureOrWordList = this.isEnglish
           ? await getEnglishWordList(english.Params(englishTerm: searchTerm))
           : await getOromoWordList(oromo.Params(oromoTerm: searchTerm));
       yield* _eitherLoadedOrErrorState(failureOrWordList);

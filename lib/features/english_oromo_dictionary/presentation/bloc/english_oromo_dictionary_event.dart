@@ -12,6 +12,7 @@ class GetListForEnglishWord extends EnglishOromoDictionaryEvent {
   @override
   List<Object?> get props => [englishTerm];
 }
+
 class GetListForOromoWord extends EnglishOromoDictionaryEvent {
   final String oromoTerm;
 
@@ -19,4 +20,13 @@ class GetListForOromoWord extends EnglishOromoDictionaryEvent {
 
   @override
   List<Object?> get props => [oromoTerm];
+}
+
+class ChangeLanguageSelected extends EnglishOromoDictionaryEvent {
+  final bool isEnglish;
+
+  ChangeLanguageSelected({required this.isEnglish});
+
+  @override
+  List<Object?> get props => [isEnglish];
 }

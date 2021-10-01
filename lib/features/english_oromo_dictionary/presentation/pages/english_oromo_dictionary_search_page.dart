@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/core/presentation/util/constants.dart';
-import 'package:oromo_dictionary/src/components/search_screen_comp/app_header.dart';
-import '../../../../injection_container.dart';
-import '../bloc/bloc.dart';
+import '../../domain/entities/english_word.dart';
+import '../../domain/entities/oromo_translation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../widgets/widgets.dart';
+import '../bloc/bloc.dart';
+import '../../../../src/utils/widget_functions.dart';
+import '../../../../injection_container.dart';
 
 class EnglishOromoDictionarySearchPage extends StatefulWidget {
   const EnglishOromoDictionarySearchPage({Key? key}) : super(key: key);
 
   @override
-  _EnglishOromoDictionarySearchPageState createState() => _EnglishOromoDictionarySearchPageState();
+  _EnglishOromoDictionarySearchPageState createState() =>
+      _EnglishOromoDictionarySearchPageState();
 }
 
-class _EnglishOromoDictionarySearchPageState extends State<EnglishOromoDictionarySearchPage> {
-  late final ThemeData theme;
+class _EnglishOromoDictionarySearchPageState
+    extends State<EnglishOromoDictionarySearchPage> {
+  late ThemeData theme;
 
   @override
   Widget build(BuildContext context) {
@@ -37,89 +41,84 @@ class _EnglishOromoDictionarySearchPageState extends State<EnglishOromoDictionar
       child: Center(
         child: LayoutBuilder(builder: (context, constraints) {
           return Container(
-              alignment: Alignment.center,
-              width: constraints.maxWidth > 700 ? 700 : constraints.maxWidth,
-              height: constraints.maxHeight > 1000
-                  ? constraints.maxHeight * 0.8
-                  : constraints.maxHeight,
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 5,
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        //AppBar,
-                        Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              AppHeader(),
-                              searchBar(),
-                            ],
-                          ),
+            alignment: Alignment.center,
+            width: constraints.maxWidth > 700 ? 700 : constraints.maxWidth,
+            height: constraints.maxHeight > 1000
+                ? constraints.maxHeight * 0.8
+                : constraints.maxHeight,
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 5,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      //Insert Custom AppBar,
+                      //Top Half: Title and Search Bar
+                      Padding(
+                        padding: isEmptyState(context)
+                            ? const EdgeInsets.all(10)
+                            : const EdgeInsets.symmetric(
+                                vertical: 25, horizontal: 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            AppHeader(),
+                            SearchBar(),
+                            isEmptyState(context)
+                                ? addVerticalSpace(30)
+                                : addVerticalSpace(0),
+                          ],
                         ),
-                      ],
-                    ),
-                  )
-                ],
-              ));
+                      ),
+                    ],
+                  ),
+                ),
+                //Bottom Half: SearchResults
+                BlocBuilder<EnglishOromoDictionaryBloc,
+                    EnglishOromoDictionaryState>(builder: (context, state) {
+                  if (state is Empty) {
+                    return SizedBox.shrink();
+                  } else if (state is Loading) {
+                    return LoadingWidget();
+                  } else if (state is Loaded) {
+                    return BlocProvider.of<EnglishOromoDictionaryBloc>(context)
+                            .isEnglish
+                        ? EnglishSearchResultsDisplay(
+                            constraints: constraints,
+                            message:
+                                "No Words Found! Try searching a different word.",
+                            wordList: state.wordList as List<EnglishWord>,
+                            theme: theme,
+                          )
+                        : OromoSearchResultsDisplay(
+                            constraints: constraints,
+                            message:
+                                "No Words Found! Try searching a different word.",
+                            wordList: state.wordList as List<OromoTranslation>,
+                            theme: theme);
+                  } else if (state is Error) {
+                    return EnglishSearchResultsDisplay(
+                      constraints: constraints,
+                      message: state.message,
+                      wordList: [],
+                      theme: theme,
+                    );
+                  }
+                  return Container();
+                })
+              ],
+            ),
+          );
         }),
       ),
     );
   }
 
-  Stack searchBar() {
-    return Stack(
-      alignment: Alignment.centerRight,
-      children: [
-        _searchBar(),
-        _selectLanguageIcon(),
-      ],
-    );
-  }
-
-  TextField _searchBar() {
-    return TextField(
-      //focusNode: _searchBarFocusNode,
-      //controller: _searchBarController,
-      style: theme.textTheme.subtitle1!.apply(color: COLOR_WHITE),
-      decoration: _searchBarDecoration(),
-      //onSubmitted: _search,
-      autocorrect: false,
-    );
-  }
-
-  InputDecoration _searchBarDecoration() {
-    return InputDecoration(
-      hintText: "Search a Word to Translate...",
-      hintStyle: theme.textTheme.subtitle1!.apply(color: COLOR_WHITE),
-      filled: true,
-      fillColor: Colors.white38,
-      border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
-      prefixIcon: Icon(Icons.search, color: COLOR_WHITE),
-      // suffixIcon: _selectLanguageIcon(),
-    );
-  }
-
-  Container _selectLanguageIcon() {
-    return Container(
-      height: 60,
-      width: 60,
-      decoration: BoxDecoration(
-        // color: Colors.white30,
-        color: COLOR_YELLOW,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),
-      ),
-      /* child: LanguageSelector(
-          controller: _searchBarController,
-          englishVM: englishVM,
-          textTheme: textTheme), */
-    );
+  /// Provided the context, will return whether the BlocProvider is in an Empty
+  /// state.
+  bool isEmptyState(BuildContext context) {
+    return BlocProvider.of<EnglishOromoDictionaryBloc>(context).state ==
+        Empty();
   }
 }
