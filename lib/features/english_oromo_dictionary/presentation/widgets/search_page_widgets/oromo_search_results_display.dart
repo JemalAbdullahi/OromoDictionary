@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/english_word.dart';
+import '../../../domain/entities/oromo_translation.dart';
 import 'search_results_display.dart';
 
-class EnglishSearchResultsDisplay extends SearchResultsDisplay<EnglishWord> {
-  EnglishSearchResultsDisplay({
+class OromoSearchResultsDisplay extends SearchResultsDisplay<OromoTranslation> {
+  OromoSearchResultsDisplay({
     required BoxConstraints constraints,
     required String message,
-    required List<EnglishWord> wordList,
+    required List<OromoTranslation> wordList,
     required ThemeData theme,
   }) : super(
           constraints: constraints,
@@ -21,7 +21,7 @@ class EnglishSearchResultsDisplay extends SearchResultsDisplay<EnglishWord> {
     return GestureDetector(
       onTap: () {
         // TODO: Implement Navigation to Second Page/Feature
-        print(wordList[index].word);
+        print(wordList[index].translation);
       },
       child: buildSearchResultListTile(index),
     );
@@ -31,12 +31,8 @@ class EnglishSearchResultsDisplay extends SearchResultsDisplay<EnglishWord> {
   ListTile buildSearchResultListTile(int index) {
     return ListTile(
       title: Text(
-        '${wordList[index].word}',
+        '${wordList[index].translation}',
         style: theme!.textTheme.bodyText2!,
-      ),
-      subtitle: Text(
-        '/${wordList[index].phonetic}/',
-        style: theme!.textTheme.subtitle1!.apply(color: Colors.black54),
       ),
       trailing: Icon(Icons.navigate_next),
     );

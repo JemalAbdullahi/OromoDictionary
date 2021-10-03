@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import '../../domain/entities/english_word.dart';
 import '../../domain/entities/oromo_translation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../widgets/widgets.dart';
+import '../widgets/search_page_widgets/search_page_widgets.dart';
 import '../bloc/bloc.dart';
 import '../../../../src/utils/widget_functions.dart';
 import '../../../../injection_container.dart';
 
 class EnglishOromoDictionarySearchPage extends StatefulWidget {
+  static const String routeName = "/pages/search";
   const EnglishOromoDictionarySearchPage({Key? key}) : super(key: key);
 
   @override

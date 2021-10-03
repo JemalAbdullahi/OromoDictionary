@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/presentation/util/constants.dart';
-import '../bloc/bloc.dart';
+import '../../../../../core/presentation/util/constants.dart';
+import '../../bloc/bloc.dart';
 
 class LanguageSelector extends StatefulWidget {
   ///Widget which switches the Language between English and Oromo

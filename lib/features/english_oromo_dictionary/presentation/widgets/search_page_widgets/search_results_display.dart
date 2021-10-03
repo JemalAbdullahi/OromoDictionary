@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../core/presentation/util/constants.dart';
+import '../../../../../core/presentation/util/constants.dart';
 
 abstract class SearchResultsDisplay<T> extends StatelessWidget {
   final BoxConstraints constraints;

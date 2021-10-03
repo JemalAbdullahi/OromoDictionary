@@ -278,4 +278,28 @@ void main() {
       },
     );
   });
+
+  group("ChangeLanguageSelected", () {
+    test(
+      'should emit [Empty] when the Language is changed to English',
+      () async {
+        //arrange
+        //act
+        expectLater(bloc.state, equals(Empty()));
+        //assert
+        bloc.add(ChangeLanguageSelected(isEnglish: true));
+        expect(bloc.isEnglish, true);
+      },
+    );
+    test(
+      'should emit [Empty] when the Language is changed to Oromo',
+      () async {
+        //arrange
+        //act
+        expectLater(bloc.state, equals(Empty()));
+        //assert
+        bloc.add(ChangeLanguageSelected(isEnglish: false));
+      },
+    );
+  });
 }
