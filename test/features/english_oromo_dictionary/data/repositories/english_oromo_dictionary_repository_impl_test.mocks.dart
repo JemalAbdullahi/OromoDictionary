@@ -43,6 +43,13 @@ class MockEnglishOromoDictionaryRemoteDataSource extends _i1.Mock
                   Future<List<_i5.EnglishWord>>.value(<_i5.EnglishWord>[]))
           as _i3.Future<List<_i5.EnglishWord>>);
   @override
+  _i3.Future<List<_i5.EnglishWord>> getEnglishTranslations(String? oromoWord) =>
+      (super.noSuchMethod(
+              Invocation.method(#getEnglishTranslations, [oromoWord]),
+              returnValue:
+                  Future<List<_i5.EnglishWord>>.value(<_i5.EnglishWord>[]))
+          as _i3.Future<List<_i5.EnglishWord>>);
+  @override
   String toString() => super.toString();
 }
 

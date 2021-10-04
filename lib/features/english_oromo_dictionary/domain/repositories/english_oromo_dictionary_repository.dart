@@ -4,5 +4,5 @@ import '../../../../core/error/failures.dart';
 
 abstract class EnglishOromoDictionaryRepository {
   Future<Either<Failure, List<dynamic>>> getWordList(
-      {required bool isEnglish, required String searchTerm});
+      {required String desiredList, required String searchTerm});
 }

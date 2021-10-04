@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/pages/search_page.dart';
 import '../../../../core/error/exceptions.dart';
 
 import '../../../../core/error/failures.dart';
@@ -12,17 +13,31 @@ class EnglishOromoDictionaryRepositoryImpl
   final NetworkInfo networkInfo;
 
   EnglishOromoDictionaryRepositoryImpl(
-      {required this.remoteDataSource,
-      required this.networkInfo});
+      {required this.remoteDataSource, required this.networkInfo});
 
   @override
   Future<Either<Failure, List<dynamic>>> getWordList(
-      {required bool isEnglish, required String searchTerm}) async {
+      {required String desiredList, required String searchTerm}) async {
     if (await networkInfo.isConnected) {
       try {
-        final remoteWordList = isEnglish
-            ? await remoteDataSource.getEnglishWordList(searchTerm)
-            : await remoteDataSource.getOromoWordList(searchTerm);
+        final remoteWordList;
+        switch (desiredList) {
+          case "EnglishWordList":
+            remoteWordList =
+                await remoteDataSource.getEnglishWordList(searchTerm);
+            break;
+          case "OromoWordList":
+            remoteWordList =
+                await remoteDataSource.getOromoWordList(searchTerm);
+            break;
+          case "EnglishTranslations":
+            remoteWordList =
+                await remoteDataSource.getEnglishTranslations(searchTerm);
+            break;
+          default:
+            remoteWordList = [];
+        }
+
         return Right(remoteWordList);
       } on ServerException {
         return Left(ServerFailure());

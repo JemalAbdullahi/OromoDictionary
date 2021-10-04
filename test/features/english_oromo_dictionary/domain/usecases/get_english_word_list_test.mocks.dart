@@ -31,10 +31,10 @@ class MockEnglishOromoDictionaryRepository extends _i1.Mock
 
   @override
   _i4.Future<_i2.Either<_i5.Failure, List<dynamic>>> getWordList(
-          {bool? isEnglish, String? searchTerm}) =>
+          {String? desiredList, String? searchTerm}) =>
       (super.noSuchMethod(
               Invocation.method(#getWordList, [],
-                  {#isEnglish: isEnglish, #searchTerm: searchTerm}),
+                  {#desiredList: desiredList, #searchTerm: searchTerm}),
               returnValue: Future<_i2.Either<_i5.Failure, List<dynamic>>>.value(
                   _FakeEither_0<_i5.Failure, List<dynamic>>()))
           as _i4.Future<_i2.Either<_i5.Failure, List<dynamic>>>);

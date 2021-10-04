@@ -47,7 +47,7 @@ void main() {
   }
 
   group('getWordList', () {
-    group('isEnglish: true', () {
+    group('EnglishWordList', () {
       final tID = 1;
       final tWord = 'aback';
       final tPhonetic = 'abaak';
@@ -63,7 +63,7 @@ void main() {
           when(mockRemoteDataSource.getEnglishWordList(any))
               .thenAnswer((_) async => tEnglishWordList);
           //act
-          await repository.getWordList(isEnglish: true, searchTerm: tWord);
+          await repository.getWordList(desiredList: "EnglishWordList", searchTerm: tWord);
           //assert
           verify(mockNetworkInfo.isConnected);
         },
@@ -77,7 +77,7 @@ void main() {
                 .thenAnswer((_) async => tEnglishWordList);
             //act
             final result = await repository.getWordList(
-                isEnglish: true, searchTerm: tWord);
+                desiredList: "EnglishWordList", searchTerm: tWord);
             //assert
             verify(mockRemoteDataSource.getEnglishWordList(tWord));
             expect(result,
@@ -92,7 +92,7 @@ void main() {
                 .thenThrow(ServerException());
             //act
             final result = await repository.getWordList(
-                isEnglish: true, searchTerm: tWord);
+                desiredList: "EnglishWordList", searchTerm: tWord);
             //assert
             verify(mockRemoteDataSource.getEnglishWordList(tWord));
             expect(result, equals(Left(ServerFailure())));
@@ -105,8 +105,7 @@ void main() {
           () async {
             //arrange
             //act
-            final result = await repository.getWordList(
-                isEnglish: true, searchTerm: tWord);
+            final result = await repository.getWordList(desiredList: "EnglishWordList", searchTerm: tWord);
             //assert
             verifyZeroInteractions(mockRemoteDataSource);
             expect(result, equals(Left(ConnectionFailure())));
@@ -115,7 +114,7 @@ void main() {
       });
     });
 
-    group('isEnglish: false', () {
+    group('OromoWordList', () {
       final tID = 62;
       final tTranslation = 'gabaabaa';
       final tPhraseID = 17;
@@ -131,7 +130,7 @@ void main() {
           when(mockRemoteDataSource.getOromoWordList(any))
               .thenAnswer((_) async => tOromoWordList);
           //act
-          repository.getWordList(isEnglish: false, searchTerm: tTranslation);
+          repository.getWordList(desiredList: "OromoWordList", searchTerm: tTranslation);
           //assert
           verify(mockNetworkInfo.isConnected);
         },
@@ -144,8 +143,7 @@ void main() {
             when(mockRemoteDataSource.getOromoWordList(any))
                 .thenAnswer((_) async => tOromoWordList);
             //act
-            final result = await repository.getWordList(
-                isEnglish: false, searchTerm: tTranslation);
+            final result = await repository.getWordList(desiredList: "OromoWordList", searchTerm: tTranslation);
             //assert
             verify(mockRemoteDataSource.getOromoWordList(tTranslation));
             expect(result,
@@ -159,8 +157,7 @@ void main() {
             when(mockRemoteDataSource.getOromoWordList(any))
                 .thenAnswer((_) async => tOromoWordList);
             //act
-            await repository.getWordList(
-                isEnglish: false, searchTerm: tTranslation);
+            await repository.getWordList(desiredList: "OromoWordList", searchTerm: tTranslation);
             //assert
             verify(mockRemoteDataSource.getOromoWordList(tTranslation));
           },
@@ -172,8 +169,7 @@ void main() {
             when(mockRemoteDataSource.getOromoWordList(any))
                 .thenThrow(ServerException());
             //act
-            final result = await repository.getWordList(
-                isEnglish: false, searchTerm: tTranslation);
+            final result = await repository.getWordList(desiredList: "OromoWordList", searchTerm: tTranslation);
             //assert
             verify(mockRemoteDataSource.getOromoWordList(tTranslation));
             expect(result, equals(Left(ServerFailure())));
@@ -186,8 +182,73 @@ void main() {
           () async {
             //arrange
             //act
+            final result = await repository.getWordList(desiredList: "OromoWordList", searchTerm: tTranslation);
+            //assert
+            verifyZeroInteractions(mockRemoteDataSource);
+            expect(result, equals(Left(ConnectionFailure())));
+          },
+        );
+      });
+    });
+    group('EnglishTranslations', () {
+      final tID = 160;
+      final tWord = 'accumulate';
+      final tPhonetic = 'akkumuuleet';
+      final tEnglishWordModel =
+          EnglishWordModel(id: tID, word: tWord, phonetic: tPhonetic);
+      final EnglishWord tEnglishWord = tEnglishWordModel;
+      final List<EnglishWord> tEnglishWordList = [tEnglishWord];
+      test(
+        'should check if the device is online',
+        () async {
+          //arrange
+          when(mockNetworkInfo.isConnected).thenAnswer((_) async => true);
+          when(mockRemoteDataSource.getEnglishTranslations(any))
+              .thenAnswer((_) async => tEnglishWordList);
+          //act
+          await repository.getWordList(desiredList: "EnglishTranslations", searchTerm: tWord);
+          //assert
+          verify(mockNetworkInfo.isConnected);
+        },
+      );
+      runTestsOnline(() {
+        test(
+          'should return remote data when the call to remote data source is successful',
+          () async {
+            //arrange
+            when(mockRemoteDataSource.getEnglishTranslations(any))
+                .thenAnswer((_) async => tEnglishWordList);
+            //act
             final result = await repository.getWordList(
-                isEnglish: false, searchTerm: tTranslation);
+                desiredList: "EnglishTranslations", searchTerm: tWord);
+            //assert
+            verify(mockRemoteDataSource.getEnglishTranslations(tWord));
+            expect(result,
+                equals(Right<Failure, List<EnglishWord>>(tEnglishWordList)));
+          },
+        );
+        test(
+          'should return server failure when the call to remote data source is unsuccessful',
+          () async {
+            //arrange
+            when(mockRemoteDataSource.getEnglishTranslations(any))
+                .thenThrow(ServerException());
+            //act
+            final result = await repository.getWordList(
+                desiredList: "EnglishTranslations", searchTerm: tWord);
+            //assert
+            verify(mockRemoteDataSource.getEnglishTranslations(tWord));
+            expect(result, equals(Left(ServerFailure())));
+          },
+        );
+      });
+      runTestsOffline(() {
+        test(
+          'should return ConnectionFailure when the device is offline',
+          () async {
+            //arrange
+            //act
+            final result = await repository.getWordList(desiredList: "EnglishTranslations", searchTerm: tWord);
             //assert
             verifyZeroInteractions(mockRemoteDataSource);
             expect(result, equals(Left(ConnectionFailure())));

@@ -11,24 +11,32 @@ import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecas
     as english;
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/get_oromo_word_list.dart'
     as oromo;
+import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/oromo_word_page/get_english_translations.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/english_oromo_dictionary_bloc.dart';
 import 'english_oromo_dictionary_bloc_test.mocks.dart';
 
-@GenerateMocks(
-    [english.GetEnglishWordList, oromo.GetOromoWordList, InputValidator])
+@GenerateMocks([
+  english.GetEnglishWordList,
+  oromo.GetOromoWordList,
+  GetEnglishTranslations,
+  InputValidator
+])
 void main() {
   late EnglishOromoDictionaryBloc bloc;
   late MockGetEnglishWordList mockGetEnglishWordList;
   late MockGetOromoWordList mockGetOromoWordList;
+  late MockGetEnglishTranslations mockGetEnglishTranslations;
   late MockInputValidator mockInputValidator;
 
   setUp(() {
     mockGetEnglishWordList = MockGetEnglishWordList();
     mockGetOromoWordList = MockGetOromoWordList();
+    mockGetEnglishTranslations = MockGetEnglishTranslations();
     mockInputValidator = MockInputValidator();
     bloc = EnglishOromoDictionaryBloc(
         getEnglishWordList: mockGetEnglishWordList,
         getOromoWordList: mockGetOromoWordList,
+        getEnglishTranslations: mockGetEnglishTranslations,
         inputValidator: mockInputValidator);
   });
 
@@ -299,6 +307,122 @@ void main() {
         expectLater(bloc.state, equals(Empty()));
         //assert
         bloc.add(ChangeLanguageSelected(isEnglish: false));
+      },
+    );
+  });
+  group('GetEnglishTranslationsForOromoWord', () {
+    final searchWord = 'daabaluu';
+    final tWord = 'accumulate';
+    final tPhonetic = 'akkumuuleet';
+    final tEnglishWord = EnglishWord(word: tWord, phonetic: tPhonetic);
+    final List<EnglishWord> tEnglishWordList = [tEnglishWord];
+
+    void setUpMockInputValidatorSuccess() =>
+        when(mockInputValidator.isValid(any)).thenReturn(Right(true));
+
+    test(
+      'should call the InputValidator to validate the input string',
+      () async {
+        //arrange
+        setUpMockInputValidatorSuccess();
+        when(mockGetEnglishTranslations(any))
+            .thenAnswer((_) async => Right(tEnglishWordList));
+        //act
+        bloc.add(GetEnglishTranslationsForOromoWord(searchWord));
+        await untilCalled(mockInputValidator.isValid(any));
+        //assert
+        verify(mockInputValidator.isValid(searchWord));
+      },
+    );
+
+    test(
+      'should emit [Error] when the input is invalid',
+      () async* {
+        //arrange
+        when(mockInputValidator.isValid(any))
+            .thenReturn(Left(InvalidInputFailure()));
+        //assert later
+        final expected = [
+          //The initial state is always emitted first
+          Empty(),
+          Error(message: INVALID_INPUT_FAILURE_MESSAGE),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+        //act
+        bloc.add(GetEnglishTranslationsForOromoWord(searchWord));
+      },
+    );
+
+    test(
+      'should get data from the english use case',
+      () async {
+        //arrange
+        setUpMockInputValidatorSuccess();
+        when(mockGetEnglishTranslations(any))
+            .thenAnswer((_) async => Right(tEnglishWordList));
+        //act
+        bloc.add(GetEnglishTranslationsForOromoWord(searchWord));
+        await untilCalled(mockGetEnglishTranslations(any));
+        //assert
+        verify(mockGetEnglishTranslations(Params(oromoWord: searchWord)));
+      },
+    );
+
+    test(
+      'should emit [Loading, Loaded] when data is retrieved successfully',
+      () async* {
+        //arrange
+        setUpMockInputValidatorSuccess();
+        when(mockGetEnglishTranslations(any))
+            .thenAnswer((_) async => Right(tEnglishWordList));
+        //assert later
+        final expected = [
+          Empty(),
+          Loading(),
+          Loaded(wordList: tEnglishWordList),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+        //act
+        bloc.isEnglish = true;
+        bloc.add(GetEnglishTranslationsForOromoWord(searchWord));
+      },
+    );
+    test(
+      'should emit [Loading, Error] when data retrieval fails',
+      () async* {
+        //arrange
+        setUpMockInputValidatorSuccess();
+        when(mockGetEnglishTranslations(any))
+            .thenAnswer((_) async => Left(ServerFailure()));
+        //assert later
+        final expected = [
+          Empty(),
+          Loading(),
+          Error(message: SERVER_FAILURE_MESSAGE),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+        //act
+        bloc.isEnglish = true;
+        bloc.add(GetEnglishTranslationsForOromoWord(searchWord));
+      },
+    );
+    test(
+      'should emit [Loading, Error] with a proper message for when data retrieval fails',
+      () async* {
+        //arrange
+        setUpMockInputValidatorSuccess();
+        when(mockGetEnglishTranslations(any))
+            .thenAnswer((_) async => Left(ServerFailure()));
+        //assert later
+        final expected = [
+          Empty(),
+          Loading(),
+          Error(message: SERVER_FAILURE_MESSAGE),
+        ];
+        expectLater(bloc, emitsInOrder(expected));
+        //act
+        bloc.isEnglish = true;
+        bloc.add(GetEnglishTranslationsForOromoWord(searchWord));
       },
     );
   });

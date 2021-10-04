@@ -30,14 +30,14 @@ void main() {
     'should get a list of english words for the english term from the repository',
     () async {
       //arrange
-      when(mockEnglishOromoDictionaryRepository.getWordList(isEnglish: anyNamed("isEnglish"), searchTerm: anyNamed("searchTerm")))
+      when(mockEnglishOromoDictionaryRepository.getWordList(desiredList: anyNamed("desiredList"), searchTerm: anyNamed("searchTerm")))
           .thenAnswer((_) async => Right(tEnglishWordList));
       //act
       final result = await usecase(Params(englishTerm: tEnglishTerm));
       //assert
       expect(result, Right(tEnglishWordList));
       verify(mockEnglishOromoDictionaryRepository
-          .getWordList(isEnglish: true, searchTerm: tEnglishTerm));
+          .getWordList(desiredList: "EnglishWordList", searchTerm: tEnglishTerm));
       verifyNoMoreInteractions(mockEnglishOromoDictionaryRepository);
     },
   );

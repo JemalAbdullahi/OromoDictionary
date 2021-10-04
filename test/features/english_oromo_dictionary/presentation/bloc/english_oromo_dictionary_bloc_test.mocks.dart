@@ -8,13 +8,15 @@ import 'package:dartz/dartz.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:oromo_dictionary/core/error/failures.dart' as _i6;
 import 'package:oromo_dictionary/core/presentation/util/input_validator.dart'
-    as _i8;
+    as _i9;
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/repositories/english_oromo_dictionary_repository.dart'
     as _i2;
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/get_english_word_list.dart'
     as _i4;
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/get_oromo_word_list.dart'
     as _i7;
+import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/oromo_word_page/get_english_translations.dart'
+    as _i8;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: avoid_setters_without_getters
@@ -76,10 +78,34 @@ class MockGetOromoWordList extends _i1.Mock implements _i7.GetOromoWordList {
   String toString() => super.toString();
 }
 
+/// A class which mocks [GetEnglishTranslations].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGetEnglishTranslations extends _i1.Mock
+    implements _i8.GetEnglishTranslations {
+  MockGetEnglishTranslations() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.EnglishOromoDictionaryRepository get repository =>
+      (super.noSuchMethod(Invocation.getter(#repository),
+              returnValue: _FakeEnglishOromoDictionaryRepository_0())
+          as _i2.EnglishOromoDictionaryRepository);
+  @override
+  _i5.Future<_i3.Either<_i6.Failure, List<dynamic>>> call(_i8.Params? params) =>
+      (super.noSuchMethod(Invocation.method(#call, [params]),
+              returnValue: Future<_i3.Either<_i6.Failure, List<dynamic>>>.value(
+                  _FakeEither_1<_i6.Failure, List<dynamic>>()))
+          as _i5.Future<_i3.Either<_i6.Failure, List<dynamic>>>);
+  @override
+  String toString() => super.toString();
+}
+
 /// A class which mocks [InputValidator].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockInputValidator extends _i1.Mock implements _i8.InputValidator {
+class MockInputValidator extends _i1.Mock implements _i9.InputValidator {
   MockInputValidator() {
     _i1.throwOnMissingStub(this);
   }
