@@ -25,6 +25,7 @@ dependencies:
   http: ^0.13.3
   shared_preferences: ^2.0.7
   flutter_bloc: ^7.2.0
+  responsive_framework: ^0.1.4
 
 dev_dependencies:
   flutter_test:
@@ -32,7 +33,6 @@ dev_dependencies:
   mockito: ^5.0.15
   build_runner: ^2.0.0
   build_web_compilers: ^3.0.0
-
 
 # The following section is specific to Flutter.
 flutter:
@@ -42,4 +42,3 @@ flutter:
   assets:
     - assets/images/Oddaa.png
   #   - images/a_dot_ham.jpeg
-

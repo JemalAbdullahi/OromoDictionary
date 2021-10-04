@@ -43,10 +43,8 @@ class _EnglishOromoDictionarySearchPageState
         child: LayoutBuilder(builder: (context, constraints) {
           return Container(
             alignment: Alignment.center,
-            width: constraints.maxWidth > 700 ? 700 : constraints.maxWidth,
-            height: constraints.maxHeight > 1000
-                ? constraints.maxHeight * 0.8
-                : constraints.maxHeight,
+            width: constraints.maxWidth,
+            height: constraints.maxHeight * 0.8,
             child: Column(
               children: [
                 Expanded(
@@ -54,7 +52,8 @@ class _EnglishOromoDictionarySearchPageState
                   child: Stack(
                     fit: StackFit.expand,
                     children: [
-                      //Insert Custom AppBar,
+                      //Custom AppBar,
+                      SearchPageAppBar(),
                       //Top Half: Title and Search Bar
                       Padding(
                         padding: isEmptyState(context)

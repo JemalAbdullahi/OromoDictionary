@@ -4,3 +4,4 @@ export 'language_selector.dart';
 export '../loading_widget.dart';
 export 'oromo_search_results_display.dart';
 export 'search_bar.dart';
+export 'search_page_app_bar.dart';
