@@ -4,7 +4,7 @@ import 'search_results_display.dart';
 
 class OromoSearchResultsDisplay extends SearchResultsDisplay<OromoTranslation> {
   OromoSearchResultsDisplay({
-    required BoxConstraints constraints,
+    required Size constraints,
     required String message,
     required List<OromoTranslation> wordList,
     required ThemeData theme,

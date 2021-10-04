@@ -53,7 +53,7 @@ void main() {
       () async {
         //arrange
         final List<dynamic> jsonMap =
-            json.decode(fixture('english_dictionary_def.json'));
+            json.decode(fixture('search_page','english_dictionary_def.json'));
         //act
         final result = EnglishDictionaryDefModel.fromJson(jsonMap);
         //assert

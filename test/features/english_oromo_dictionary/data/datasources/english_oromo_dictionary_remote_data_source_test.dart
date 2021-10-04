@@ -22,9 +22,9 @@ void main() {
         EnglishOromoDictionaryRemoteDataSourceImpl(client: mockHttpClient);
   });
 
-  void setUpMockHttpClientSuccess200(String fileName) {
+  void setUpMockHttpClientSuccess200(String folderName, String fileName) {
     when(mockHttpClient.get(any, headers: anyNamed('headers')))
-        .thenAnswer((_) async => http.Response(fixture(fileName), 200));
+        .thenAnswer((_) async => http.Response(fixture(folderName, fileName), 200));
   }
 
   void setUpMockHttpClientFailure404() {
@@ -35,7 +35,7 @@ void main() {
   group('getEnglishWordList', () {
     final englishTerm = 'aback';
     final tEnglishWordModel =
-        EnglishWordModel.fromJson(json.decode(fixture('english_word.json')));
+        EnglishWordModel.fromJson(json.decode(fixture('search_page','english_word.json')));
     Uri uri = Uri(
         scheme: 'https',
         host: 'oromo-dictionary-staging.herokuapp.com',
@@ -45,7 +45,7 @@ void main() {
       and with application/json header''',
       () async {
         //arrange
-        setUpMockHttpClientSuccess200('english_word_list.json');
+        setUpMockHttpClientSuccess200('search_page','english_word_list.json');
         //act
         dataSource.getEnglishWordList(englishTerm);
         //assert
@@ -57,7 +57,7 @@ void main() {
       'should return EnglishWord when the response code is 200',
       () async {
         //arrange
-        setUpMockHttpClientSuccess200('english_word_list.json');
+        setUpMockHttpClientSuccess200('search_page','english_word_list.json');
         //act
         final result = await dataSource.getEnglishWordList(englishTerm);
         //assert
@@ -80,7 +80,7 @@ void main() {
   group('getOromoWordList', () {
     final oromoTerm = 'gabab';
     final tOromoTranslationModel = OromoTranslationModel.fromJson(
-        json.decode(fixture('oromo_translation.json')));
+        json.decode(fixture('search_page','oromo_translation.json')));
     Uri uri = Uri(
         scheme: 'https',
         host: 'oromo-dictionary-staging.herokuapp.com',
@@ -90,7 +90,7 @@ void main() {
       and with application/json header''',
       () async {
         //arrange
-        setUpMockHttpClientSuccess200('oromo_translation_list.json');
+        setUpMockHttpClientSuccess200('search_page','oromo_translation_list.json');
         //act
         dataSource.getOromoWordList(oromoTerm);
         //assert
@@ -102,7 +102,7 @@ void main() {
       'should return OromoTranslation when the response code is 200',
       () async {
         //arrange
-        setUpMockHttpClientSuccess200('oromo_translation_list.json');
+        setUpMockHttpClientSuccess200('search_page','oromo_translation_list.json');
         //act
         final result = await dataSource.getOromoWordList(oromoTerm);
         //assert
@@ -118,6 +118,51 @@ void main() {
         final call = dataSource.getOromoWordList;
         //assert
         expect(() => call(oromoTerm), throwsA(TypeMatcher<ServerException>()));
+      },
+    );
+  });
+  group('getEnglishTranslations', () {
+    final oromoWord = 'daabaluu';
+    final tEnglishWordModel =
+        EnglishWordModel.fromJson(json.decode(fixture('oromo_word_page','english_word.json')));
+    Uri uri = Uri(
+        scheme: 'https',
+        host: 'oromo-dictionary-staging.herokuapp.com',
+        path: '/word/$oromoWord');
+    test(
+      '''should perform a GET request on a URL with /word being the endpoint 
+      and with application/json header''',
+      () async {
+        //arrange
+        setUpMockHttpClientSuccess200('oromo_word_page','english_translations.json');
+        //act
+        dataSource.getEnglishTranslations(oromoWord);
+        //assert
+        verify(mockHttpClient
+            .get(uri, headers: {'Content-Type': 'application/json'}));
+      },
+    );
+    test(
+      'should return EnglishWord when the response code is 200',
+      () async {
+        //arrange
+        setUpMockHttpClientSuccess200('oromo_word_page','english_translations.json');
+        //act
+        final result = await dataSource.getEnglishTranslations(oromoWord);
+        //assert
+        expect(result, equals([tEnglishWordModel]));
+      },
+    );
+    test(
+      'should throw a ServerException when the response code is not 2xx',
+      () async {
+        //arrange
+        setUpMockHttpClientFailure404();
+        //act
+        final call = dataSource.getEnglishTranslations;
+        //assert
+        expect(
+            () => call(oromoWord), throwsA(TypeMatcher<ServerException>()));
       },
     );
   });

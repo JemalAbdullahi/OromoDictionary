@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/presentation/util/constants.dart';
 
 abstract class SearchResultsDisplay<T> extends StatelessWidget {
-  final BoxConstraints constraints;
+  final Size constraints;
   final String message;
   final List<T> wordList;
   final ThemeData? theme;
@@ -27,8 +27,8 @@ abstract class SearchResultsDisplay<T> extends StatelessWidget {
     return Container(
       decoration: _searchResultCardDecoration(),
       clipBehavior: Clip.hardEdge,
-      height: constraints.maxHeight / 2,
-      width: constraints.maxWidth,
+      height: constraints.height / 2,
+      width: constraints.width,
       child: wordList.length > 0
           ? ListView.builder(
               padding: const EdgeInsets.only(top: 18, left: 12),

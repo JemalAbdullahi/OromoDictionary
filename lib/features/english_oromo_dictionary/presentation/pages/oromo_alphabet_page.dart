@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:oromo_dictionary/core/presentation/util/constants.dart';
 
-class OromoAlphabetScreen extends StatefulWidget {
+class OromoAlphabetPage extends StatefulWidget {
   static const String routeName = "/alphabet";
-  const OromoAlphabetScreen({Key? key}) : super(key: key);
+  const OromoAlphabetPage({Key? key}) : super(key: key);
 
   @override
-  _OromoAlphabetScreenState createState() => _OromoAlphabetScreenState();
+  _OromoAlphabetPageState createState() => _OromoAlphabetPageState();
 }
 
-class _OromoAlphabetScreenState extends State<OromoAlphabetScreen> {
+class _OromoAlphabetPageState extends State<OromoAlphabetPage> {
   late ThemeData theme;
   String selectedLetters = "";
   Map<String, Map<String, String>> letterSet = {

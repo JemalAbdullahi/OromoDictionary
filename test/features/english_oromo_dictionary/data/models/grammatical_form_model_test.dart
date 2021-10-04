@@ -24,7 +24,7 @@ void main() {
       () async {
         //arrange
         final Map<String, dynamic> jsonMap =
-            json.decode(fixture('grammatical_form.json'));
+            json.decode(fixture('search_page','grammatical_form.json'));
         //act
         final result = GrammaticalFormModel.fromJson(jsonMap);
         //assert

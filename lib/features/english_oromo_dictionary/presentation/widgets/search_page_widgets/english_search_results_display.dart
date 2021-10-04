@@ -4,7 +4,7 @@ import 'search_results_display.dart';
 
 class EnglishSearchResultsDisplay extends SearchResultsDisplay<EnglishWord> {
   EnglishSearchResultsDisplay({
-    required BoxConstraints constraints,
+    required Size constraints,
     required String message,
     required List<EnglishWord> wordList,
     required ThemeData theme,

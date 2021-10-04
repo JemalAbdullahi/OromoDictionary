@@ -18,6 +18,11 @@ abstract class EnglishOromoDictionaryRemoteDataSource {
   ///
   ///Throws a [ServerException] for all error codes
   Future<List<EnglishWord>> getEnglishWordList(String englishTerm);
+
+  ///Calls the https://oromo-dictionary-staging.herokuapp.com/search/en/{englishTerm} endpoint.
+  ///
+  ///Throws a [ServerException] for all error codes
+  Future<List<EnglishWord>> getEnglishTranslations(String oromoWord);
 }
 
 class EnglishOromoDictionaryRemoteDataSourceImpl
@@ -32,6 +37,15 @@ class EnglishOromoDictionaryRemoteDataSourceImpl
         scheme: 'https',
         host: 'oromo-dictionary-staging.herokuapp.com',
         path: '/search/en/$englishTerm');
+    return _getWordListFromURI<EnglishWord>(uri, isEnglish: true);
+  }
+
+  @override
+  Future<List<EnglishWord>> getEnglishTranslations(String oromoWord) async {
+    Uri uri = Uri(
+        scheme: 'https',
+        host: 'oromo-dictionary-staging.herokuapp.com',
+        path: '/word/$oromoWord');
     return _getWordListFromURI<EnglishWord>(uri, isEnglish: true);
   }
 

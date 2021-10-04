@@ -23,7 +23,7 @@ void main() {
       () async {
         //arrange
         final Map<String, dynamic> jsonMap =
-            json.decode(fixture('phrase.json'));
+            json.decode(fixture('search_page', 'phrase.json'));
         //act
         final result = PhraseModel.fromJson(jsonMap);
         //assert

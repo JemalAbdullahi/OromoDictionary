@@ -24,7 +24,7 @@ void main() {
       () async {
         //arrange
         final Map<String, dynamic> jsonMap =
-            json.decode(fixture('english_word.json'));
+            json.decode(fixture('search_page','english_word.json'));
         //act
         final result = EnglishWordModel.fromJson(jsonMap);
         //assert

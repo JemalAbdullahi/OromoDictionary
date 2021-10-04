@@ -24,7 +24,7 @@ void main() {
       () async {
         //arrange
         final Map<String, dynamic> jsonMap =
-            json.decode(fixture('oromo_translation.json'));
+            json.decode(fixture('search_page','oromo_translation.json'));
         //act
         final result = OromoTranslationModel.fromJson(jsonMap);
         //assert
