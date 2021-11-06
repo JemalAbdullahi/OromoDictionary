@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:oromo_dictionary/core/presentation/util/constants.dart';
+import '../../../../core/presentation/util/constants.dart';
 
 class OromoAlphabetPage extends StatefulWidget {
   static const String routeName = "/alphabet";

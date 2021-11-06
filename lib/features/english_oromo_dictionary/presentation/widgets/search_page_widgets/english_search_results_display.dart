@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/pages/english_to_oromo_translation_page.dart';
+import '../../pages/english_to_oromo_translation_page.dart';
 import '../../../domain/entities/english_word.dart';
 import 'search_results_display.dart';
 

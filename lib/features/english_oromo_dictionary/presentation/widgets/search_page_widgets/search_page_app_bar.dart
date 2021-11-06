@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/core/presentation/util/constants.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/pages/oromo_alphabet_page.dart';
+import '../../../../../core/presentation/util/constants.dart';
+import '../../pages/oromo_alphabet_page.dart';
 
 class SearchPageAppBar extends StatelessWidget {
   SearchPageAppBar({Key? key, required this.textTheme}) : super(key: key);

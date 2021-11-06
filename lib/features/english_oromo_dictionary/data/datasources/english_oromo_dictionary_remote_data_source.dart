@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import '../../../../core/error/exceptions.dart';
-import '../models/english_word_model.dart';
-import '../models/oromo_translation_model.dart';
+import 'package:http/http.dart' as http;
 
+import '../../../../core/error/exceptions.dart';
 import '../../domain/entities/english_word.dart';
 import '../../domain/entities/oromo_translation.dart';
-import 'package:http/http.dart' as http;
+import '../models/english_word_model.dart';
+import '../models/oromo_translation_model.dart';
 
 abstract class EnglishOromoDictionaryRemoteDataSource {
   ///Calls the https://oromo-dictionary-staging.herokuapp.com/search/om/{oromoTerm} endpoint.

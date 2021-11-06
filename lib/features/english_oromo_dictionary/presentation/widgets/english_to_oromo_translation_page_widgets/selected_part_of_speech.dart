@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/core/presentation/util/constants.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/grammatical_form.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/widgets/english_to_oromo_translation_page_widgets/definition_and_translation_listview.dart';
+import '../../../../../core/presentation/util/constants.dart';
+import '../../../domain/entities/english_word.dart';
+import '../../../domain/entities/grammatical_form.dart';
+import 'definition_and_translation_listview.dart';
 
 class SelectedPartOfSpeech extends StatelessWidget {
   const SelectedPartOfSpeech({

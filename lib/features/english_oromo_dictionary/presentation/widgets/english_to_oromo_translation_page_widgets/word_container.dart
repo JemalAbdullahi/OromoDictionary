@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:oromo_dictionary/core/presentation/util/constants.dart';
-import 'package:oromo_dictionary/core/presentation/util/widget_functions.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
+import '../../../../../core/presentation/util/constants.dart';
+import '../../../../../core/presentation/util/widget_functions.dart';
+import '../../../domain/entities/english_word.dart';
 
 class WordContainer extends StatelessWidget {
   const WordContainer({required this.englishWord,

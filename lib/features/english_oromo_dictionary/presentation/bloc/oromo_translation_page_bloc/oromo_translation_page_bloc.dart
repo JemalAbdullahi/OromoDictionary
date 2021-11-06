@@ -1,5 +1,5 @@
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/oromo_word_page/get_english_translations.dart';
+import '../../../domain/entities/english_word.dart';
+import '../../../domain/usecases/oromo_word_page/get_english_translations.dart';
 import '../bloc_imports.dart';
 
 part 'oromo_translation_page_event.dart';

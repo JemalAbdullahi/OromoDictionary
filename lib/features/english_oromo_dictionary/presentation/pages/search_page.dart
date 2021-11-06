@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../src/utils/widget_functions.dart';
 import '../../domain/entities/english_word.dart';
 import '../../domain/entities/oromo_translation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../widgets/search_page_widgets/search_page_widgets.dart';
 import '../bloc/search_page_bloc/bloc.dart';
-import '../../../../src/utils/widget_functions.dart';
+import '../widgets/search_page_widgets/search_page_widgets.dart';
 
 class SearchPage extends StatefulWidget {
   static const String routeName = "/";

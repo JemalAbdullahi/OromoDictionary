@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marquee/marquee.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/oromo_translation_page_bloc/bloc.dart';
+import '../bloc/oromo_translation_page_bloc/bloc.dart';
 
 import '../../../../core/presentation/util/constants.dart';
 import '../../../../core/presentation/util/widget_functions.dart';

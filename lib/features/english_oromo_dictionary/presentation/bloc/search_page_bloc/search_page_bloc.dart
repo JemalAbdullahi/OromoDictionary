@@ -1,6 +1,6 @@
+import '../../../domain/usecases/search_page/get_english_word_list.dart' as english;
+import '../../../domain/usecases/search_page/get_oromo_word_list.dart' as oromo;
 import '../bloc_imports.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/search_page/get_english_word_list.dart' as english;
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/search_page/get_oromo_word_list.dart' as oromo;
 
 part 'search_page_event.dart';
 part 'search_page_state.dart';

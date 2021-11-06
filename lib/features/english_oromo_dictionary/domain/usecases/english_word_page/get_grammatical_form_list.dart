@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:oromo_dictionary/core/error/failures.dart';
-import 'package:oromo_dictionary/core/usecases/usecase.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/grammatical_form.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/repositories/english_definition_repository.dart';
+import '../../../../../core/error/failures.dart';
+import '../../../../../core/usecases/usecase.dart';
+import '../../entities/grammatical_form.dart';
+import '../../repositories/english_definition_repository.dart';
 
 class GetGrammaticalFormList implements UseCase<List<dynamic>, Params> {
   final EnglishDefinitionRepository repository;

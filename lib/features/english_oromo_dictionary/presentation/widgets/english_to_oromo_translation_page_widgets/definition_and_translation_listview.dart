@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/grammatical_form.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/widgets/english_to_oromo_translation_page_widgets/phrase_translation_container.dart';
+
+import '../../../domain/entities/english_word.dart';
+import '../../../domain/entities/grammatical_form.dart';
+import 'phrase_translation_container.dart';
 
 class EnglishDefinitionListView extends StatelessWidget {
   const EnglishDefinitionListView(

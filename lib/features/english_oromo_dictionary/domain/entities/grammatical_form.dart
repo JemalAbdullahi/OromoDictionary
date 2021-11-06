@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/phrase.dart';
+import 'phrase.dart';
 
 class GrammaticalForm extends Equatable {
   late final int id;

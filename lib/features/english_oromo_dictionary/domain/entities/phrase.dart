@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/oromo_translation.dart';
+import 'oromo_translation.dart';
 
 class Phrase extends Equatable {
   late final int id;

@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:oromo_dictionary/core/error/exceptions.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/grammatical_form_model.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/oromo_translation_model.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/phrase_model.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/grammatical_form.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/oromo_translation.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/phrase.dart';
+import '../../../../core/error/exceptions.dart';
+import '../models/grammatical_form_model.dart';
+import '../models/oromo_translation_model.dart';
+import '../models/phrase_model.dart';
+import '../../domain/entities/grammatical_form.dart';
+import '../../domain/entities/oromo_translation.dart';
+import '../../domain/entities/phrase.dart';
 
 abstract class EnglishDefinitionRemoteDataSource {
   ///Calls the https://oromo-dictionary-staging.herokuapp.com/translation/{phraseID} endpoint.

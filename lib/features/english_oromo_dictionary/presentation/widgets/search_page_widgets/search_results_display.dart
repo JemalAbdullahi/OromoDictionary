@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../core/presentation/util/constants.dart';
 
 abstract class SearchResultsDisplay<T> extends StatelessWidget {

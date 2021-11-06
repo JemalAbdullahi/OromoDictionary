@@ -1,8 +1,9 @@
-import 'package:oromo_dictionary/core/error/failures.dart';
+import '../../../../core/error/failures.dart';
 
 export 'package:bloc/bloc.dart';
 export 'package:equatable/equatable.dart';
 export 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/page_states.dart';
+
 export '../../../../../core/presentation/util/input_validator.dart';
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';

@@ -1,4 +1,4 @@
-import 'package:oromo_dictionary/core/presentation/util/constants.dart';
+import '../../../../../core/presentation/util/constants.dart';
 ///Breaks down a given oromo word's pronunciation letter by letter
 class GetOromoPhoneticBreakdown {
   String call({String oromoWord = ''}) {

@@ -1,10 +1,11 @@
-import 'package:oromo_dictionary/core/error/exceptions.dart';
-import 'package:oromo_dictionary/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:oromo_dictionary/core/network/network_info.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/english_definition_remote_data_source.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/grammatical_form.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/repositories/english_definition_repository.dart';
+
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failures.dart';
+import '../../../../core/network/network_info.dart';
+import '../../domain/entities/grammatical_form.dart';
+import '../../domain/repositories/english_definition_repository.dart';
+import '../datasources/english_definition_remote_data_source.dart';
 
 class EnglishDefinitionRepositoryImpl implements EnglishDefinitionRepository {
   final EnglishDefinitionRemoteDataSource remoteDataSource;

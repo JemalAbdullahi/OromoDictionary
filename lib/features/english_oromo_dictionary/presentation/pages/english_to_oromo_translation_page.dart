@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:oromo_dictionary/core/presentation/util/constants.dart';
-import 'package:oromo_dictionary/core/presentation/util/widget_functions.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/widgets/english_to_oromo_translation_page_widgets/word_container.dart';
+import '../../../../core/presentation/util/constants.dart';
+import '../../../../core/presentation/util/widget_functions.dart';
+import '../../domain/entities/english_word.dart';
+import '../widgets/english_to_oromo_translation_page_widgets/selected_part_of_speech.dart';
+import '../widgets/english_to_oromo_translation_page_widgets/word_container.dart';
 
 class EnglishToOromoTranslationPage extends StatefulWidget {
   static const String routeName = "/pages/english";
@@ -55,12 +56,12 @@ class _EnglishToOromoTranslationPageState
           child: Column(
             children: [
               partOfSpeechSelector(constraints),
-              /* SelectedPartOfSpeech(
+              SelectedPartOfSpeech(
                   englishWord: _englishWord,
                   selectedPartOfSpeech:
                       _englishWord.forms![selectedSubEntryIndex],
                   textTheme: _theme.textTheme), 
-              */
+             
             ],
           ),
         ),

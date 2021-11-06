@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/grammatical_form.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/english_word_page/get_grammatical_form_list.dart';
+import '../../../domain/entities/grammatical_form.dart';
+import '../../../domain/usecases/english_word_page/get_grammatical_form_list.dart';
 
 import '../bloc_imports.dart';
 import '../page_states.dart';
