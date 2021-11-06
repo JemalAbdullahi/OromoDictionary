@@ -1,5 +1,10 @@
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/english_definition_remote_data_source.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/data/repositories/english_definition_repository_impl.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/repositories/english_definition_repository.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/english_word_page/get_grammatical_form_list.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
 import 'features/english_oromo_dictionary/domain/usecases/oromo_word_page/get_english_translations.dart';
 import 'features/english_oromo_dictionary/presentation/bloc/oromo_translation_page_bloc/bloc.dart';
 import 'core/network/network_info.dart';
@@ -33,22 +38,45 @@ void init() {
     ),
   );
 
+  sl.registerFactory(
+      () => EnglishTranslationPageBloc(getGrammaticalFormList: sl()));
+
   // Use Cases
-  sl.registerLazySingleton(() => GetEnglishWordList(sl()));
-  sl.registerLazySingleton(() => GetOromoWordList(sl()));
-  sl.registerLazySingleton(() => GetEnglishTranslations(sl()));
+  sl.registerLazySingleton(
+      () => GetEnglishWordList(sl<EnglishOromoDictionaryRepository>()));
+  sl.registerLazySingleton(
+      () => GetOromoWordList(sl<EnglishOromoDictionaryRepository>()));
+  sl.registerLazySingleton(
+      () => GetEnglishTranslations(sl<EnglishOromoDictionaryRepository>()));
+  sl.registerLazySingleton(
+      () => GetGrammaticalFormList(sl<EnglishDefinitionRepository>()));
 
   // Repository
   sl.registerLazySingleton<EnglishOromoDictionaryRepository>(
     () => EnglishOromoDictionaryRepositoryImpl(
-      remoteDataSource: sl(),
+      remoteDataSource: sl<EnglishOromoDictionaryRemoteDataSource>(),
+      networkInfo: sl(),
+    ),
+  );
+  sl.registerLazySingleton<EnglishDefinitionRepository>(
+    () => EnglishDefinitionRepositoryImpl(
+      remoteDataSource: sl<EnglishDefinitionRemoteDataSource>(),
       networkInfo: sl(),
     ),
   );
 
   // Data Sources
   sl.registerLazySingleton<EnglishOromoDictionaryRemoteDataSource>(
-      () => EnglishOromoDictionaryRemoteDataSourceImpl(client: sl()));
+    () => EnglishOromoDictionaryRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
+
+  sl.registerLazySingleton<EnglishDefinitionRemoteDataSource>(
+    () => EnglishDefinitionRemoteDataSourceImpl(
+      client: sl(),
+    ),
+  );
   //! Core
   sl.registerLazySingleton(() => InputValidator());
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

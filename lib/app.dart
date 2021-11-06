@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
@@ -22,6 +23,8 @@ class _MyAppState extends State<MyApp> {
   final SearchPageBloc _searchPageBloc = sl<SearchPageBloc>();
   final OromoTranslationPageBloc _oromoTranslationPageBloc =
       sl<OromoTranslationPageBloc>();
+  final EnglishTranslationPageBloc _englishTranslationPageBloc =
+      sl<EnglishTranslationPageBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,10 @@ class _MyAppState extends State<MyApp> {
                 child: OromoToEnglishTranslationPage(),
               ),
           EnglishToOromoTranslationPage.routeName: (BuildContext context) =>
-              EnglishToOromoTranslationPage(),
+              BlocProvider.value(
+                value: _englishTranslationPageBloc,
+                child: EnglishToOromoTranslationPage(),
+              ),
           // OromoEnglishTranslationScreen.routeName: (BuildContext context) =>
           // ChangeNotifierProvider(
           // create: (context) => SearchListViewModel(),

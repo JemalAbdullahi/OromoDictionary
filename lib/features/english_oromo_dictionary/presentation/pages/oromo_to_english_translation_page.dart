@@ -21,7 +21,7 @@ class OromoToEnglishTranslationPage extends StatefulWidget {
 
 class _OromoToEnglishTranslationPageState
     extends State<OromoToEnglishTranslationPage> {
-  late OromoTranslationPageBloc bloc;
+  late final OromoTranslationPageBloc bloc;
   late final ThemeData _theme;
   late final OromoTranslation _oromoTranslation;
   bool initialized = false;

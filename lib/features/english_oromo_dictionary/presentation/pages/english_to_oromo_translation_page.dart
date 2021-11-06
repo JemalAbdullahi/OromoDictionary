@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/page_states.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/widgets/loading_widget.dart';
 import '../../../../core/presentation/util/constants.dart';
 import '../../../../core/presentation/util/widget_functions.dart';
 import '../../domain/entities/english_word.dart';
@@ -16,6 +20,7 @@ class EnglishToOromoTranslationPage extends StatefulWidget {
 
 class _EnglishToOromoTranslationPageState
     extends State<EnglishToOromoTranslationPage> {
+  late final EnglishTranslationPageBloc bloc;
   late final ThemeData _theme;
   late final EnglishWord _englishWord;
   late final double phraseTranslationContainerWidth;
@@ -24,10 +29,12 @@ class _EnglishToOromoTranslationPageState
 
   _initialize(BuildContext context) {
     if (!initialized) {
+      bloc = BlocProvider.of<EnglishTranslationPageBloc>(context);
       _theme = Theme.of(context);
       final args = ModalRoute.of(context)!.settings.arguments
           as EnglishToOromoTranslationPageArguments;
       _englishWord = args.englishWord;
+      bloc.add(GetGrammaticalForms(_englishWord.id));
       phraseTranslationContainerWidth = MediaQuery.of(context).size.width * 0.8;
       initialized = true;
     }
@@ -39,12 +46,31 @@ class _EnglishToOromoTranslationPageState
     Size constraints = MediaQuery.of(context).size;
     return Scaffold(
       appBar: customAppBar(),
-      body: Container(
-        height: constraints.height,
-        width: constraints.width,
-        color: Theme.of(context).primaryColor,
-        child: _buildColumn(constraints),
-      ),
+      body: _buildBody(constraints),
+    );
+  }
+
+  BlocBuilder<EnglishTranslationPageBloc, PageState> _buildBody(
+      Size constraints) {
+    return BlocBuilder<EnglishTranslationPageBloc, PageState>(
+      builder: (context, state) {
+        if (state is Empty) {
+          return SizedBox.shrink();
+        } else if (state is Loading) {
+          return LoadingWidget();
+        } else if (state is Loaded) {
+          _englishWord.forms = state.grammaticalForms;
+          return Container(
+            height: constraints.height,
+            width: constraints.width,
+            color: _theme.primaryColor,
+            child: _buildColumn(constraints),
+          );
+        } else if (state is Error) {
+          return Center(child: Text(state.message));
+        }
+        return Container();
+      },
     );
   }
 
@@ -59,9 +85,8 @@ class _EnglishToOromoTranslationPageState
               SelectedPartOfSpeech(
                   englishWord: _englishWord,
                   selectedPartOfSpeech:
-                      _englishWord.forms![selectedSubEntryIndex],
-                  textTheme: _theme.textTheme), 
-             
+                      _englishWord.forms[selectedSubEntryIndex],
+                  textTheme: _theme.textTheme),
             ],
           ),
         ),
@@ -79,7 +104,6 @@ class _EnglishToOromoTranslationPageState
                 englishWord: _englishWord,
                 textTheme: _theme.textTheme,
                 constraints: constraints),
-           
           ],
         ),
       ),
@@ -93,7 +117,7 @@ class _EnglishToOromoTranslationPageState
       height: 50,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 1,//_englishWord.forms!.length,
+        itemCount: _englishWord.forms.length,
         itemBuilder: (BuildContext context, int index) {
           return Material(
             color: COLOR_RED,
@@ -106,8 +130,8 @@ class _EnglishToOromoTranslationPageState
                   selectedSubEntryIndex = index;
                 });
               },
-              child: Text('hello',
-                //'${_englishWord.forms![index].partOfSpeech.toUpperCase()}',
+              child: Text(
+                '${_englishWord.forms[index].partOfSpeech.toUpperCase()}',
                 style: _theme.textTheme.headline6!.apply(color: COLOR_YELLOW),
               ),
             ),

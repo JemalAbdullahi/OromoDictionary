@@ -8,7 +8,7 @@ import '../../repositories/english_definition_repository.dart';
 class GetGrammaticalFormList implements UseCase<List<dynamic>, Params> {
   final EnglishDefinitionRepository repository;
 
-  GetGrammaticalFormList({required this.repository});
+  GetGrammaticalFormList(this.repository);
 
   @override
   Future<Either<Failure, List<GrammaticalForm>>> call(Params params) async {

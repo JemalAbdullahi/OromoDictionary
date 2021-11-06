@@ -1,5 +1,6 @@
 import '../../domain/entities/english_word.dart';
 
+// ignore: must_be_immutable
 class EnglishWordModel extends EnglishWord {
   EnglishWordModel({
     required id,
