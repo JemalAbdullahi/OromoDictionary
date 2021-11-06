@@ -5,13 +5,14 @@ class GrammaticalForm extends Equatable {
   late final int id;
   late final int wordID;
   late final String partOfSpeech;
-  List<Phrase>? phrases;
+  late final List<Phrase> phrases;
 
   GrammaticalForm(
       {
         required this.id, 
         required this.wordID,
-        required this.partOfSpeech});
+        required this.partOfSpeech,
+      });
 
   @override
   List<Object?> get props => [id, wordID, partOfSpeech];

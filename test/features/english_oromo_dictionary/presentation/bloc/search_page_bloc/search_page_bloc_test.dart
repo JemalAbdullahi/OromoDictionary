@@ -48,7 +48,7 @@ void main() {
   group('GetListForEnglishWord', () {
     final tWord = 'aback';
     final tPhonetic = 'abaak';
-    final tEnglishWord = EnglishWord(word: tWord, phonetic: tPhonetic);
+    final tEnglishWord = EnglishWord(id: 1, word: tWord, phonetic: tPhonetic);
     final List<EnglishWord> tEnglishWordList = [tEnglishWord];
 
     void setUpMockInputValidatorSuccess() =>

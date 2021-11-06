@@ -34,7 +34,7 @@ void main() {
     final searchWord = 'daabaluu';
     final tWord = 'accumulate';
     final tPhonetic = 'akkumuuleet';
-    final tEnglishWord = EnglishWord(word: tWord, phonetic: tPhonetic);
+    final tEnglishWord = EnglishWord(id: 160, word: tWord, phonetic: tPhonetic);
     final List<EnglishWord> tEnglishWordList = [tEnglishWord];
 
     void setUpMockInputValidatorSuccess() =>

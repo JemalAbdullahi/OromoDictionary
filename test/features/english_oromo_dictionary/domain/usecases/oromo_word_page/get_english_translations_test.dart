@@ -21,7 +21,7 @@ void main() {
 
   tOromoWord = "daabaluu";
   tEnglishWordList = [
-    EnglishWord(word: "accumulate", phonetic: "akkumuuleet"),
+    EnglishWord(id: 160, word: "accumulate", phonetic: "akkumuuleet"),
   ];
   test(
     'should get a list of english translations for the oromo word from the repository',

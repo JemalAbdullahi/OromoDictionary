@@ -42,11 +42,11 @@ class OromoTranslationListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: selectedPartOfSpeech.phrases!.length,
+      itemCount: selectedPartOfSpeech.phrases.length,
       itemBuilder: (BuildContext context, int index) {
         return PhraseTranslationContainer(
           textTheme: textTheme,
-          phrase: selectedPartOfSpeech.phrases![index],
+          phrase: selectedPartOfSpeech.phrases[index],
           index: index,
           isPhraseSection: true,
         );

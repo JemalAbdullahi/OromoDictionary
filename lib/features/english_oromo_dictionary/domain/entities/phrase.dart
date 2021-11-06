@@ -6,7 +6,7 @@ class Phrase extends Equatable {
   late final int formID;
   late final String? phrase;
   late final String? example;
-  List<OromoTranslation>? translations;
+  late final List<OromoTranslation>? translations;
 
   Phrase(
       {
