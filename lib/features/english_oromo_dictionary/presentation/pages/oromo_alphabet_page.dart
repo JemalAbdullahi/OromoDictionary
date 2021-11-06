@@ -40,7 +40,7 @@ class _OromoAlphabetPageState extends State<OromoAlphabetPage> {
                       selectedLetters = "";
                     });
                   },
-                  icon: Icon(Icons.clear),
+                  icon: Icon(Icons.clear, color: COLOR_RED),
                 )
               : SizedBox.shrink()
         ],

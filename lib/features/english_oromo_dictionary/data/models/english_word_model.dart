@@ -5,7 +5,7 @@ class EnglishWordModel extends EnglishWord {
     required id,
     required word,
     required phonetic,
-  }) : super(word: word, phonetic: phonetic);
+  }) : super(id: id, word: word, phonetic: phonetic);
 
   factory EnglishWordModel.fromJson(Map<String, dynamic> parsedJson) {
     return EnglishWordModel(

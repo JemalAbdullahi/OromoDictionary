@@ -1,5 +1,5 @@
 import 'language_selector.dart';
-import '../../bloc/bloc.dart';
+import '../../bloc/search_page_bloc/bloc.dart';
 import '../../../../../core/presentation/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,10 +77,10 @@ class _SearchBarState extends State<SearchBar> {
 
   void _search() {
     controller.clear();
-    BlocProvider.of<EnglishOromoDictionaryBloc>(context).isEnglish
-        ? BlocProvider.of<EnglishOromoDictionaryBloc>(context)
+    BlocProvider.of<SearchPageBloc>(context).isEnglish
+        ? BlocProvider.of<SearchPageBloc>(context)
             .add(GetListForEnglishWord(inputString))
-        : BlocProvider.of<EnglishOromoDictionaryBloc>(context)
+        : BlocProvider.of<SearchPageBloc>(context)
             .add(GetListForOromoWord(inputString));
   }
 }

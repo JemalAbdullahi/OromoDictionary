@@ -13,7 +13,7 @@ class GetEnglishTranslations implements UseCase<List<dynamic>, Params> {
   @override
   Future<Either<Failure, List<dynamic>>> call(Params params) async {
     return await repository.getWordList(
-        desiredList: "EnglishTranslations",
+        desiredList: "EnglishTranslation",
         searchTerm: params.oromoWord);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/pages/english_to_oromo_translation_page.dart';
 import '../../../domain/entities/english_word.dart';
 import 'search_results_display.dart';
 
@@ -20,8 +21,10 @@ class EnglishSearchResultsDisplay extends SearchResultsDisplay<EnglishWord> {
       int index, BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // TODO: Implement Navigation to Second Page/Feature
-        print(wordList[index].word);
+        Navigator.of(context).pushNamed(
+          EnglishToOromoTranslationPage.routeName,
+          arguments: EnglishToOromoTranslationPageArguments(wordList[index]),
+        );
       },
       child: buildSearchResultListTile(index),
     );

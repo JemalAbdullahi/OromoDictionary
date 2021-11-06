@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/pages/search_page.dart';
 import '../../../../core/error/exceptions.dart';
 
 import '../../../../core/error/failures.dart';
@@ -30,7 +29,7 @@ class EnglishOromoDictionaryRepositoryImpl
             remoteWordList =
                 await remoteDataSource.getOromoWordList(searchTerm);
             break;
-          case "EnglishTranslations":
+          case "EnglishTranslation":
             remoteWordList =
                 await remoteDataSource.getEnglishTranslations(searchTerm);
             break;

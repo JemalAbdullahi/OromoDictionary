@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/presentation/util/constants.dart';
-import '../../bloc/bloc.dart';
+import '../../bloc/search_page_bloc/bloc.dart';
 
 class LanguageSelector extends StatefulWidget {
   ///Widget which switches the Language between English and Oromo
@@ -25,7 +25,7 @@ class _LanguageSelectorState extends State<LanguageSelector> {
   PopupMenuButton _popupMenuButton(BuildContext context) {
     return PopupMenuButton<String>(
       icon: Text(
-        BlocProvider.of<EnglishOromoDictionaryBloc>(context).isEnglish
+        BlocProvider.of<SearchPageBloc>(context).isEnglish
             ? 'EN'
             : 'OM',
         style: theme.textTheme.bodyText1!
@@ -39,8 +39,9 @@ class _LanguageSelectorState extends State<LanguageSelector> {
         ),
       ),
       onSelected: (value) {
-        BlocProvider.of<EnglishOromoDictionaryBloc>(context)
+        BlocProvider.of<SearchPageBloc>(context)
             .add(ChangeLanguageSelected(isEnglish: value == 'en'));
+        setState(() {});
       },
       itemBuilder: (context) => [
         PopupMenuItem<String>(

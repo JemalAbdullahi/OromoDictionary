@@ -1,11 +1,12 @@
-part of 'english_oromo_dictionary_bloc.dart';
+part of 'search_page_bloc.dart';
 
-abstract class EnglishOromoDictionaryEvent extends Equatable {
-  const EnglishOromoDictionaryEvent();
+abstract class SearchPageEvent extends Equatable {
+  const SearchPageEvent();
 }
 
-class GetListForEnglishWord extends EnglishOromoDictionaryEvent {
+class GetListForEnglishWord extends SearchPageEvent {
   final String englishTerm;
+
   ///Retrieves Search Results for the englishTerm inputted.
   ///
   ///englishTerm: String
@@ -15,8 +16,9 @@ class GetListForEnglishWord extends EnglishOromoDictionaryEvent {
   List<Object?> get props => [englishTerm];
 }
 
-class GetListForOromoWord extends EnglishOromoDictionaryEvent {
+class GetListForOromoWord extends SearchPageEvent {
   final String oromoTerm;
+
   ///Retrieves the Search Results for the oromoTerm inputted.
   ///
   ///oromoTerm: String
@@ -25,19 +27,10 @@ class GetListForOromoWord extends EnglishOromoDictionaryEvent {
   @override
   List<Object?> get props => [oromoTerm];
 }
-class GetEnglishTranslationsForOromoWord extends EnglishOromoDictionaryEvent {
-  final String oromoWord;
-  ///Retrieves the Search Results for the oromoWord inputted.
-  ///
-  ///oromoWord: String
-  GetEnglishTranslationsForOromoWord(this.oromoWord);
 
-  @override
-  List<Object?> get props => [oromoWord];
-}
-
-class ChangeLanguageSelected extends EnglishOromoDictionaryEvent {
+class ChangeLanguageSelected extends SearchPageEvent {
   final bool isEnglish;
+
   ///Changes the Bloc's isEnglish field when the Language is changed.
   ///
   ///isEnglish: boolean.

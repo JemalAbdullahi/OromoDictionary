@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'core/presentation/util/constants.dart';
-import 'features/english_oromo_dictionary/presentation/pages/search_page.dart';
+import 'features/english_oromo_dictionary/presentation/bloc/oromo_translation_page_bloc/oromo_translation_page_bloc.dart';
+import 'features/english_oromo_dictionary/presentation/bloc/search_page_bloc/bloc.dart';
+import 'features/english_oromo_dictionary/presentation/pages/english_to_oromo_translation_page.dart';
 import 'features/english_oromo_dictionary/presentation/pages/oromo_alphabet_page.dart';
+import 'features/english_oromo_dictionary/presentation/pages/oromo_to_english_translation_page.dart';
+import 'features/english_oromo_dictionary/presentation/pages/search_page.dart';
+import 'injection_container.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final SearchPageBloc _searchPageBloc = sl<SearchPageBloc>();
+  final OromoTranslationPageBloc _oromoTranslationPageBloc =
+      sl<OromoTranslationPageBloc>();
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -36,17 +51,29 @@ class MyApp extends StatelessWidget {
                 ResponsiveBreakpoint.resize(1080, name: DESKTOP),
               ],
             ),
-        home: SearchPage(),
         routes: <String, WidgetBuilder>{
-          SearchPage.routeName: (BuildContext context) => SearchPage(),
-          OromoAlphabetPage.routeName: (BuildContext context) =>
-              OromoAlphabetPage(),
-          //    EnglishOromoTranslationScreen.routeName: (BuildContext context) =>
-          //        EnglishOromoTranslationScreen(),
+          SearchPage.routeName: (context) => BlocProvider.value(
+                value: _searchPageBloc,
+                child: SearchPage(),
+              ),
+          OromoAlphabetPage.routeName: (context) => OromoAlphabetPage(),
+          OromoToEnglishTranslationPage.routeName: (context) =>
+              BlocProvider.value(
+                value: _oromoTranslationPageBloc,
+                child: OromoToEnglishTranslationPage(),
+              ),
+          EnglishToOromoTranslationPage.routeName: (BuildContext context) =>
+              EnglishToOromoTranslationPage(),
           // OromoEnglishTranslationScreen.routeName: (BuildContext context) =>
           // ChangeNotifierProvider(
           // create: (context) => SearchListViewModel(),
           // child: OromoEnglishTranslationScreen()),
         });
+  }
+
+  @override
+  void dispose() {
+    _searchPageBloc.close();
+    super.dispose();
   }
 }

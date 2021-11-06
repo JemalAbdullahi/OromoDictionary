@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:oromo_dictionary/core/presentation/util/constants.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/pages/oromo_alphabet_page.dart';
 
 class SearchPageAppBar extends StatelessWidget {
-  SearchPageAppBar({Key? key}) : super(key: key);
+  SearchPageAppBar({Key? key, required this.textTheme}) : super(key: key);
 
-  late TextTheme textTheme;
+  final TextTheme textTheme;
   @override
   Widget build(BuildContext context) {
-    textTheme = Theme.of(context).textTheme;
     return AppBar(
       leading: _popupMenuButton(context),
       backgroundColor: Colors.transparent,
@@ -26,7 +26,7 @@ class SearchPageAppBar extends StatelessWidget {
         ),
       ),
       onSelected: (value) {
-        //Navigator.pushNamed(context, OromoAlphabetScreen.routeName);
+        Navigator.of(context).pushNamed(OromoAlphabetPage.routeName);
       },
       itemBuilder: (context) => [
         PopupMenuItem<String>(

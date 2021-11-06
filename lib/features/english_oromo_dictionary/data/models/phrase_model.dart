@@ -6,7 +6,7 @@ class PhraseModel extends Phrase {
     required int formID,
     required String phrase,
     required String example,
-  }) : super(phrase: phrase, example: example);
+  }) : super(phrase: phrase, example: example, id: id, formID: formID);
 
   factory PhraseModel.fromJson(Map<String, dynamic> parsedJson) {
     return PhraseModel(

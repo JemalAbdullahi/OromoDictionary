@@ -4,7 +4,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/repositories/english_oromo_dictionary_repository.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/get_english_word_list.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/search_page/get_english_word_list.dart';
 import 'get_english_word_list_test.mocks.dart';
 
 
