@@ -2,10 +2,17 @@
 This app was developed to translate English words to its Oromo equivalent and vice versa.
 
 ## Features
+- Search for a list of English or Oromo words
+- Find all English words correlated to an Oromo word
+- Translate an English word into all possible Oromo Words
+- View the English Definition of an English word
+- View a phonetic breakdown of an Oromo word
+- View the Oromo alphabet and the sound it makes
 
 ## Current Plugins
 
 ## Project Structure
+```
 oromo_dictionary
 ├─ assets
 │  ├─ images
@@ -172,3 +179,4 @@ oromo_dictionary
    │  └─ Icon-512.png
    ├─ index.html
    └─ manifest.json
+```
