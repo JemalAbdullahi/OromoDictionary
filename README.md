@@ -6,6 +6,7 @@ This app was developed to translate English words to its Oromo equivalent and vi
 ## Current Plugins
 
 ## Project Structure
+```
 oromo_dictionary
 ├─ assets
 │  ├─ images
@@ -172,3 +173,4 @@ oromo_dictionary
    │  └─ Icon-512.png
    ├─ index.html
    └─ manifest.json
+```
