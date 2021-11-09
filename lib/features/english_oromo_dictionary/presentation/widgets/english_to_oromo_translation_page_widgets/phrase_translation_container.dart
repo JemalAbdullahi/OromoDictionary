@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../domain/entities/phrase.dart';
 
 class PhraseTranslationContainer extends StatelessWidget {

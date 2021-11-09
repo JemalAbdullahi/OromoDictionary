@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'core/presentation/util/constants.dart';
+import 'features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
 import 'features/english_oromo_dictionary/presentation/bloc/oromo_translation_page_bloc/oromo_translation_page_bloc.dart';
 import 'features/english_oromo_dictionary/presentation/bloc/search_page_bloc/bloc.dart';
 import 'features/english_oromo_dictionary/presentation/pages/english_to_oromo_translation_page.dart';

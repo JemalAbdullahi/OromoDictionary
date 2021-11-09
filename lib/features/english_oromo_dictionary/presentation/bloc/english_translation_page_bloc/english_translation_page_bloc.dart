@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
+import '../../../domain/entities/english_word.dart';
 import '../../../domain/usecases/english_word_page/get_english_definition.dart';
 
 import '../bloc_imports.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../pages/oromo_to_english_translation_page.dart';
+
 import '../../../domain/entities/oromo_translation.dart';
+import '../../pages/oromo_to_english_translation_page.dart';
 import 'search_results_display.dart';
 
 class OromoSearchResultsDisplay extends SearchResultsDisplay<OromoTranslation> {

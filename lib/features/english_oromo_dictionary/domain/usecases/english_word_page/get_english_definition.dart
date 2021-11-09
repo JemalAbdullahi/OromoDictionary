@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
+import '../../entities/english_word.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecases/usecase.dart';
 import '../../repositories/english_definition_repository.dart';

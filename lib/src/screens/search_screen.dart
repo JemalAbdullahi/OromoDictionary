@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../components/search_screen_comp/app_header.dart';
-import '../components/search_screen_comp/language_selector.dart';
 import '../components/search_screen_comp/english_search_results_container.dart';
+import '../components/search_screen_comp/language_selector.dart';
 import '../components/search_screen_comp/oromo_search_result_container.dart';
 import '../components/search_screen_comp/search_screen_app_bar.dart';
 import '../services/api.dart';
-import 'package:provider/provider.dart';
 import '../utils/constants.dart';
 import '../utils/widget_functions.dart';
 import '../viewmodels/english_view_models/english_word_list_view_model.dart';

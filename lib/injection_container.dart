@@ -1,10 +1,10 @@
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/english_definition_remote_data_source.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/repositories/english_definition_repository_impl.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/repositories/english_definition_repository.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/english_word_page/get_english_definition.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
+import 'features/english_oromo_dictionary/data/datasources/english_definition_remote_data_source.dart';
+import 'features/english_oromo_dictionary/data/repositories/english_definition_repository_impl.dart';
+import 'features/english_oromo_dictionary/domain/repositories/english_definition_repository.dart';
+import 'features/english_oromo_dictionary/domain/usecases/english_word_page/get_english_definition.dart';
+import 'features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
 import 'features/english_oromo_dictionary/domain/usecases/oromo_word_page/get_english_translations.dart';
 import 'features/english_oromo_dictionary/presentation/bloc/oromo_translation_page_bloc/bloc.dart';
 import 'core/network/network_info.dart';

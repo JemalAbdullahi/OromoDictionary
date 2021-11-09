@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/page_states.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/widgets/loading_widget.dart';
+import '../bloc/english_translation_page_bloc/bloc.dart';
+import '../widgets/loading_widget.dart';
 import '../../../../core/presentation/util/constants.dart';
 import '../../../../core/presentation/util/widget_functions.dart';
 import '../../domain/entities/english_word.dart';

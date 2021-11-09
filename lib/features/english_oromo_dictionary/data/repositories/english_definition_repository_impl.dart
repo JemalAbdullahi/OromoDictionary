@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
+import '../../domain/entities/english_word.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
