@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import '../../../domain/entities/grammatical_form.dart';
-import '../../../domain/usecases/english_word_page/get_grammatical_form_list.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
+import '../../../domain/usecases/english_word_page/get_english_definition.dart';
 
 import '../bloc_imports.dart';
 import '../page_states.dart';
@@ -9,22 +9,27 @@ part 'english_translation_page_state.dart';
 
 class EnglishTranslationPageBloc
     extends Bloc<EnglishTranslationPageEvent, PageState> {
-  GetGrammaticalFormList getGrammaticalFormList;
+  GetEnglishDefinition getEnglishDefinition;
 
-  EnglishTranslationPageBloc({required this.getGrammaticalFormList})
+  EnglishTranslationPageBloc({required this.getEnglishDefinition})
       : super(Empty()) {
-    on<GetGrammaticalForms>(_onGetGrammaticalForms);
+    on<GetEnglishWordInfo>(_onGetEnglishWordInfo);
   }
 
-  _onGetGrammaticalForms(
-      GetGrammaticalForms event, Emitter<PageState> emit) async {
+  _onGetEnglishWordInfo(
+      GetEnglishWordInfo event, Emitter<PageState> emit) async {
     emit(Empty());
-
+    // if (event.englishWord.forms != null) {
+    // print("if");
+    // return emit(Loaded(grammaticalForms: event.englishWord.forms!));
+    // } else {
+    // print("else");
     emit(Loading());
-    final failureOrGrammaticalForms =
-        await getGrammaticalFormList(Params(wordID: event.wordID));
-    emit(failureOrGrammaticalForms.fold(
+    final failureOrEnglishWord =
+        await getEnglishDefinition(Params(englishWord: event.englishWord));
+    emit(failureOrEnglishWord.fold(
         (failure) => Error(message: mapFailureToMessage(failure)),
-        (grammaticalForms) => Loaded(grammaticalForms: grammaticalForms)));
+        (englishWord) => Loaded(englishWord: englishWord)));
+    // }
   }
 }

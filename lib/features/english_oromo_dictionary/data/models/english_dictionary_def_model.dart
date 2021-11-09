@@ -3,7 +3,7 @@ import '../../domain/entities/english_dictionary_def.dart';
 class EnglishDictionaryDefModel extends EnglishDictionaryDef {
   EnglishDictionaryDefModel({
     required String word,
-    required Map? phonetics,
+    required Map<String, dynamic>? phonetics,
     required String? origin,
     required List<dynamic> meanings,
   }) : super(

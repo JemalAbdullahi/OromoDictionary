@@ -98,7 +98,7 @@ class _SearchPageState extends State<SearchPage> {
       if (state is Empty) {
         return SizedBox.shrink();
       } else if (state is Loading) {
-        return LoadingWidget();
+        return LoadingWidget(heightDenominator: 3,);
       } else if (state is Loaded) {
         return englishOromoDictionaryBloc.isEnglish
             ? EnglishSearchResultsDisplay(

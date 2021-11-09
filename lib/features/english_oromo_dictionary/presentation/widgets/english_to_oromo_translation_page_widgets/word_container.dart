@@ -5,10 +5,12 @@ import '../../../../../core/presentation/util/widget_functions.dart';
 import '../../../domain/entities/english_word.dart';
 
 class WordContainer extends StatelessWidget {
-  const WordContainer({required this.englishWord,
-    required this.textTheme,
-    required this.constraints,
-    Key? key}) : super(key: key);
+  const WordContainer(
+      {required this.englishWord,
+      required this.textTheme,
+      required this.constraints,
+      Key? key})
+      : super(key: key);
 
   final EnglishWord englishWord;
   final TextTheme textTheme;
@@ -23,8 +25,10 @@ class WordContainer extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildColumn(), oddaaImage(),
-      ],),
+          _buildColumn(),
+          oddaaImage(),
+        ],
+      ),
     );
   }
 
@@ -84,18 +88,18 @@ class _PhoneticButtonState extends State<_PhoneticButton> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           primary: COLOR_YELLOW),
-      onPressed: null, //phoneticAudio,
+      onPressed: phoneticAudio,
       child: _phoneticText(),
     );
   }
 
-/*   void phoneticAudio() async {
+  void phoneticAudio() async {
     if (widget.englishWord.audio!.isNotEmpty) {
       await player.setUrl("https://${widget.englishWord.audio!}");
       player.play();
     }
   }
- */
+
   Text _phoneticText() {
     return Text(
       "/ ${widget.englishWord.phonetic} /",

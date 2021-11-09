@@ -22,22 +22,27 @@ class _EnglishToOromoTranslationPageState
     extends State<EnglishToOromoTranslationPage> {
   late final EnglishTranslationPageBloc bloc;
   late final ThemeData _theme;
-  late final EnglishWord _englishWord;
+  late EnglishWord _englishWord;
   late final double phraseTranslationContainerWidth;
   bool initialized = false;
   int selectedSubEntryIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    bloc = BlocProvider.of<EnglishTranslationPageBloc>(context);
+  }
+
   _initialize(BuildContext context) {
     if (!initialized) {
-      bloc = BlocProvider.of<EnglishTranslationPageBloc>(context);
       _theme = Theme.of(context);
       final args = ModalRoute.of(context)!.settings.arguments
           as EnglishToOromoTranslationPageArguments;
       _englishWord = args.englishWord;
-      bloc.add(GetGrammaticalForms(_englishWord.id));
       phraseTranslationContainerWidth = MediaQuery.of(context).size.width * 0.8;
       initialized = true;
     }
+    bloc.add(GetEnglishWordInfo(_englishWord));
   }
 
   @override
@@ -45,6 +50,7 @@ class _EnglishToOromoTranslationPageState
     _initialize(context);
     Size constraints = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: _theme.primaryColor,
       appBar: customAppBar(),
       body: _buildBody(constraints),
     );
@@ -57,9 +63,9 @@ class _EnglishToOromoTranslationPageState
         if (state is Empty) {
           return SizedBox.shrink();
         } else if (state is Loading) {
-          return LoadingWidget();
+          return LoadingWidget(heightDenominator: 1);
         } else if (state is Loaded) {
-          _englishWord.forms = state.grammaticalForms;
+          _englishWord = state.englishWord;
           return Container(
             height: constraints.height,
             width: constraints.width,
@@ -85,7 +91,7 @@ class _EnglishToOromoTranslationPageState
               SelectedPartOfSpeech(
                   englishWord: _englishWord,
                   selectedPartOfSpeech:
-                      _englishWord.forms[selectedSubEntryIndex],
+                      _englishWord.forms![selectedSubEntryIndex],
                   textTheme: _theme.textTheme),
             ],
           ),
@@ -117,7 +123,7 @@ class _EnglishToOromoTranslationPageState
       height: 50,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: _englishWord.forms.length,
+        itemCount: _englishWord.forms!.length,
         itemBuilder: (BuildContext context, int index) {
           return Material(
             color: COLOR_RED,
@@ -131,7 +137,7 @@ class _EnglishToOromoTranslationPageState
                 });
               },
               child: Text(
-                '${_englishWord.forms[index].partOfSpeech.toUpperCase()}',
+                '${_englishWord.forms![index].partOfSpeech.toUpperCase()}',
                 style: _theme.textTheme.headline6!.apply(color: COLOR_YELLOW),
               ),
             ),

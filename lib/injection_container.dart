@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/english_definition_remote_data_source.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/data/repositories/english_definition_repository_impl.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/repositories/english_definition_repository.dart';
-import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/english_word_page/get_grammatical_form_list.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/usecases/english_word_page/get_english_definition.dart';
 import 'package:oromo_dictionary/features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
 import 'features/english_oromo_dictionary/domain/usecases/oromo_word_page/get_english_translations.dart';
 import 'features/english_oromo_dictionary/presentation/bloc/oromo_translation_page_bloc/bloc.dart';
@@ -39,7 +39,7 @@ void init() {
   );
 
   sl.registerFactory(
-      () => EnglishTranslationPageBloc(getGrammaticalFormList: sl()));
+      () => EnglishTranslationPageBloc(getEnglishDefinition: sl()));
 
   // Use Cases
   sl.registerLazySingleton(
@@ -49,7 +49,7 @@ void init() {
   sl.registerLazySingleton(
       () => GetEnglishTranslations(sl<EnglishOromoDictionaryRepository>()));
   sl.registerLazySingleton(
-      () => GetGrammaticalFormList(sl<EnglishDefinitionRepository>()));
+      () => GetEnglishDefinition(sl<EnglishDefinitionRepository>()));
 
   // Repository
   sl.registerLazySingleton<EnglishOromoDictionaryRepository>(

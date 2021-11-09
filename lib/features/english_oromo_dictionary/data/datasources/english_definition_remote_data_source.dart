@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:oromo_dictionary/features/english_oromo_dictionary/data/models/english_dictionary_def_model.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_dictionary_def.dart';
+import 'package:oromo_dictionary/features/english_oromo_dictionary/domain/entities/english_word.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../models/grammatical_form_model.dart';
@@ -10,6 +13,8 @@ import '../../domain/entities/oromo_translation.dart';
 import '../../domain/entities/phrase.dart';
 
 abstract class EnglishDefinitionRemoteDataSource {
+  Future<EnglishWord> getEnglishDefinitions(EnglishWord englishWord);
+
   ///Calls the https://oromo-dictionary-staging.herokuapp.com/translation/{phraseID} endpoint.
   ///
   ///Throws a [ServerException] for all error codes
@@ -33,6 +38,46 @@ class EnglishDefinitionRemoteDataSourceImpl
   final http.Client client;
 
   EnglishDefinitionRemoteDataSourceImpl({required this.client});
+
+  @override
+  Future<EnglishWord> getEnglishDefinitions(EnglishWord englishWord) async {
+    Uri uri = Uri(
+        scheme: 'https',
+        host: 'api.dictionaryapi.dev',
+        path: '/api/v2/entries/en/${englishWord.word}');
+    final response = await client
+        .get(uri, headers: {'Content-Type': 'application/json'}).timeout(
+            Duration(seconds: 5), onTimeout: () {
+      englishWord.audio = "";
+      return http.Response("Error", 500);
+    });
+
+    if (response.statusCode == 200) {
+      final List<dynamic> result = json.decode(response.body);
+      print(result[0].toString());
+      EnglishDictionaryDef englishDictionaryDef =
+          EnglishDictionaryDefModel.fromJson(result);
+      englishWord.audio = englishDictionaryDef.phoneticAudio;
+      englishWord.definitions = _convertMeanings(englishDictionaryDef.meanings);
+      englishWord.forms = await getGrammaticalFormList(englishWord.id);
+      return englishWord;
+    } else if (response.statusCode != 500) {
+      throw ServerException();
+    }
+    throw ServerException();
+  }
+
+  Map<String, List<String>> _convertMeanings(List meanings) {
+    Map<String, List<String>> definitions = new Map();
+    for (dynamic meaning in meanings) {
+      List<String> definition = [];
+      for (Map<String, dynamic> def in meaning["definitions"]) {
+        definition.add(def["definition"]);
+      }
+      definitions[meaning["partOfSpeech"]] = definition;
+    }
+    return definitions;
+  }
 
   @override
   Future<List<GrammaticalForm>> getGrammaticalFormList(int wordID) async {
@@ -92,8 +137,7 @@ class EnglishDefinitionRemoteDataSourceImpl
     if (response.statusCode == 200) {
       for (Map<String, dynamic> json_ in result["data"]) {
         try {
-          translations
-              .add(OromoTranslationModel.fromJson(json_));
+          translations.add(OromoTranslationModel.fromJson(json_));
         } catch (Exception) {
           print(Exception);
         }

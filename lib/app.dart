@@ -80,6 +80,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     _searchPageBloc.close();
+    _englishTranslationPageBloc.close();
+    _oromoTranslationPageBloc.close();
     super.dispose();
   }
 }

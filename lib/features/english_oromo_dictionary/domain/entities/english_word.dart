@@ -7,12 +7,19 @@ class EnglishWord extends Equatable {
   final int id;
   final String word;
   final String phonetic;
-  late final List<GrammaticalForm> forms;
+  List<GrammaticalForm>? forms;
   late Map<String, List<String>> definitions = new Map();
-  late final String? audio;
+  String? audio;
 
   EnglishWord({required this.id, required this.word, required this.phonetic});
 
   @override
   List<Object?> get props => [word, phonetic];
+
+  /* @override
+  String toString() {
+    StringBuffer stringBuffer = new StringBuffer();
+    stringBuffer.writeAll(forms!, ", ");
+    return "$id | $word | $phonetic | ${stringBuffer.toString()}";
+  } */
 }

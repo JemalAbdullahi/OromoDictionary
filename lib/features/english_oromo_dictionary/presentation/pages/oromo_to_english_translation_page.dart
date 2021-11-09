@@ -47,16 +47,14 @@ class _OromoToEnglishTranslationPageState
   /// by adding an [event] to the BlocProvider.
   _initialize(BuildContext context) {
     if (!initialized) {
-      bloc =
-          BlocProvider.of<OromoTranslationPageBloc>(context);
+      bloc = BlocProvider.of<OromoTranslationPageBloc>(context);
       _theme = Theme.of(context);
       final args = ModalRoute.of(context)!.settings.arguments
           as OromoToEnglishTranslationPageArguments;
       _oromoTranslation = args.oromoTranslation;
       initialized = true;
       // Get List of English Words corresponding to Oromo Word
-      bloc.add(
-          GetEnglishTranslationsList(_oromoTranslation.translation));
+      bloc.add(GetEnglishTranslationsList(_oromoTranslation.translation));
     }
   }
 
@@ -132,7 +130,9 @@ class _OromoToEnglishTranslationPageState
       if (state is Empty) {
         return SizedBox.shrink();
       } else if (state is Loading) {
-        return LoadingWidget();
+        return LoadingWidget(
+          heightDenominator: 3,
+        );
       } else if (state is Loaded) {
         print(state.wordList.toString());
         return EnglishSearchResultsDisplay(
