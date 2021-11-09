@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../src/utils/widget_functions.dart';
+import '../../../../core/presentation/util/widget_functions.dart';
 import '../../domain/entities/english_word.dart';
 import '../../domain/entities/oromo_translation.dart';
 import '../bloc/search_page_bloc/bloc.dart';
