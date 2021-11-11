@@ -10,7 +10,8 @@ This app was developed to translate English words to its Oromo equivalent and vi
 - View the Oromo alphabet and the sound it makes
 
 ## Future
-Soon to be downloadable from the iOS App Store.
+- Soon to be downloadable from the iOS App Store.
+- Web version available
 
 ## Project Structure
 ```
