@@ -22,12 +22,20 @@ Container oddaaImage() {
   return Container(
     width: 60,
     height: 60,
-    decoration: BoxDecoration(
-      color: COLOR_YELLOW,
-      borderRadius: BorderRadius.circular(30),
-    ),
-    child: Padding(
-        padding: EdgeInsets.all(8),
-        child: Image.asset("assets/images/Oddaa.png")),
+    decoration: _boxDecorationForOddaaImageContainer(),
+    child: _oddaaImageAsset(),
   );
+}
+
+BoxDecoration _boxDecorationForOddaaImageContainer() {
+  return BoxDecoration(
+    color: COLOR_YELLOW,
+    borderRadius: BorderRadius.circular(30),
+  );
+}
+
+Padding _oddaaImageAsset() {
+  return Padding(
+      padding: EdgeInsets.all(8),
+      child: Image.asset("assets/images/Oddaa.png"));
 }

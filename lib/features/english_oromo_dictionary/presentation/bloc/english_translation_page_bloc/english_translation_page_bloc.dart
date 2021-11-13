@@ -9,7 +9,7 @@ part 'english_translation_page_state.dart';
 
 class EnglishTranslationPageBloc
     extends Bloc<EnglishTranslationPageEvent, PageState> {
-  GetEnglishDefinition getEnglishDefinition;
+  GetEnglishWord getEnglishDefinition;
 
   EnglishTranslationPageBloc({required this.getEnglishDefinition})
       : super(Empty()) {

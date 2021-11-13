@@ -3,16 +3,16 @@ import 'package:equatable/equatable.dart';
 import '../../entities/english_word.dart';
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecases/usecase.dart';
-import '../../repositories/english_definition_repository.dart';
+import '../../repositories/english_word_repository.dart';
 
-class GetEnglishDefinition implements UseCase<EnglishWord, Params> {
-  final EnglishDefinitionRepository repository;
+class GetEnglishWord implements UseCase<EnglishWord, Params> {
+  final EnglishWordRepository repository;
 
-  GetEnglishDefinition(this.repository);
+  GetEnglishWord(this.repository);
 
   @override
   Future<Either<Failure, EnglishWord>> call(Params params) async {
-    return await repository.getEnglishDefinitions(englishWord: params.englishWord);
+    return await repository.getEnglishWord(englishWord: params.englishWord);
   }
 }
 

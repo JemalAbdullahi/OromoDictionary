@@ -1,8 +1,8 @@
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
-import 'features/english_oromo_dictionary/data/datasources/english_definition_remote_data_source.dart';
-import 'features/english_oromo_dictionary/data/repositories/english_definition_repository_impl.dart';
-import 'features/english_oromo_dictionary/domain/repositories/english_definition_repository.dart';
+import 'features/english_oromo_dictionary/data/datasources/english_word_remote_data_source.dart';
+import 'features/english_oromo_dictionary/data/repositories/english_word_repository_impl.dart';
+import 'features/english_oromo_dictionary/domain/repositories/english_word_repository.dart';
 import 'features/english_oromo_dictionary/domain/usecases/english_word_page/get_english_definition.dart';
 import 'features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
 import 'features/english_oromo_dictionary/domain/usecases/oromo_word_page/get_english_translations.dart';
@@ -49,7 +49,7 @@ void init() {
   sl.registerLazySingleton(
       () => GetEnglishTranslations(sl<EnglishOromoDictionaryRepository>()));
   sl.registerLazySingleton(
-      () => GetEnglishDefinition(sl<EnglishDefinitionRepository>()));
+      () => GetEnglishWord(sl<EnglishWordRepository>()));
 
   // Repository
   sl.registerLazySingleton<EnglishOromoDictionaryRepository>(
@@ -58,9 +58,9 @@ void init() {
       networkInfo: sl(),
     ),
   );
-  sl.registerLazySingleton<EnglishDefinitionRepository>(
-    () => EnglishDefinitionRepositoryImpl(
-      remoteDataSource: sl<EnglishDefinitionRemoteDataSource>(),
+  sl.registerLazySingleton<EnglishWordRepository>(
+    () => EnglishWordRepositoryImpl(
+      remoteDataSource: sl<EnglishWordRemoteDataSource>(),
       networkInfo: sl(),
     ),
   );
@@ -72,8 +72,8 @@ void init() {
     ),
   );
 
-  sl.registerLazySingleton<EnglishDefinitionRemoteDataSource>(
-    () => EnglishDefinitionRemoteDataSourceImpl(
+  sl.registerLazySingleton<EnglishWordRemoteDataSource>(
+    () => EnglishWordRemoteDataSourceImpl(
       client: sl(),
     ),
   );
