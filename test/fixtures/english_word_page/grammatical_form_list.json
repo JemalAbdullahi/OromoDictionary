@@ -1,0 +1,10 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 1,
+      "english_word_id": 1,
+      "part_of_speech": "adverb"
+    }
+  ]
+}

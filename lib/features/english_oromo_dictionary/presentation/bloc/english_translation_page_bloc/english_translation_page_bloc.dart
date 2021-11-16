@@ -19,17 +19,11 @@ class EnglishTranslationPageBloc
   _onGetEnglishWordInfo(
       GetEnglishWordInfo event, Emitter<PageState> emit) async {
     emit(Empty());
-    // if (event.englishWord.forms != null) {
-    // print("if");
-    // return emit(Loaded(grammaticalForms: event.englishWord.forms!));
-    // } else {
-    // print("else");
     emit(Loading());
     final failureOrEnglishWord =
         await getEnglishDefinition(Params(englishWord: event.englishWord));
     emit(failureOrEnglishWord.fold(
         (failure) => Error(message: mapFailureToMessage(failure)),
         (englishWord) => Loaded(englishWord: englishWord)));
-    // }
   }
 }

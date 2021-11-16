@@ -1,6 +1,5 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
+import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/http_response.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../domain/entities/english_word.dart';
 import '../../domain/entities/oromo_translation.dart';
@@ -26,64 +25,76 @@ abstract class EnglishOromoDictionaryRemoteDataSource {
 
 class EnglishOromoDictionaryRemoteDataSourceImpl
     implements EnglishOromoDictionaryRemoteDataSource {
-  final http.Client client;
+  final String scheme = 'https';
+  final String host = 'oromo-dictionary-staging.herokuapp.com';
 
-  EnglishOromoDictionaryRemoteDataSourceImpl({required this.client});
+  final http.Client client;
+  late final HTTPResponse response;
+  EnglishOromoDictionaryRemoteDataSourceImpl({required this.client}) {
+    response = new HTTPResponse(client);
+  }
 
   @override
   Future<List<EnglishWord>> getEnglishWordList(String englishTerm) async {
-    Uri uri = Uri(
-        scheme: 'https',
-        host: 'oromo-dictionary-staging.herokuapp.com',
-        path: '/search/en/$englishTerm');
-    return await _getWordListFromURI<EnglishWord>(uri, isEnglish: true);
+    Uri uri = Uri(scheme: scheme, host: host, path: '/search/en/$englishTerm');
+    return await _getEnglishWordListFrom(uri);
   }
 
   @override
   Future<List<EnglishWord>> getEnglishTranslations(String oromoWord) async {
-    Uri uri = Uri(
-        scheme: 'https',
-        host: 'oromo-dictionary-staging.herokuapp.com',
-        path: '/word/$oromoWord');
-    return await _getWordListFromURI<EnglishWord>(uri, isEnglish: true);
+    Uri uri = Uri(scheme: scheme, host: host, path: '/word/$oromoWord');
+    return await _getEnglishWordListFrom(uri);
   }
 
   @override
   Future<List<OromoTranslation>> getOromoWordList(String oromoTerm) async {
-    Uri uri = Uri(
-        scheme: 'https',
-        host: 'oromo-dictionary-staging.herokuapp.com',
-        path: '/search/om/$oromoTerm');
-    return await _getWordListFromURI<OromoTranslation>(uri, isEnglish: false);
+    Uri uri = Uri(scheme: scheme, host: host, path: '/search/om/$oromoTerm');
+    return await _getOromoTranslationListFrom(uri);
   }
 
-  Future<List<T>> _getWordListFromURI<T>(Uri uri,
-      {required bool isEnglish}) async {
-    final response =
-        await client.get(uri, headers: {'Content-Type': 'application/json'});
-    if (response.statusCode == 200) {
-      final result = json.decode(response.body);
-      final List<T> wordList =
-          await _parseSearchResults<T>(result['data'], isEnglish: isEnglish);
-      return wordList;
-    } else {
-      throw ServerException();
-    }
+  Future<List<EnglishWord>> _getEnglishWordListFrom(Uri uri) async {
+    await response.setResponseFrom(uri);
+    return response.isSuccessful()
+        ? _getEnglishWordListResults()
+        : throw ServerException();
   }
 
-  Future<List<T>> _parseSearchResults<T>(List<dynamic> data,
-      {required bool isEnglish}) async {
-    List<T> words = [];
+  Future<List<OromoTranslation>> _getOromoTranslationListFrom(Uri uri) async {
+    await response.setResponseFrom(uri);
+    return response.isSuccessful()
+        ? _getOromoTranslationListResults()
+        : throw ServerException();
+  }
+
+  List<EnglishWord> _getEnglishWordListResults() {
+    final result = response.getResult();
+    return _parseEnglishSearchResults(result['data']);
+  }
+
+  List<OromoTranslation> _getOromoTranslationListResults() {
+    final result = response.getResult();
+    return _parseOromoSearchResults(result['data']);
+  }
+
+  List<EnglishWord> _parseEnglishSearchResults(List<dynamic> data) {
+    List<EnglishWord> words = [];
     for (Map<String, dynamic> json_ in data) {
       try {
-        if (isEnglish) {
-          // EnglishWord? englishWord =
-          //     await getEnglishDefinitions(EnglishWordModel.fromJson(json_));
-          words.add(EnglishWordModel.fromJson(json_) as T);
-        } else {
-          words.add(OromoTranslationModel.fromJson(json_) as T);
-        }
+        words.add(EnglishWordModel.fromJson(json_));
       } catch (Exception) {
+        print(Exception);
+      }
+    }
+    return words;
+  }
+
+  List<OromoTranslation> _parseOromoSearchResults(List<dynamic> data) {
+    List<OromoTranslation> words = [];
+    for (Map<String, dynamic> json_ in data) {
+      try {
+        words.add(OromoTranslationModel.fromJson(json_));
+      } catch (Exception) {
+        //TODO: Deal with all catch Exceptions instead of just printing Exception
         print(Exception);
       }
     }

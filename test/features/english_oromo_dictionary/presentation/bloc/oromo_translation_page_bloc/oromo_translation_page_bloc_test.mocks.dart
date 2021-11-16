@@ -61,10 +61,14 @@ class MockInputValidator extends _i1.Mock implements _i7.InputValidator {
   }
 
   @override
-  _i3.Either<_i6.Failure, bool> isValid(String? str) =>
-      (super.noSuchMethod(Invocation.method(#isValid, [str]),
+  _i3.Either<_i6.Failure, bool> isValid(String? input) =>
+      (super.noSuchMethod(Invocation.method(#isValid, [input]),
               returnValue: _FakeEither_1<_i6.Failure, bool>())
           as _i3.Either<_i6.Failure, bool>);
+  @override
+  void emptyStringFormatException(String? str) =>
+      super.noSuchMethod(Invocation.method(#emptyStringFormatException, [str]),
+          returnValueForMissingStub: null);
   @override
   String toString() => super.toString();
 }

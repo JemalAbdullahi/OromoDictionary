@@ -1,0 +1,25 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "id": 3,
+      "phrase_id": 2,
+      "translation": "rifatu"
+    },
+    {
+      "id": 4,
+      "phrase_id": 2,
+      "translation": "afaan faajaawuu"
+    },
+    {
+      "id": 5,
+      "phrase_id": 2,
+      "translation": "afaan wallaaluu"
+    },
+    {
+      "id": 6,
+      "phrase_id": 2,
+      "translation": "dheelmoochuu"
+    }
+  ]
+}

@@ -15,7 +15,7 @@ class HTTPResponse {
 
   Future<void> setResponseWithTimeoutFrom(Uri uri) async {
     response = await client
-        .get(uri, headers: {'Content-Type': 'application/json'}).timeout(
+        .get(uri, headers: {'Content-Type': 'application/json; charset=utf-8'}).timeout(
             Duration(seconds: 5), onTimeout: () {
       return http.Response("Error", 500);
     });

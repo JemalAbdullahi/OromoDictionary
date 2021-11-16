@@ -220,7 +220,7 @@ void main() {
                 .thenAnswer((_) async => tEnglishWordList);
             //act
             final result = await repository.getWordList(
-                desiredList: "EnglishTranslations", searchTerm: tWord);
+                desiredList: "EnglishTranslation", searchTerm: tWord);
             //assert
             verify(mockRemoteDataSource.getEnglishTranslations(tWord));
             expect(result,
@@ -235,7 +235,7 @@ void main() {
                 .thenThrow(ServerException());
             //act
             final result = await repository.getWordList(
-                desiredList: "EnglishTranslations", searchTerm: tWord);
+                desiredList: "EnglishTranslation", searchTerm: tWord);
             //assert
             verify(mockRemoteDataSource.getEnglishTranslations(tWord));
             expect(result, equals(Left(ServerFailure())));

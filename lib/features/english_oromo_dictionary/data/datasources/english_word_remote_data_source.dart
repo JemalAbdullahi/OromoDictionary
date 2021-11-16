@@ -15,17 +15,14 @@ import '../../domain/entities/phrase.dart';
 abstract class EnglishWordRemoteDataSource {
   ///Gets an EnglishWord object complete with grammatical forms,
   /// phrases, definitions, and translations.
-  /// 
+  ///
   /// Calls various endpoints beginning with https://oromo-dictionary-staging.herokuapp.com/
-  /// 
+  ///
   ///Throws a [ServerException] for all error codes
   Future<EnglishWord> getEnglishWord(EnglishWord englishWord);
-
-  
 }
 
-class EnglishWordRemoteDataSourceImpl
-    implements EnglishWordRemoteDataSource {
+class EnglishWordRemoteDataSourceImpl implements EnglishWordRemoteDataSource {
   final String scheme = 'https';
   final String host = 'oromo-dictionary-staging.herokuapp.com';
   final http.Client client;
@@ -41,21 +38,22 @@ class EnglishWordRemoteDataSourceImpl
     _setEnglishWord(englishWord);
     await getEnglishDefinitions();
     await getGrammaticalFormList();
-    return englishWord;
+    return this.englishWord!;
   }
+
   ///Sets the english word to be updated by this object
   _setEnglishWord(EnglishWord englishWord) {
     this.englishWord = englishWord;
   }
 
   Future<void> getEnglishDefinitions() async {
-    await getEnglishDefinitionsResponse();
+    await _getEnglishDefinitionsResponse();
     response.isSuccessful()
-        ? await successfulEnglishDefinitionResponse()
-        : unsucessfulEnglishDefinitionResponse();
+        ? await _successfulEnglishDefinitionResponse()
+        : _unsucessfulEnglishDefinitionResponse();
   }
 
-  Future<void> getEnglishDefinitionsResponse() async {
+  Future<void> _getEnglishDefinitionsResponse() async {
     Uri uri = Uri(
         scheme: 'https',
         host: 'api.dictionaryapi.dev',
@@ -63,14 +61,14 @@ class EnglishWordRemoteDataSourceImpl
     await response.setResponseWithTimeoutFrom(uri);
   }
 
-  unsucessfulEnglishDefinitionResponse() {
+  _unsucessfulEnglishDefinitionResponse() {
     if (response.hasTimedOut()) {
       englishWord!.audio = "";
     }
     throw ServerException();
   }
 
-  successfulEnglishDefinitionResponse() async {
+  _successfulEnglishDefinitionResponse() async {
     EnglishDictionaryDef englishDictionaryDef =
         EnglishDictionaryDefModel.fromJson(response.getResult());
     englishWord!.audio = englishDictionaryDef.phoneticAudio;
@@ -91,13 +89,13 @@ class EnglishWordRemoteDataSourceImpl
   }
 
   Future<List<GrammaticalForm>> getGrammaticalFormList() async {
-    await getGrammaticalFormsResponse();
+    await _getGrammaticalFormsResponse();
     return response.isSuccessful()
-        ? successfulGrammaticalFormListResponse()
+        ? _successfulGrammaticalFormListResponse()
         : throw ServerException();
   }
 
-  Future<void> getGrammaticalFormsResponse() async {
+  Future<void> _getGrammaticalFormsResponse() async {
     Uri uri = Uri(
         scheme: scheme,
         host: host,
@@ -105,13 +103,13 @@ class EnglishWordRemoteDataSourceImpl
     await response.setResponseFrom(uri);
   }
 
-  Future<List<GrammaticalForm>> successfulGrammaticalFormListResponse() async {
+  Future<List<GrammaticalForm>> _successfulGrammaticalFormListResponse() async {
     List<GrammaticalForm> forms = [];
     final Map result = response.getResult();
     for (Map<String, dynamic> json_ in result["data"]) {
       try {
         GrammaticalForm form = GrammaticalFormModel.fromJson(json_);
-        form.phrases = await getPhraseList(form.id);
+        //form.phrases = await getPhraseList(form.id);
         forms.add(form);
       } catch (Exception) {
         print(Exception);
@@ -121,24 +119,24 @@ class EnglishWordRemoteDataSourceImpl
   }
 
   Future<List<Phrase>> getPhraseList(int formID) async {
-    getPhrasesResponse(formID);
+    await _getPhrasesResponse(formID);
     return response.isSuccessful()
-        ? successfulPhraseResponse()
+        ? _successfulPhraseResponse()
         : throw ServerException();
   }
 
-  Future<void> getPhrasesResponse(int formID) async {
+  Future<void> _getPhrasesResponse(int formID) async {
     Uri uri = Uri(scheme: scheme, host: host, path: '/phrase/$formID');
     await response.setResponseFrom(uri);
   }
 
-  successfulPhraseResponse() async {
+  Future<List<Phrase>> _successfulPhraseResponse() async {
     List<Phrase> phrases = [];
     final result = response.getResult();
     for (Map<String, dynamic> json_ in result["data"]) {
       try {
         Phrase phrase = PhraseModel.fromJson(json_);
-        phrase.translations = await getOromoWordList(phrase.id);
+        //phrase.translations = await getOromoWordList(phrase.id);
 
         phrases.add(phrase);
       } catch (Exception) {
@@ -149,18 +147,18 @@ class EnglishWordRemoteDataSourceImpl
   }
 
   Future<List<OromoTranslation>> getOromoWordList(int phraseID) async {
-    await getOromoWordListResponse(phraseID);
+    await _getOromoWordListResponse(phraseID);
     return response.isSuccessful()
-        ? successfulOromoWordListResponse()
+        ? _successfulOromoWordListResponse()
         : throw ServerException();
   }
 
-  Future<void> getOromoWordListResponse(int phraseID) async {
+  Future<void> _getOromoWordListResponse(int phraseID) async {
     Uri uri = Uri(scheme: scheme, host: host, path: '/translation/$phraseID');
     await response.setResponseFrom(uri);
   }
 
-  Future<List<OromoTranslation>> successfulOromoWordListResponse() async {
+  Future<List<OromoTranslation>> _successfulOromoWordListResponse() async {
     List<OromoTranslation> translations = [];
     final Map result = response.getResult();
     for (Map<String, dynamic> json_ in result["data"]) {

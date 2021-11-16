@@ -54,7 +54,7 @@ void main() {
       },
     );
     test(
-      'should return EnglishWord when the response code is 200',
+      'should return EnglishWords when the response code is 200',
       () async {
         //arrange
         setUpMockHttpClientSuccess200('search_page','english_word_list.json');
