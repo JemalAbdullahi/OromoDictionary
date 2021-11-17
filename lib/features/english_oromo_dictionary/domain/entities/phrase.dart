@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'oromo_translation.dart';
 
 class Phrase extends Equatable {

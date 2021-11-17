@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/presentation/util/constants.dart';
+
 class LoadingWidget extends StatelessWidget {
-  const LoadingWidget({required this.heightDenominator,Key? key}) : super(key: key);
+  const LoadingWidget({required this.heightDenominator, Key? key})
+      : super(key: key);
 
   final int heightDenominator;
 
@@ -10,7 +13,7 @@ class LoadingWidget extends StatelessWidget {
     return Container(
       height: MediaQuery.of(context).size.height / heightDenominator,
       child: Center(
-        child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(color: COLOR_YELLOW),
       ),
     );
   }

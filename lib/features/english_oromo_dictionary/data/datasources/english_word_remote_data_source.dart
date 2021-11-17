@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/http_response.dart';
+import 'http_response.dart';
 import '../models/english_dictionary_def_model.dart';
 import '../../domain/entities/english_dictionary_def.dart';
 import '../../domain/entities/english_word.dart';
@@ -73,7 +73,7 @@ class EnglishWordRemoteDataSourceImpl implements EnglishWordRemoteDataSource {
         EnglishDictionaryDefModel.fromJson(response.getResult());
     englishWord!.audio = englishDictionaryDef.phoneticAudio;
     englishWord!.definitions = _convertMeanings(englishDictionaryDef.meanings);
-    //englishWord!.forms = await getGrammaticalFormList();
+    englishWord!.forms = await getGrammaticalFormList();
   }
 
   Map<String, List<String>> _convertMeanings(List meanings) {
@@ -109,7 +109,7 @@ class EnglishWordRemoteDataSourceImpl implements EnglishWordRemoteDataSource {
     for (Map<String, dynamic> json_ in result["data"]) {
       try {
         GrammaticalForm form = GrammaticalFormModel.fromJson(json_);
-        //form.phrases = await getPhraseList(form.id);
+        form.phrases = await getPhraseList(form.id);
         forms.add(form);
       } catch (Exception) {
         print(Exception);
@@ -136,7 +136,7 @@ class EnglishWordRemoteDataSourceImpl implements EnglishWordRemoteDataSource {
     for (Map<String, dynamic> json_ in result["data"]) {
       try {
         Phrase phrase = PhraseModel.fromJson(json_);
-        //phrase.translations = await getOromoWordList(phrase.id);
+        phrase.translations = await getOromoWordList(phrase.id);
 
         phrases.add(phrase);
       } catch (Exception) {

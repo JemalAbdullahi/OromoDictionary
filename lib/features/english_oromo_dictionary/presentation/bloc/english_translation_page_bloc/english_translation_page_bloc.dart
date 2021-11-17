@@ -14,6 +14,7 @@ class EnglishTranslationPageBloc
   EnglishTranslationPageBloc({required this.getEnglishDefinition})
       : super(Empty()) {
     on<GetEnglishWordInfo>(_onGetEnglishWordInfo);
+    on<DisposeEnglishPage>(_onDisposeEnglishPage);
   }
 
   _onGetEnglishWordInfo(
@@ -25,5 +26,10 @@ class EnglishTranslationPageBloc
     emit(failureOrEnglishWord.fold(
         (failure) => Error(message: mapFailureToMessage(failure)),
         (englishWord) => Loaded(englishWord: englishWord)));
+  }
+
+  _onDisposeEnglishPage(
+      DisposeEnglishPage event, Emitter<PageState> emit) async {
+    emit(Empty());
   }
 }

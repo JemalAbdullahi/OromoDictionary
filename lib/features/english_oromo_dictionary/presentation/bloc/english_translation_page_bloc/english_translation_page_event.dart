@@ -13,3 +13,8 @@ class GetEnglishWordInfo extends EnglishTranslationPageEvent {
   @override
   List<Object?> get props => [englishWord];
 }
+
+class DisposeEnglishPage extends EnglishTranslationPageEvent{
+  @override
+  List<Object?> get props => [];
+}

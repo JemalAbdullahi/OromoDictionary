@@ -1,8 +1,5 @@
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
+import '../usecase_imports.dart';
 import '../../entities/english_word.dart';
-import '../../../../../core/error/failures.dart';
-import '../../../../../core/usecases/usecase.dart';
 import '../../repositories/english_word_repository.dart';
 
 class GetEnglishWord implements UseCase<EnglishWord, Params> {
@@ -11,9 +8,11 @@ class GetEnglishWord implements UseCase<EnglishWord, Params> {
   GetEnglishWord(this.repository);
 
   @override
-  Future<Either<Failure, EnglishWord>> call(Params params) async {
-    return await repository.getEnglishWord(englishWord: params.englishWord);
-  }
+
+  ///UseCase to GET the EnglishWord complete with the english dictionary definition,
+  ///grammatical forms, phrases, and translations.
+  Future<Either<Failure, EnglishWord>> call(Params params) async =>
+      await repository.getEnglishWord(englishWord: params.englishWord);
 }
 
 class Params extends Equatable {

@@ -1,21 +1,22 @@
 import 'package:data_connection_checker_tv/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
-import 'features/english_oromo_dictionary/data/datasources/english_word_remote_data_source.dart';
-import 'features/english_oromo_dictionary/data/repositories/english_word_repository_impl.dart';
-import 'features/english_oromo_dictionary/domain/repositories/english_word_repository.dart';
-import 'features/english_oromo_dictionary/domain/usecases/english_word_page/get_english_definition.dart';
-import 'features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
-import 'features/english_oromo_dictionary/domain/usecases/oromo_word_page/get_english_translations.dart';
-import 'features/english_oromo_dictionary/presentation/bloc/oromo_translation_page_bloc/bloc.dart';
+import 'package:http/http.dart' as http;
+
 import 'core/network/network_info.dart';
 import 'core/presentation/util/input_validator.dart';
 import 'features/english_oromo_dictionary/data/datasources/english_oromo_dictionary_remote_data_source.dart';
+import 'features/english_oromo_dictionary/data/datasources/english_word_remote_data_source.dart';
 import 'features/english_oromo_dictionary/data/repositories/english_oromo_dictionary_repository_impl.dart';
+import 'features/english_oromo_dictionary/data/repositories/english_word_repository_impl.dart';
 import 'features/english_oromo_dictionary/domain/repositories/english_oromo_dictionary_repository.dart';
+import 'features/english_oromo_dictionary/domain/repositories/english_word_repository.dart';
+import 'features/english_oromo_dictionary/domain/usecases/english_word_page/get_english_definition.dart';
+import 'features/english_oromo_dictionary/domain/usecases/oromo_word_page/get_english_translations.dart';
 import 'features/english_oromo_dictionary/domain/usecases/search_page/get_english_word_list.dart';
 import 'features/english_oromo_dictionary/domain/usecases/search_page/get_oromo_word_list.dart';
+import 'features/english_oromo_dictionary/presentation/bloc/english_translation_page_bloc/english_translation_page_bloc.dart';
+import 'features/english_oromo_dictionary/presentation/bloc/oromo_translation_page_bloc/bloc.dart';
 import 'features/english_oromo_dictionary/presentation/bloc/search_page_bloc/search_page_bloc.dart';
-import 'package:http/http.dart' as http;
 
 //Service Locator
 final sl = GetIt.instance;

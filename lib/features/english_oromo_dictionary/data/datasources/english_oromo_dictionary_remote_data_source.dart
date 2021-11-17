@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:oromo_dictionary/features/english_oromo_dictionary/data/datasources/http_response.dart';
+import 'http_response.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../domain/entities/english_word.dart';
 import '../../domain/entities/oromo_translation.dart';
@@ -82,7 +82,8 @@ class EnglishOromoDictionaryRemoteDataSourceImpl
       try {
         words.add(EnglishWordModel.fromJson(json_));
       } catch (Exception) {
-        print(Exception);
+        // Parse Exception
+        throw ServerException();
       }
     }
     return words;
@@ -94,8 +95,8 @@ class EnglishOromoDictionaryRemoteDataSourceImpl
       try {
         words.add(OromoTranslationModel.fromJson(json_));
       } catch (Exception) {
-        //TODO: Deal with all catch Exceptions instead of just printing Exception
-        print(Exception);
+        // Parse Exception
+        throw ServerException();
       }
     }
     return words;

@@ -1,9 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-
-import '../../../../../core/error/failures.dart';
-import '../../../../../core/usecases/usecase.dart';
-import '../../repositories/english_oromo_dictionary_repository.dart';
+import '../usecase_imports.dart';
 
 class GetOromoWordList implements UseCase<List<dynamic>, Params> {
   final EnglishOromoDictionaryRepository repository;
@@ -11,8 +6,12 @@ class GetOromoWordList implements UseCase<List<dynamic>, Params> {
   GetOromoWordList(this.repository);
 
   @override
+
+  ///UseCase to GET a list of oromo words that begins with the oromo search
+  ///term provided.
   Future<Either<Failure, List<dynamic>>> call(Params params) async {
-    return await repository.getWordList(desiredList: "OromoWordList", searchTerm: params.oromoTerm);
+    return await repository.getWordList(
+        desiredList: "OromoWordList", searchTerm: params.oromoTerm);
   }
 }
 

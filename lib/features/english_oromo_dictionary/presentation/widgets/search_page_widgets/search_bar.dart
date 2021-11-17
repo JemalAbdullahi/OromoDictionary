@@ -1,8 +1,9 @@
-import 'language_selector.dart';
-import '../../bloc/search_page_bloc/bloc.dart';
-import '../../../../../core/presentation/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../core/presentation/util/constants.dart';
+import '../../bloc/search_page_bloc/bloc.dart';
+import 'language_selector.dart';
 
 class SearchBar extends StatefulWidget {
   ///Search Bar that is responsible for receiving user input and retrieving

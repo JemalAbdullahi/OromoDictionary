@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../pages/english_to_oromo_translation_page.dart';
+
 import '../../../domain/entities/english_word.dart';
+import '../../pages/english_to_oromo_translation_page.dart';
 import 'search_results_display.dart';
 
 class EnglishSearchResultsDisplay extends SearchResultsDisplay<EnglishWord> {

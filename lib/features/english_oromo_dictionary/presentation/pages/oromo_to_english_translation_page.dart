@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marquee/marquee.dart';
-import '../bloc/oromo_translation_page_bloc/bloc.dart';
 
 import '../../../../core/presentation/util/constants.dart';
 import '../../../../core/presentation/util/widget_functions.dart';
 import '../../domain/entities/oromo_translation.dart';
 import '../../domain/usecases/oromo_word_page/get_oromo_phonetic_breakdown.dart';
+import '../bloc/oromo_translation_page_bloc/bloc.dart';
 import '../widgets/loading_widget.dart';
 import '../widgets/search_page_widgets/english_search_results_display.dart';
 

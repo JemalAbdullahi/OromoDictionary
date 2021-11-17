@@ -32,6 +32,12 @@ class _EnglishToOromoTranslationPageState
     bloc = BlocProvider.of<EnglishTranslationPageBloc>(context);
   }
 
+  @override
+  void dispose() {
+    bloc.add(DisposeEnglishPage());
+    super.dispose();
+  }
+
   _initialize(BuildContext context) {
     if (!initialized) {
       _theme = Theme.of(context);

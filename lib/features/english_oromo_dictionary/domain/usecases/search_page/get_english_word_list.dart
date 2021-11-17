@@ -1,9 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
-
-import '../../../../../core/error/failures.dart';
-import '../../../../../core/usecases/usecase.dart';
-import '../../repositories/english_oromo_dictionary_repository.dart';
+import '../usecase_imports.dart';
 
 class GetEnglishWordList implements UseCase<List<dynamic>, Params> {
   final EnglishOromoDictionaryRepository repository;
@@ -11,6 +6,8 @@ class GetEnglishWordList implements UseCase<List<dynamic>, Params> {
   GetEnglishWordList(this.repository);
 
   @override
+  ///UseCase to GET a list of english words that begins with the english search
+  ///term provided.
   Future<Either<Failure, List>> call(Params params) async {
     return await repository.getWordList(
         desiredList: "EnglishWordList",
